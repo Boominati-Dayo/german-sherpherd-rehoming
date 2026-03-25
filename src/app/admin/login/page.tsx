@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Home } from "lucide-react";
+import { Home, Loader2, CheckCircle, XCircle } from "lucide-react";
 
 export default function AdminLogin() {
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [initialCheck, setInitialCheck] = useState(true);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -18,24 +19,35 @@ export default function AdminLogin() {
             if (token) {
                 setIsAuthenticated(true);
                 router.push("/admin");
+            } else {
+                setInitialCheck(false);
             }
         };
         checkAuth();
     }, [router]);
 
-    if (isAuthenticated) {
-        return null;
+    if (isAuthenticated || initialCheck) {
+        return (
+            <div className="flex bg-brand-forest-900 min-h-screen items-center justify-center p-4">
+                <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-3xl shadow-2xl text-center">
+                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-orange-700" />
+                    <p className="text-brand-forest-600">Checking authentication...</p>
+                </div>
+            </div>
+        );
     }
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError("");
+        setSuccess(false);
 
         try {
             const res = await fetch("/api/admin/login", {
@@ -45,13 +57,17 @@ export default function AdminLogin() {
             });
 
             if (res.ok) {
+                setSuccess(true);
                 document.cookie = "admin_token=authenticated; path=/; max-age=86400; SameSite=Strict";
-                router.push("/admin");
+                setTimeout(() => {
+                    router.push("/admin");
+                }, 800);
             } else {
-                setError("Invalid credentials");
+                const data = await res.json();
+                setError(data.error || "Invalid credentials");
             }
         } catch {
-            setError("An error occurred");
+            setError("An error occurred. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -64,7 +80,21 @@ export default function AdminLogin() {
                     <h1 className="text-2xl font-black text-brand-forest-900 uppercase tracking-tight">Admin Login</h1>
                     <p className="text-brand-forest-600 text-sm mt-2">Enter your credentials to access the dashboard</p>
                 </div>
-                {error && <p className="text-red-500 text-sm text-center font-medium">{error}</p>}
+                
+                {success && (
+                    <div className="flex items-center justify-center gap-2 p-3 bg-green-50 text-green-700 rounded-xl">
+                        <CheckCircle className="w-5 h-5" />
+                        <span className="font-medium">Login successful! Redirecting...</span>
+                    </div>
+                )}
+                
+                {error && (
+                    <div className="flex items-center justify-center gap-2 p-3 bg-red-50 text-red-700 rounded-xl">
+                        <XCircle className="w-5 h-5" />
+                        <span className="font-medium">{error}</span>
+                    </div>
+                )}
+                
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="email" className="text-xs font-black text-brand-forest-700 uppercase">Email</Label>
@@ -74,6 +104,7 @@ export default function AdminLogin() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            disabled={loading || success}
                             className="rounded-xl h-12 border-brand-forest-200"
                         />
                     </div>
@@ -85,15 +116,28 @@ export default function AdminLogin() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            disabled={loading || success}
                             className="rounded-xl h-12 border-brand-forest-200"
                         />
                     </div>
                     <Button 
                         type="submit" 
-                        disabled={loading}
-                        className="w-full h-12 bg-brand-orange-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-orange-800"
+                        disabled={loading || success}
+                        className="w-full h-12 bg-brand-orange-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-orange-800 disabled:opacity-50"
                     >
-                        {loading ? "Logging in..." : "Login"}
+                        {loading ? (
+                            <>
+                                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                                Logging in...
+                            </>
+                        ) : success ? (
+                            <>
+                                <CheckCircle className="w-5 h-5 mr-2" />
+                                Success!
+                            </>
+                        ) : (
+                            "Login"
+                        )}
                     </Button>
                 </form>
                 

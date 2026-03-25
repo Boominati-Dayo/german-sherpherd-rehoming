@@ -89,10 +89,6 @@ export function PuppiesContainer({ initialPuppies }: PuppiesContainerProps) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        {/* Circle with Cavalier text */}
-                        <div className="w-40 h-40 mx-auto mb-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-white/30">
-                            <span className="text-3xl font-black text-white uppercase tracking-wider">Cavalier</span>
-                        </div>
                         
                         <h1 className="text-4xl sm:text-6xl font-black text-white uppercase tracking-tight mb-4">
                             Available <span className="text-brand-orange-500">Cavaliers</span>
