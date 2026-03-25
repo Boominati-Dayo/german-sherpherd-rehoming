@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     siteName: "Rebecca Herman's Fostering",
     images: [
       {
-        url: "/thumbnail.png",
+        url: "https://rebecca-herman-fostering.vercel.app/thumbnail.png",
         width: 1200,
         height: 630,
         alt: "Rebecca Herman's Fostering",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
       "Rebecca Herman's Fostering",
     description:
       "Find healthy, home-raised Cavalier King Charles Spaniels ready for loving families.",
-    images: ["/thumbnail.png"],
+    images: ["https://rebecca-herman-fostering.vercel.app/thumbnail.png"],
   },
 
   category: "Pets",
