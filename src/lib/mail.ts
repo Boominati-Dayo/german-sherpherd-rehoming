@@ -49,7 +49,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
     const brandColor = "#c45210";
     const brandColorLight = "#fde4d0";
     const logoText = "Rebecca Herman's Fostering";
-    const logoUrl = "https://rebecca-herman-fostering.vercel.app/RebeccaHermanFosteringLogo.svg";
+    const logoUrl = "https://rebecca-herman-fostering.vercel.app/RebeccaHermanFosteringLogo.png";
 
     let headerContent = "";
     let mainContent = "";
@@ -58,7 +58,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
         case "application_submitted":
             headerContent = `
                 <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a8460d 100%); padding: 30px 40px; text-align: center;">
-                    <img src="${logoUrl}" alt="${logoText}" style="height: 60px; margin-bottom: 15px;" />
+                    <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="height: 60px; width: auto; margin-bottom: 15px;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">Application Received</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
                 </div>
@@ -81,7 +81,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
         case "application_approved":
             headerContent = `
                 <div style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); padding: 30px 40px; text-align: center;">
-                    <img src="${logoUrl}" alt="${logoText}" style="height: 60px; margin-bottom: 15px;" />
+                    <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="height: 60px; width: auto; margin-bottom: 15px;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">Application Approved! 🎉</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
                 </div>
@@ -98,7 +98,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
         case "application_rejected":
             headerContent = `
                 <div style="background: linear-gradient(135deg, #666 0%, #444 100%); padding: 30px 40px; text-align: center;">
-                    <img src="${logoUrl}" alt="${logoText}" style="height: 60px; margin-bottom: 15px;" />
+                    <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="height: 60px; width: auto; margin-bottom: 15px;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">Application Update</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
                 </div>
@@ -115,7 +115,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
         case "contact_submitted":
             headerContent = `
                 <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a8460d 100%); padding: 30px 40px; text-align: center;">
-                    <img src="${logoUrl}" alt="${logoText}" style="height: 60px; margin-bottom: 15px;" />
+                    <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="height: 60px; width: auto; margin-bottom: 15px;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">Message Received</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
                 </div>
@@ -132,7 +132,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
         case "admin_reply":
             headerContent = `
                 <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a8460d 100%); padding: 30px 40px; text-align: center;">
-                    <img src="${logoUrl}" alt="${logoText}" style="height: 60px; margin-bottom: 15px;" />
+                    <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="height: 60px; width: auto; margin-bottom: 15px;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">New Message</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
                 </div>
