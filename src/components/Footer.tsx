@@ -76,7 +76,7 @@ export function Footer() {
                                 <div className="w-10 h-10 bg-brand-orange-700/20 rounded-full flex items-center justify-center">
                                     <Mail className="w-5 h-5 text-brand-orange-500" />
                                 </div>
-                                <span className="text-white/70 font-medium">rebecca@rebecca-herman.com</span>
+                                <span className="text-white/70 font-medium">admin@rebeccahermanfostering.com</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="w-10 h-10 bg-brand-orange-700/20 rounded-full flex items-center justify-center">

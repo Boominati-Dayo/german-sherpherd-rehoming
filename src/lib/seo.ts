@@ -28,7 +28,7 @@ export const seoConfig = {
     socialImage: `${siteUrl}/thumbnail.png`,
     twitterHandle: "@RebeccaHerman",
     phone: "(555) 123-4567",
-    email: "rebecca@rebecca-herman.com",
+    email: "admin@rebeccahermanfostering.com",
 };
 
 export function generatePageMetadata({

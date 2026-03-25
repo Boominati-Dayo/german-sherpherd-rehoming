@@ -64,7 +64,7 @@ export function ContactForm() {
                                     </div>
                                     <div>
                                         <p className="text-xs font-black text-brand-forest-600 uppercase">Email</p>
-                                        <p className="text-brand-forest-800 font-medium">rebecca@rebecca-herman.com</p>
+                                        <p className="text-brand-forest-800 font-medium">admin@rebeccahermanfostering.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">

@@ -67,7 +67,7 @@ export async function POST(request: Request) {
         }
 
         // Send notification to admin
-        const adminEmail = process.env.ADMIN_EMAIL || "vanslili265@gmail.com";
+        const adminEmail = process.env.ADMIN_EMAIL || "admin@rebeccahermanfostering.com";
         let answersHtml = "";
         Object.entries(answers).forEach(([key, value]) => {
             if (value) {

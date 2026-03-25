@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             message,
         });
 
-        const adminEmail = process.env.ADMIN_EMAIL || "vanslili265@gmail.com";
+        const adminEmail = process.env.ADMIN_EMAIL || "admin@rebeccahermanfostering.com";
 
         await sendMail({
             to: adminEmail,
