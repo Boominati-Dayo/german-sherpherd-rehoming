@@ -56,13 +56,18 @@ export function ApplicationDetail({ application, onBack, onUpdate }: Application
         if (!confirm("Reject this application? This will send a notification email.")) return;
         setSending(true);
         try {
-            const res = await fetch(`/api/applications/${application._id}/reject`, { method: "POST" });
+            const res = await fetch(`/api/applications/${application._id}/reject`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: "" })
+            });
+            const data = await res.json();
             if (res.ok) {
                 toast.success("Application rejected");
                 onUpdate();
                 onBack();
             } else {
-                toast.error("Failed to reject");
+                toast.error(data.error || "Failed to reject");
             }
         } catch (e) {
             toast.error("Error rejecting");
