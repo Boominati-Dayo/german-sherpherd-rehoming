@@ -86,7 +86,7 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
                         </div>
 
                         {/* Content Area with custom scrollbar */}
-                        <div className="flex-1 overflow-y-auto p-8 pt-6 custom-scrollbar">
+                        <div className="flex-1 overflow-y-auto p-4 md:p-8 pt-6 custom-scrollbar">
                             {children}
                         </div>
 
