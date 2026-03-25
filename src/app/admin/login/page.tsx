@@ -10,8 +10,13 @@ import { Home, Loader2, CheckCircle, XCircle } from "lucide-react";
 
 export default function AdminLogin() {
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [initialCheck, setInitialCheck] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -25,23 +30,6 @@ export default function AdminLogin() {
         };
         checkAuth();
     }, [router]);
-
-    if (isAuthenticated || initialCheck) {
-        return (
-            <div className="flex bg-brand-forest-900 min-h-screen items-center justify-center p-4">
-                <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-3xl shadow-2xl text-center">
-                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-orange-700" />
-                    <p className="text-brand-forest-600">Checking authentication...</p>
-                </div>
-            </div>
-        );
-    }
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -72,6 +60,17 @@ export default function AdminLogin() {
             setLoading(false);
         }
     };
+
+    if (isAuthenticated || initialCheck) {
+        return (
+            <div className="flex bg-brand-forest-900 min-h-screen items-center justify-center p-4">
+                <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-3xl shadow-2xl text-center">
+                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-orange-700" />
+                    <p className="text-brand-forest-600">Checking authentication...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex bg-brand-forest-900 min-h-screen items-center justify-center p-4">
