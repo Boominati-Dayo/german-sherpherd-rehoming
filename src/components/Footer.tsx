@@ -82,7 +82,10 @@ export function Footer() {
                                 <div className="w-10 h-10 bg-brand-orange-700/20 rounded-full flex items-center justify-center">
                                     <Phone className="w-5 h-5 text-brand-orange-500" />
                                 </div>
-                                <span className="text-white/70 font-medium">(555) 123-4567</span>
+                                <div>
+                                    <span className="text-white/70 font-medium block">(555) 123-4567</span>
+                                    <span className="text-xs text-white/50">Text messages only</span>
+                                </div>
                             </li>
                         </ul>
                     </div>

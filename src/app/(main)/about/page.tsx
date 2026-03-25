@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
-import { Heart, ShieldCheck, Star, PawPrint, ArrowRight, Bone, Dog, Clock, Home, Activity } from "lucide-react";
+import { Heart, ShieldCheck, Star, PawPrint, ArrowRight, Bone, Dog, Clock, Home, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { generatePageMetadata } from "@/lib/seo";
 
@@ -9,6 +9,15 @@ export const metadata: Metadata = generatePageMetadata({
     title: "About Rebecca Herman",
     description: "Learn about Rebecca Herman and her mission to find loving forever homes for Cavalier King Charles Spaniels. Our commitment to responsible breeding and adoption.",
 });
+
+const familyImages = [
+    { src: "/assets/rebeccaFamily/rebeccainherweddingphoto.jpg", alt: "Rebecca in her wedding photo" },
+    { src: "/assets/rebeccaFamily/rebeccawithahappyfamillyandanoldlady.jpg", alt: "Rebecca with a happy family and elderly lady" },
+    { src: "/assets/rebeccaFamily/rebeccaatbirthdaypartyofsomecomunitykids.jpg", alt: "Rebecca at a community event" },
+    { src: "/assets/rebeccaFamily/rebeccaandsomeladiesatapress.jpg", alt: "Rebecca with friends" },
+    { src: "/assets/rebeccaFamily/rebebeccaandherfriendstakingselfieatnight.jpg", alt: "Rebecca taking selfie with friends" },
+    { src: "/assets/rebeccaFamily/twoofrebeccasdogssleepingonchair.jpg", alt: "Rebecca's Cavaliers" },
+];
 
 export default function AboutPage() {
     return (
@@ -42,14 +51,14 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="order-2 lg:order-1">
                             <div className="relative">
-                                <div className="aspect-[4/5] rounded-[3rem] bg-gradient-to-br from-brand-forest-100 to-brand-orange-100 flex items-center justify-center">
-                                    <div className="text-center p-8">
-                                        <div className="w-40 h-40 bg-brand-orange-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                                            <Heart className="w-20 h-20 text-white" />
-                                        </div>
-                                        <p className="text-xl font-black text-brand-forest-800 uppercase">Rebecca Herman</p>
-                                        <p className="text-brand-forest-600">Cavalier Enthusiast</p>
-                                    </div>
+                                <div className="aspect-[4/5] rounded-[3rem] bg-gradient-to-br from-brand-forest-100 to-brand-orange-100 overflow-hidden shadow-2xl">
+                                    <Image 
+                                        src="/assets/rebeccaFamily/rebeccainherweddingphoto.jpg"
+                                        alt="Rebecca Herman"
+                                        fill
+                                        className="object-cover"
+                                        priority
+                                    />
                                 </div>
                                 <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl">
                                     <p className="text-4xl font-black text-brand-orange-600">10+</p>
@@ -65,10 +74,10 @@ export default function AboutPage() {
                             
                             <div className="space-y-6 text-brand-forest-700 text-lg leading-relaxed">
                                 <p>
-                                    I am a 34-year-old wife, mother of four, and passionate dog lover. I am happily married to my husband, who manages a small local business, and together we've built a warm, family-oriented life centered on love, care, and compassion.
+                                    I'm Rebecca Herman, a 34-year-old wife, mother of four, and passionate dog lover. My connection with dogs—especially Cavalier King Charles Spaniels—began in childhood.
                                 </p>
                                 <p>
-                                    My connection with dogs—especially Cavalier King Charles Spaniels—began in childhood. Although my early experiences weren't ideal, they shaped a deep personal promise within me: to always love, protect, and advocate for dogs, and to support anyone who shares that same compassion.
+                                    Although my early experiences weren't ideal, they shaped a deep personal promise within me: to always love, protect, and advocate for dogs, and to support anyone who shares that same compassion.
                                 </p>
                                 <p>
                                     Over the years, I became increasingly aware of the heartbreaking number of dogs in shelters, often surrendered for reasons beyond their control. Seeing this inspired me to take action and make a difference.
@@ -86,41 +95,43 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Family Images */}
+            {/* Family Images - Carousel on mobile, grid on desktop */}
             <section className="py-16 bg-brand-forest-50">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
-                            <Image 
-                                src="/assets/rebeccaFamily/rebeccaandherkids.jpg"
-                                alt="Rebecca with her children"
-                                fill
-                                className="object-cover hover:scale-105 transition-transform duration-500"
-                            />
+                    {/* Desktop: Grid */}
+                    <div className="hidden lg:grid grid-cols-2 lg:grid-cols-4 gap-6">
+                        {familyImages.map((img, idx) => (
+                            <div key={idx} className="aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
+                                <Image 
+                                    src={img.src}
+                                    alt={img.alt}
+                                    fill
+                                    className="object-cover hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Mobile: Carousel */}
+                    <div className="lg:hidden">
+                        <div className="flex gap-4 overflow-x-auto snap-x pb-4 scrollbar-hide">
+                            {familyImages.map((img, idx) => (
+                                <div key={idx} className="flex-none w-[280px] snap-center">
+                                    <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
+                                        <Image 
+                                            src={img.src}
+                                            alt={img.alt}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
-                            <Image 
-                                src="/assets/rebeccaFamily/rebeccainherweddingphoto.jpg"
-                                alt="Rebecca in her wedding photo"
-                                fill
-                                className="object-cover hover:scale-105 transition-transform duration-500"
-                            />
-                        </div>
-                        <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
-                            <Image 
-                                src="/assets/rebeccaFamily/rebeccaandsomeoldfolksshehelped.jpg"
-                                alt="Rebecca with elderly couple she helped"
-                                fill
-                                className="object-cover hover:scale-105 transition-transform duration-500"
-                            />
-                        </div>
-                        <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-lg relative">
-                            <Image 
-                                src="/assets/rebeccaFamily/rebeccawithahappyfamillyandanoldlady.jpg"
-                                alt="Rebecca with a happy family and elderly lady"
-                                fill
-                                className="object-cover hover:scale-105 transition-transform duration-500"
-                            />
+                        <div className="flex justify-center gap-2 mt-4">
+                            {familyImages.map((_, idx) => (
+                                <div key={idx} className="w-2 h-2 rounded-full bg-brand-orange-300" />
+                            ))}
                         </div>
                     </div>
                 </div>

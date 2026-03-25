@@ -52,7 +52,10 @@ export function HomeHero() {
                         </h1>
 
                         <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
-                            I connect loving families with beautiful Cavalier King Charles Spaniels who are ready to fill your home with unconditional love.
+                            Connecting Families with Cavalier Love
+                        </p>
+                        <p className="text-white/60 mb-4 max-w-xl mx-auto">
+                            I'm Rebecca Herman, a 34-year-old wife, mother of four, and passionate dog lover.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">

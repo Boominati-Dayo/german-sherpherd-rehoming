@@ -74,6 +74,7 @@ export function ContactForm() {
                                     <div>
                                         <p className="text-xs font-black text-brand-forest-600 uppercase">Phone</p>
                                         <p className="text-brand-forest-800 font-medium">(555) 123-4567</p>
+                                        <p className="text-xs text-brand-forest-500">Text messages only</p>
                                     </div>
                                 </div>
                             </div>

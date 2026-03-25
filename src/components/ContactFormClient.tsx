@@ -169,6 +169,7 @@ export function ContactFormClient() {
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Phone</p>
                                             <p className="text-sm">(555) 123-4567</p>
+                                            <p className="text-xs text-brand-forest-500">Text messages only</p>
                                         </div>
                                     </a>
                                 </div>
