@@ -18,8 +18,8 @@ export async function POST(request: Request, { params }: RouteParams) {
         // Send Email using centralized utility
         await sendMail({
             to: app.email,
-            subject: "Update regarding your application - Tiffany Dawson's Rehoming",
-            text: `Dear ${app.applicantName},\n\n${message}\n\nWarm regards,\nTiffany Dawson`,
+            subject: "Update regarding your application - Rebecca Herman Fostering",
+            text: `Dear ${app.applicantName},\n\n${message}\n\nWarm regards,\nRebecca Herman`,
             html: `
                 <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
                     <h2 style="color: #0d9488;">Update Regarding Your Application</h2>
@@ -27,7 +27,7 @@ export async function POST(request: Request, { params }: RouteParams) {
                     <p style="line-height: 1.6; white-space: pre-wrap;">${message}</p>
                     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                     <p>Warm regards,</p>
-                    <p><strong>Tiffany Dawson</strong><br>Tiffany Dawson's Rehoming</p>
+                    <p><strong>Rebecca Herman</strong><br>Rebecca Herman Fostering</p>
                 </div>
             `,
         });

@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return new Promise<NextResponse>((resolve) => {
         cloudinary.uploader.upload_stream(
             {
-                folder: "tiffany-rehoming/puppies",
+                folder: "rebecca-herman-fostering/puppies",
             },
             (error, result) => {
                 if (error) {

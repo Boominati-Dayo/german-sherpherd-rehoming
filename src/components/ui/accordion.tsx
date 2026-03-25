@@ -25,7 +25,7 @@ export function AccordionItem({ title, children, className }: AccordionItemProps
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
-        <div className={cn("border border-gray-100 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-300", isOpen && "shadow-md ring-1 ring-brand-teal-deep/5", className)}>
+        <div className={cn("border border-gray-100 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-300", isOpen && "shadow-md ring-1 ring-brand-forest/5", className)}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center justify-between w-full p-6 text-left hover:bg-gray-50/50 transition-colors focus:outline-none"
@@ -34,7 +34,7 @@ export function AccordionItem({ title, children, className }: AccordionItemProps
                 <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="text-brand-teal-muted flex-shrink-0 ml-4"
+                    className="text-brand-forest flex-shrink-0 ml-4"
                 >
                     <ChevronDown className="w-5 h-5" />
                 </motion.div>

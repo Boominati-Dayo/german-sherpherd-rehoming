@@ -71,14 +71,14 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
                         {/* Glass Header */}
                         <div className="sticky top-0 z-20 flex items-center justify-between px-8 py-6 bg-white/80 backdrop-blur-md border-b border-gray-100/50">
                             <div>
-                                <h2 className="text-2xl font-bold text-brand-teal-deep tracking-tight">{title}</h2>
-                                <div className="h-1 w-12 bg-brand-red rounded-full mt-1" />
+                                <h2 className="text-2xl font-bold text-brand-forest tracking-tight">{title}</h2>
+                                <div className="h-1 w-12 bg-brand-orange rounded-full mt-1" />
                             </div>
                             <Button
                                 variant="ghost"
                                 size="icon"
                                 onClick={onClose}
-                                className="rounded-full bg-gray-50 hover:bg-brand-red hover:text-white transition-all duration-300 group"
+                                className="rounded-full bg-gray-50 hover:bg-brand-orange hover:text-white transition-all duration-300 group"
                             >
                                 <X className="w-5 h-5 text-gray-500 group-hover:text-white" />
                                 <span className="sr-only">Close</span>

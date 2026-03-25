@@ -1,39 +1,34 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tiffany-dawson-rehoming.vercel.app"),
+  metadataBase: new URL("https://rebecca-herman-fostering.vercel.app"),
 
   title: {
-    default: "Tiffany Dawson's Rehoming | Maltipoo, Cavapoo & Poochon Puppies",
-    template: "%s | Tiffany Dawson's Rehoming",
+    default: "Rebecca Herman's Fostering",
+    template: "%s | Rebecca Herman's Fostering",
   },
 
   description:
-    "Find healthy, home-raised Maltipoo, Cavapoo, and Poochon puppies ready for loving homes. Vet-checked, vaccinated, and responsibly rehomed across the U.S.",
+    "Find healthy, home-raised Cavalier King Charles Spaniels ready for loving homes. Vet-checked, vaccinated, and responsibly rehomed across the U.S.",
 
   keywords: [
-    "Maltipoo puppies",
-    "Cavapoo puppies",
-    "Poochon puppies",
-    "puppies for adoption",
-    "puppies for sale",
-    "rehoming puppies",
-    "hypoallergenic puppies",
+    "Cavalier King Charles Spaniel puppies",
+    "Cavalier puppies for adoption",
+    "Cavalier King Charles Spaniel rehoming",
+    " Cavalier King Charles Spaniel puppies",
     "family puppies",
-    "Tiffany Dawson puppies"
+    "Rebecca Herman"
   ],
 
-  authors: [{ name: "Tiffany Dawson" }],
-  creator: "Tiffany Dawson",
-  publisher: "Tiffany Dawson's Rehoming",
+  authors: [{ name: "Rebecca Herman" }],
+  creator: "Rebecca Herman",
+  publisher: "Rebecca Herman's Fostering",
 
   robots: {
     index: true,
@@ -48,23 +43,23 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://tiffany-dawson-rehoming.vercel.app",
+    canonical: "https://rebecca-herman-fostering.vercel.app",
   },
 
   openGraph: {
     type: "website",
-    url: "https://tiffany-dawson-rehoming.vercel.app",
+    url: "https://rebecca-herman-fostering.vercel.app",
     title:
-      "Tiffany Dawson's Rehoming | Loving Maltipoo, Cavapoo & Poochon Puppies",
+      "Rebecca Herman's Fostering",
     description:
-      "Healthy, vet-checked Maltipoo, Cavapoo, and Poochon puppies raised with care and ready for loving homes.",
-    siteName: "Tiffany Dawson's Rehoming",
+      "Healthy, vet-checked Cavalier King Charles Spaniels raised with care and ready for loving homes.",
+    siteName: "Rebecca Herman's Fostering",
     images: [
       {
-        url: "/thumbnail.png", // place this inside /public
+        url: "/thumbnail.png",
         width: 1200,
         height: 630,
-        alt: "Tiffany Dawson's Rehoming Puppies",
+        alt: "Rebecca Herman's Fostering",
       },
     ],
   },
@@ -72,15 +67,14 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Tiffany Dawson's Rehoming | Maltipoo, Cavapoo & Poochon Puppies",
+      "Rebecca Herman's Fostering",
     description:
-      "Find healthy, home-raised puppies ready for loving families.",
+      "Find healthy, home-raised Cavalier King Charles Spaniels ready for loving families.",
     images: ["/thumbnail.png"],
   },
 
   category: "Pets",
 };
-
 
 export default function RootLayout({
   children,
@@ -91,9 +85,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-white text-gray-900`}>
         <Toaster position="top-right" />
-        <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );

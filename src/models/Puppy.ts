@@ -8,6 +8,7 @@ export interface IPuppy extends Document {
     image: string;
     images: string[];
     status: "available" | "adopted" | "pending";
+    featured: boolean;
     fee: string;
     nannyFee: string;
     description: string;
@@ -29,6 +30,7 @@ const PuppySchema: Schema = new Schema(
             enum: ["available", "adopted", "pending"],
             default: "available",
         },
+        featured: { type: Boolean, default: false },
         fee: { type: String, required: true },
         nannyFee: { type: String, required: true },
         description: { type: String, required: true },

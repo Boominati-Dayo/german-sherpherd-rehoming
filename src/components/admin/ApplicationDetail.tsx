@@ -11,6 +11,24 @@ interface ApplicationDetailProps {
     onUpdate: () => void;
 }
 
+const questionLabels: Record<string, string> = {
+    homeLifestyle: "Home & Lifestyle",
+    canineExperience: "Canine Experience",
+    currentPets: "Current Pets",
+    currentPetsDetails: "Current Pets Details",
+    hoursAlone: "Hours Alone Per Day",
+    careArrangement: "Care Arrangement",
+    livingEnvironment: "Living Environment",
+    livingEnvironmentOther: "Living Environment (Other)",
+    outdoorSpace: "Outdoor Space",
+    outdoorSpaceDetails: "Outdoor Space Details",
+    readinessScore: "Readiness Score (1-100)",
+    readinessExplanation: "Readiness Explanation",
+    veterinarian: "Has Veterinarian",
+    vetDetails: "Veterinarian Details",
+    agreement: "Agreement"
+};
+
 export function ApplicationDetail({ application, onBack, onUpdate }: ApplicationDetailProps) {
     const [replyMessage, setReplyMessage] = useState("");
     const [sending, setSending] = useState(false);
@@ -34,14 +52,36 @@ export function ApplicationDetail({ application, onBack, onUpdate }: Application
         }
     };
 
+    const handleReject = async () => {
+        if (!confirm("Reject this application? This will send a notification email.")) return;
+        setSending(true);
+        try {
+            const res = await fetch(`/api/applications/${application._id}/reject`, { method: "POST" });
+            if (res.ok) {
+                toast.success("Application rejected");
+                onUpdate();
+                onBack();
+            } else {
+                toast.error("Failed to reject");
+            }
+        } catch (e) {
+            toast.error("Error rejecting");
+        } finally {
+            setSending(false);
+        }
+    };
+
     const handleReply = async () => {
-        if (!replyMessage.trim()) return alert("Enter a message");
+        if (!replyMessage.trim()) return toast.error("Enter a message");
         setSending(true);
         try {
             const res = await fetch(`/api/applications/${application._id}/reply`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: replyMessage }),
+                body: JSON.stringify({ 
+                    message: replyMessage,
+                    puppyName: application.puppyName 
+                }),
             });
             if (res.ok) {
                 toast.success("Reply sent!");
@@ -56,62 +96,104 @@ export function ApplicationDetail({ application, onBack, onUpdate }: Application
         }
     };
 
+    const answers = application.answers || {};
+
     return (
-        <div className="bg-white p-4 sm:p-8 rounded-xl shadow-sm border border-gray-100">
+        <div className="bg-white p-6 rounded-3xl shadow-lg">
             <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-gray-900">{application.applicantName}</h2>
-                    <p className="text-gray-500">{application.email}</p>
+                    <h2 className="text-2xl font-black text-brand-forest-900 uppercase">{application.applicantName}</h2>
+                    <p className="text-brand-forest-600">{application.email}</p>
+                    <p className="text-brand-forest-500 text-sm">{application.phone}</p>
+                    <p className="text-brand-forest-500 text-sm">{application.location}</p>
+                    {application.puppyName && (
+                        <p className="text-brand-orange-700 font-bold mt-2">Cavalier: {application.puppyName}</p>
+                    )}
+                    <span className={`inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold uppercase ${
+                        application.status === 'approved' ? 'bg-green-100 text-green-700' :
+                        application.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                        application.status === 'reviewed' ? 'bg-blue-100 text-blue-700' :
+                        'bg-yellow-100 text-yellow-700'
+                    }`}>
+                        {application.status}
+                    </span>
                 </div>
-                <Button variant="outline" className="w-full sm:w-auto" onClick={onBack}>Back to List</Button>
+                <Button variant="outline" onClick={onBack} className="rounded-full font-bold">
+                    Back
+                </Button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div className="space-y-4">
-                    <h3 className="font-semibold text-lg border-b pb-2">Questions & Answers</h3>
-                    {[
-                        { q: "Why are you interested in adopting a puppy at this time?", a: application.answers.q1 },
-                        { q: "Do you have a secure, fenced yard or a safe plan for outdoor time?", a: application.answers.q2 },
-                        { q: "Who will be the primary caregiver for the puppy?", a: application.answers.q3 },
-                        { q: "Are there any other pets in your home?", a: application.answers.q4 },
-                        { q: "Experience with breed's grooming and exercise needs?", a: application.answers.q5 },
-                        { q: "How many hours a day will the puppy be left alone?", a: application.answers.q6 },
-                        { q: "All members of household in agreement?", a: application.answers.q7 },
-                        { q: "Ever had to rehome a pet before?", a: application.answers.q8 },
-                    ].map((item, i) => (
-                        <div key={i} className="mb-4">
-                            <span className="text-[10px] font-black uppercase text-brand-teal-deep-700 tracking-widest">{i + 1}. {item.q}</span>
-                            <p className="text-sm text-gray-800 bg-brand-white-200/50 p-4 rounded-xl mt-1.5 border border-brand-white-400 italic leading-relaxed font-medium">
-                                "{item.a || "No answer provided"}"
-                            </p>
-                        </div>
-                    ))}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Answers Column */}
+                <div className="lg:col-span-2 space-y-4">
+                    <h3 className="font-black text-brand-forest-900 uppercase text-lg">Application Answers</h3>
+                    {Object.entries(answers).map(([key, value]: [string, any]) => {
+                        if (!value) return null;
+                        return (
+                            <div key={key} className="bg-brand-forest-50 p-4 rounded-xl">
+                                <span className="text-xs font-black text-brand-forest-700 uppercase tracking-wider block mb-2">
+                                    {questionLabels[key] || key}
+                                </span>
+                                {key === "readinessScore" ? (
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex-1 h-3 bg-brand-forest-200 rounded-full overflow-hidden">
+                                            <div 
+                                                className="h-full bg-brand-orange-600" 
+                                                style={{ width: `${value}%` }}
+                                            />
+                                        </div>
+                                        <span className="text-xl font-black text-brand-orange-700">{value}</span>
+                                    </div>
+                                ) : (
+                                    <p className="text-brand-forest-800 font-medium italic">"{value}"</p>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
 
-                <div className="space-y-6">
-                    <div className="bg-gray-50 p-6 rounded-lg">
-                        <h3 className="font-semibold text-lg mb-4">Actions</h3>
+                {/* Actions Column */}
+                <div className="space-y-4">
+                    <h3 className="font-black text-brand-forest-900 uppercase text-lg">Actions</h3>
+                    
+                    <div className="space-y-3">
                         {application.status !== 'approved' && (
                             <Button
                                 onClick={handleApprove}
-                                className="w-full mb-4 bg-green-600 hover:bg-green-700 text-white"
                                 disabled={sending}
+                                className="w-full bg-green-600 hover:bg-green-700 rounded-full font-black uppercase"
                             >
-                                {sending ? "Processing..." : "Approve Application"}
+                                Approve Application
                             </Button>
                         )}
-                        <div className="border-t pt-4 mt-4">
-                            <h4 className="font-medium mb-2">Send Custom Reply</h4>
-                            <Textarea
-                                value={replyMessage}
-                                onChange={(e) => setReplyMessage(e.target.value)}
-                                placeholder="Type your message here..."
-                                className="mb-2"
-                            />
-                            <Button onClick={handleReply} disabled={sending || !replyMessage} variant="outline" className="w-full">
-                                Send Message
+                        {application.status !== 'rejected' && (
+                            <Button
+                                onClick={handleReject}
+                                disabled={sending}
+                                variant="outline"
+                                className="w-full border-red-300 text-red-600 hover:bg-red-50 rounded-full font-bold"
+                            >
+                                Reject Application
                             </Button>
-                        </div>
+                        )}
+                    </div>
+
+                    <div className="border-t border-brand-forest-100 pt-4 mt-4">
+                        <h4 className="font-bold text-brand-forest-900 mb-3">Send Reply</h4>
+                        <Textarea
+                            value={replyMessage}
+                            onChange={(e) => setReplyMessage(e.target.value)}
+                            placeholder="Type your message to the applicant..."
+                            className="mb-3 rounded-xl"
+                            rows={4}
+                        />
+                        <Button 
+                            onClick={handleReply} 
+                            disabled={sending || !replyMessage}
+                            className="w-full bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase"
+                        >
+                            Send Reply
+                        </Button>
                     </div>
                 </div>
             </div>

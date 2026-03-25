@@ -17,6 +17,7 @@ interface PuppyData {
     image: string;
     images: string[];
     status: "available" | "pending" | "adopted";
+    featured: boolean;
     fee: string;
     nannyFee: string;
     description: string;
@@ -39,6 +40,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
             image: "",
             images: [],
             status: "available",
+            featured: false,
             fee: "",
             nannyFee: "",
             description: "",
@@ -93,8 +95,8 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                 {/* Left Column: Details */}
                 <div className="p-6 sm:p-8 lg:p-10 space-y-6 border-b lg:border-b-0 lg:border-r border-brand-white-400">
                     <div className="flex items-center gap-2 mb-2">
-                        <Star className="w-5 h-5 text-brand-red-700" />
-                        <h3 className="text-xl font-black text-brand-teal-deep-900 uppercase tracking-tight">Puppy Information</h3>
+                        <Star className="w-5 h-5 text-brand-orange-700" />
+                        <h3 className="text-xl font-black text-brand-forest-900 uppercase tracking-tight">Puppy Information</h3>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -104,7 +106,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="breed" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Breed</Label>
-                            <Input id="breed" value={formData.breed} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Cavapoo" />
+                            <Input id="breed" value={formData.breed} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Cavalier King Charles Spaniel" />
                         </div>
                     </div>
 
@@ -117,7 +119,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                             <Label htmlFor="gender" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Gender</Label>
                             <select
                                 id="gender"
-                                className="flex h-11 w-full rounded-xl border border-brand-white-400 bg-white px-3 py-2 text-sm font-medium focus:ring-2 focus:ring-brand-teal-deep-100 transition-all outline-none"
+                                className="flex h-11 w-full rounded-xl border border-brand-white-400 bg-white px-3 py-2 text-sm font-medium focus:ring-2 focus:ring-brand-forest-100 transition-all outline-none"
                                 value={formData.gender}
                                 onChange={handleChange}
                             >
@@ -132,7 +134,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                             <Label htmlFor="status" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Status</Label>
                             <select
                                 id="status"
-                                className="flex h-11 w-full rounded-xl border border-brand-white-400 bg-white px-3 py-2 text-sm font-bold focus:ring-2 focus:ring-brand-teal-deep-100 transition-all outline-none"
+                                className="flex h-11 w-full rounded-xl border border-brand-white-400 bg-white px-3 py-2 text-sm font-bold focus:ring-2 focus:ring-brand-forest-100 transition-all outline-none"
                                 value={formData.status}
                                 onChange={handleChange}
                             >
@@ -151,6 +153,17 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                         </div>
                     </div>
 
+                    <div className="flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            id="featured"
+                            checked={formData.featured}
+                            onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                            className="w-5 h-5 rounded border-brand-white-400 text-brand-orange-700 focus:ring-brand-orange-500"
+                        />
+                        <Label htmlFor="featured" className="text-sm font-bold text-brand-forest-900 cursor-pointer">Feature on homepage</Label>
+                    </div>
+
                     <div className="space-y-2">
                         <Label htmlFor="description" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Description</Label>
                         <Textarea id="description" value={formData.description} onChange={handleChange} required className="rounded-2xl border-brand-white-400 min-h-[100px] py-3" placeholder="Tell us about the puppy's personality..." />
@@ -165,14 +178,14 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                 {/* Right Column: Media */}
                 <div className="p-6 sm:p-8 lg:p-10 bg-brand-white-200/50 space-y-8">
                     <div className="flex items-center gap-2 mb-2">
-                        <ImageIcon className="w-5 h-5 text-brand-teal-deep-700" />
-                        <h3 className="text-xl font-black text-brand-teal-deep-900 uppercase tracking-tight">Media Management</h3>
+                        <ImageIcon className="w-5 h-5 text-brand-forest-700" />
+                        <h3 className="text-xl font-black text-brand-forest-900 uppercase tracking-tight">Media Management</h3>
                     </div>
 
                     {/* Primary Image */}
                     <div className="space-y-4">
                         <Label className="text-[10px] font-black uppercase tracking-widest text-brand-white-900 block">Primary Display Image</Label>
-                        <div className="relative group aspect-video rounded-3xl overflow-hidden border-2 border-dashed border-brand-white-400 bg-white flex flex-col items-center justify-center transition-all hover:border-brand-teal-deep-300">
+                        <div className="relative group aspect-video rounded-3xl overflow-hidden border-2 border-dashed border-brand-white-400 bg-white flex flex-col items-center justify-center transition-all hover:border-brand-forest-300">
                             {formData.image ? (
                                 <>
                                     <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
@@ -277,7 +290,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                                 placeholder="Paste Image URL here..."
                                 className="rounded-xl border-brand-white-400 h-11 text-xs flex-grow"
                             />
-                            <Button type="button" onClick={handleAddLink} variant="outline" className="rounded-xl h-11 px-4 font-bold text-xs uppercase tracking-widest border-brand-teal-deep-700 text-brand-teal-deep-700 hover:bg-brand-teal-deep-50">
+                            <Button type="button" onClick={handleAddLink} variant="outline" className="rounded-xl h-11 px-4 font-bold text-xs uppercase tracking-widest border-brand-forest-700 text-brand-forest-700 hover:bg-brand-forest-50">
                                 Add link
                             </Button>
                         </div>
@@ -320,7 +333,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                             ))}
 
                             {/* Main Bulk Upload Card */}
-                            <div className="relative aspect-square rounded-2xl border-2 border-dashed border-brand-white-400 flex flex-col items-center justify-center gap-1 text-brand-white-900 hover:bg-white hover:border-brand-teal-deep-300 transition-all cursor-pointer group">
+                            <div className="relative aspect-square rounded-2xl border-2 border-dashed border-brand-white-400 flex flex-col items-center justify-center gap-1 text-brand-white-900 hover:bg-white hover:border-brand-forest-300 transition-all cursor-pointer group">
                                 <input
                                     type="file"
                                     multiple
@@ -352,7 +365,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                                         });
                                     }}
                                 />
-                                <Upload className="w-6 h-6 text-brand-white-400 group-hover:text-brand-teal-deep-700 transition-colors" />
+                                <Upload className="w-6 h-6 text-brand-white-400 group-hover:text-brand-forest-700 transition-colors" />
                                 <span className="text-[10px] font-black uppercase tracking-widest text-center px-2">Bulk Upload Files</span>
                             </div>
                         </div>
@@ -363,7 +376,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
             {/* Form Footer */}
             <div className="p-4 sm:p-6 lg:p-8 bg-brand-white-300 border-t border-brand-white-400 flex flex-col sm:flex-row justify-end gap-4 items-center">
                 <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-bold border-brand-white-900 text-brand-white-900 uppercase tracking-widest">Cancel</Button>
-                <Button type="submit" disabled={loading} className="w-full sm:w-auto rounded-full px-10 h-12 text-sm font-black bg-brand-teal-deep-700 text-white hover:bg-brand-teal-deep-800 shadow-xl uppercase tracking-widest">
+                <Button type="submit" disabled={loading} className="w-full sm:w-auto rounded-full px-10 h-12 text-sm font-black bg-brand-forest-700 text-white hover:bg-brand-forest-800 shadow-xl uppercase tracking-widest">
                     {loading ? "Saving..." : initialData ? "Update Puppy" : "Add Puppy"}
                 </Button>
             </div>

@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import Contact from "@/models/Contact";
-import { sendMail } from "@/lib/mail";
+import { sendMail, getEmailTemplate } from "@/lib/mail";
 
 export async function POST(request: Request) {
     await dbConnect();
     try {
         const { name, email, message, phone, subject } = await request.json();
 
-        // Save to Database
         const contact = await Contact.create({
             name,
             email,
@@ -36,7 +35,7 @@ export async function POST(request: Request) {
             `,
             html: `
                 <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                    <h2 style="color: #0d9488;">New Contact Form Submission</h2>
+                    <h2 style="color: #c45210;">New Contact Form Submission</h2>
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
                     <p><strong>Phone:</strong> ${phone || "N/A"}</p>
@@ -46,6 +45,16 @@ export async function POST(request: Request) {
                     <p style="white-space: pre-wrap; line-height: 1.6;">${message}</p>
                 </div>
             `,
+        });
+
+        await sendMail({
+            to: email,
+            subject: `Thank You for Reaching Out | Rebecca Herman Fostering`,
+            text: `Hi ${name},\n\nThank you for contacting Rebecca Herman's Fostering! Rebecca will get back to you within 24 hours.\n\nBest regards,\nRebecca Herman`,
+            html: getEmailTemplate("contact_submitted", {
+                name,
+                message
+            })
         });
 
         return NextResponse.json({ success: true, contact });

@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Star } from "lucide-react";
 
 interface PuppyProps {
     id: string;
@@ -15,47 +13,59 @@ interface PuppyProps {
 }
 
 export function PuppyCard({ puppy }: { puppy: PuppyProps }) {
+    const isAvailable = puppy.status === "available";
+    
     return (
-        <Card className="overflow-hidden bg-brand-white-100 shadow-xl hover:shadow-2xl transition-all duration-700 border border-brand-white-400 rounded-[2.5rem] group hover:-translate-y-2 flex flex-col h-full">
-            <div className="relative aspect-square w-full overflow-hidden">
-                <Image
-                    src={puppy.image}
-                    alt={puppy.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
-                />
-                {/* Breed Tag */}
-                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-brand-teal-deep-700 shadow-xl border border-white/20">
-                    {puppy.breed}
-                </div>
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-brand-teal-deep-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
-
-            <CardContent className="p-4 sm:p-8 flex-grow">
-                <div className="flex justify-between items-end mb-2 sm:mb-4">
-                    <div>
-                        <p className="text-[8px] sm:text-[10px] font-black text-brand-red-700 uppercase tracking-widest mb-0.5 sm:mb-1">Meet our</p>
-                        <h3 className="text-xl sm:text-3xl font-black text-brand-teal-deep-800 tracking-tighter uppercase leading-none">{puppy.name}</h3>
+        <Link href={`/puppies/${puppy.id}`} className="block">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 h-full flex flex-col">
+                {/* Image Section */}
+                <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                        src={puppy.image}
+                        alt={puppy.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    
+                    {/* Status Badge */}
+                    <div className="absolute top-4 left-4">
+                        <span className={`px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider ${
+                            isAvailable 
+                                ? "bg-brand-orange-600 text-white" 
+                                : "bg-gray-500 text-white"
+                        }`}>
+                            {puppy.status}
+                        </span>
                     </div>
-                    <span className="text-[8px] sm:text-[10px] font-black text-brand-teal-muted-700 bg-brand-teal-muted-100 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-brand-teal-muted-200 uppercase tracking-widest">{puppy.age}</span>
-                </div>
-                <p className="text-brand-white-900 text-xs sm:text-base font-medium leading-relaxed italic line-clamp-2">
-                    "{puppy.description}"
-                </p>
-            </CardContent>
 
-            <CardFooter className="p-4 sm:p-8 pt-0">
-                <Link
-                    href={`/puppies/${puppy.id}`}
-                    className="w-full"
-                >
-                    <button className="w-full h-10 sm:h-14 bg-brand-teal-deep-700 text-white rounded-full text-xs sm:text-sm font-black uppercase tracking-widest hover:bg-brand-teal-deep-800 transition-colors flex items-center justify-center group/btn shadow-lg">
-                        Learn More
-                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1.5 sm:ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                </Link>
-            </CardFooter>
-        </Card>
+                    {/* Name & Info on Image */}
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-1">{puppy.name}</h3>
+                        <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
+                            <span className="flex items-center gap-1">
+                                <Star className="w-4 h-4" />
+                                {puppy.age}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Content Section */}
+                <div className="p-5 flex-grow flex flex-col">
+                    <p className="text-brand-forest-600 text-sm italic line-clamp-2 mb-4 flex-grow">
+                        "{puppy.description}"
+                    </p>
+                    
+                    <div className="flex items-center justify-between pt-4 border-t border-brand-forest-100">
+                        <span className="text-xs font-bold text-brand-forest-500 uppercase tracking-wider">View Details</span>
+                        <div className="w-8 h-8 bg-brand-orange-100 rounded-full flex items-center justify-center group-hover:bg-brand-orange-600 transition-colors">
+                            <ArrowRight className="w-4 h-4 text-brand-orange-600 group-hover:text-white transition-colors" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Link>
     );
 }

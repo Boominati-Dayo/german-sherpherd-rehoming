@@ -1,180 +1,417 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "react-hot-toast";
 
-export function AdoptionForm({ puppyName, onSuccess }: { puppyName?: string, onSuccess?: () => void }) {
-    const [submitted, setSubmitted] = useState(false);
+interface Question {
+    id: string;
+    question: string;
+    type: "text" | "textarea" | "select" | "radio" | "checkbox" | "scale";
+    options?: string[];
+    required?: boolean;
+}
+
+const questions: Question[] = [
+    {
+        id: "homeLifestyle",
+        question: "1. Home & Lifestyle - Please provide an overview of your household, including who resides in the home, your living environment (house, apartment, etc.), and what a typical weekday and weekend look like.",
+        type: "textarea",
+        required: true
+    },
+    {
+        id: "canineExperience",
+        question: "2. Canine Experience - Kindly share your experience with dogs, particularly companion or small breeds such as the Cavalier King Charles Spaniel. If applicable, include details of any current or previous pets.",
+        type: "textarea",
+        required: true
+    },
+    {
+        id: "currentPets",
+        question: "Do you currently have any pets?",
+        type: "radio",
+        options: ["Yes, dogs", "Yes, cats", "Yes, both", "No pets currently"],
+        required: true
+    },
+    {
+        id: "currentPetsDetails",
+        question: "Please provide details about your current pets (breeds, ages, etc.):",
+        type: "textarea",
+        required: false
+    },
+    {
+        id: "hoursAlone",
+        question: "3. Time, Presence & Care Plan - Approximately how many hours per day would the Cavalier be alone?",
+        type: "select",
+        options: ["Less than 2 hours", "2-4 hours", "4-6 hours", "6-8 hours", "More than 8 hours"],
+        required: true
+    },
+    {
+        id: "careArrangement",
+        question: "What arrangements are in place to ensure the Cavalier's mental stimulation, care, and emotional well-being when you're away?",
+        type: "textarea",
+        required: true
+    },
+    {
+        id: "livingEnvironment",
+        question: "4. Environment & Safety - What type of living environment do you have?",
+        type: "radio",
+        options: ["Detached House", "Semi-detached House", "Apartment", "Condo", "Other"],
+        required: true
+    },
+    {
+        id: "livingEnvironmentOther",
+        question: "Please specify your living environment:",
+        type: "text",
+        required: false
+    },
+    {
+        id: "outdoorSpace",
+        question: "Do you have outdoor space available?",
+        type: "radio",
+        options: ["Yes, fenced yard", "Yes, unfenced yard", "No outdoor space", "Other"],
+        required: true
+    },
+    {
+        id: "outdoorSpaceDetails",
+        question: "Please describe your outdoor space:",
+        type: "textarea",
+        required: false
+    },
+    {
+        id: "readinessScore",
+        question: "5. Readiness & Long-Term Commitment - On a scale of 1-100, how prepared do you feel to welcome a Cavalier into your home at this time?",
+        type: "scale",
+        required: true
+    },
+    {
+        id: "readinessExplanation",
+        question: "Please elaborate on your response and what makes you confident in your readiness for the long-term responsibilities of dog ownership:",
+        type: "textarea",
+        required: true
+    },
+    {
+        id: "veterinarian",
+        question: "Do you have a veterinarian selected?",
+        type: "radio",
+        options: ["Yes", "No, but plan to", "No"],
+        required: true
+    },
+    {
+        id: "vetDetails",
+        question: "Please provide your veterinarian's name and contact (if available):",
+        type: "text",
+        required: false
+    },
+    {
+        id: "agreement",
+        question: "I understand that this is a standard placement process and agree to provide accurate information:",
+        type: "radio",
+        options: ["I agree"],
+        required: true
+    }
+];
+
+interface AdoptionFormProps {
+    puppyName: string;
+    puppyId: string;
+    onSuccess: () => void;
+}
+
+export function AdoptionForm({ puppyName, puppyId, onSuccess }: AdoptionFormProps) {
+    const [step, setStep] = useState(0);
+    const [formData, setFormData] = useState<Record<string, any>>({});
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
+    const [showContactForm, setShowContactForm] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [contactInfo, setContactInfo] = useState({
         name: "",
         email: "",
         phone: "",
-        location: "",
-        answers: ["", "", "", "", "", "", "", ""]
+        location: ""
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
+    const currentQuestion = questions[step];
+    const progress = ((step + 1) / questions.length) * 100;
+
+    const handleAnswer = (answer: any) => {
+        setFormData({ ...formData, [currentQuestion.id]: answer });
+        setStep(step + 1);
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleContactSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
-        const applicationData = {
-            applicantName: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            location: formData.location,
-            puppyName: puppyName,
-            answers: {
-                q1: formData.answers[0],
-                q2: formData.answers[1],
-                q3: formData.answers[2],
-                q4: formData.answers[3],
-                q5: formData.answers[4],
-                q6: formData.answers[5],
-                q7: formData.answers[6],
-                q8: formData.answers[7],
-            }
-        };
-
         try {
+            const fullData = {
+                ...formData,
+                applicantName: contactInfo.name,
+                email: contactInfo.email,
+                phone: contactInfo.phone,
+                location: contactInfo.location,
+                puppyName,
+                puppyId
+            };
+
             const res = await fetch("/api/applications", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(applicationData),
+                body: JSON.stringify(fullData),
             });
 
             if (res.ok) {
+                toast.success("Application submitted successfully!");
                 setSubmitted(true);
-                if (onSuccess) {
-                    setTimeout(() => onSuccess(), 2000); // Close after 2s so they see the success message
-                }
             } else {
-                alert("Failed to submit application. Please try again.");
+                toast.error("Something went wrong. Please try again.");
             }
         } catch (error) {
             console.error(error);
-            alert("An error occurred. Please try again.");
+            toast.error("An error occurred. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
+    const shouldShowQuestion = () => {
+        if (currentQuestion.id === "currentPetsDetails") {
+            return formData.currentPets && ["Yes, dogs", "Yes, cats", "Yes, both"].includes(formData.currentPets);
+        }
+        if (currentQuestion.id === "livingEnvironmentOther") {
+            return formData.livingEnvironment === "Other";
+        }
+        if (currentQuestion.id === "outdoorSpaceDetails") {
+            return formData.outdoorSpace === "Other";
+        }
+        if (currentQuestion.id === "vetDetails") {
+            return formData.veterinarian === "Yes" || formData.veterinarian === "No, but plan to";
+        }
+        return true;
+    };
+
     if (submitted) {
         return (
             <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-16 px-8 bg-brand-teal-deep-50 rounded-[2.5rem] border border-brand-teal-deep-200 shadow-inner"
+                className="bg-brand-forest-50 rounded-[2rem] p-8 md:p-12 text-center border border-brand-forest-100"
             >
-                <div className="bg-brand-teal-deep-700 shadow-xl rounded-full p-6 w-24 h-24 mx-auto mb-8 flex items-center justify-center animate-bounce">
-                    <Heart className="w-12 h-12 text-white fill-white" />
+                <div className="w-20 h-20 bg-brand-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Check className="w-10 h-10 text-brand-orange-700" />
                 </div>
-                <h3 className="text-3xl font-extrabold text-brand-teal-deep-700 mb-4">Application Sent!</h3>
-                <p className="text-brand-white-900 text-lg leading-relaxed max-w-md mx-auto">
-                    Thank you for your interest in <strong>{puppyName || "our puppy"}</strong>. Tiffany will personally review your application and get back to you within 24-48 hours.
+                <h3 className="text-2xl font-black text-brand-forest-900 mb-4 uppercase">Application Submitted!</h3>
+                <p className="text-brand-forest-700 mb-6 leading-relaxed">
+                    Thank you for your interest in <strong>{puppyName}</strong>. Rebecca will personally review your application and get back to you within 24-48 hours.
                 </p>
-                <Button
-                    className="mt-10 rounded-full border-brand-teal-muted-700 text-brand-teal-deep-700 hover:bg-brand-teal-deep-700 hover:text-white transition-all px-10 h-12 font-bold"
-                    variant="outline"
-                    onClick={() => window.location.reload()}
-                >
-                    Submit Another Application
-                </Button>
+                <p className="text-sm text-brand-forest-500">
+                    You will receive a confirmation email shortly.
+                </p>
             </motion.div>
         );
     }
 
-    return (
-        <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                    <Label htmlFor="name" className="text-[10px] font-extrabold text-brand-teal-deep-700 ml-1 uppercase tracking-widest">Full Name</Label>
-                    <Input id="name" placeholder="John Doe" value={formData.name} onChange={handleChange} required className="rounded-2xl border-brand-white-400 focus:ring-brand-teal-deep-300 h-12 bg-white/50" />
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="email" className="text-[10px] font-extrabold text-brand-teal-deep-700 ml-1 uppercase tracking-widest">Email Address</Label>
-                    <Input id="email" type="email" placeholder="john@example.com" value={formData.email} onChange={handleChange} required className="rounded-2xl border-brand-white-400 focus:ring-brand-teal-deep-300 h-12 bg-white/50" />
-                </div>
-            </div>
+    if (step >= questions.length) {
+        if (!showContactForm) {
+            setShowContactForm(true);
+            return null;
+        }
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-[10px] font-extrabold text-brand-teal-deep-700 ml-1 uppercase tracking-widest">Phone Number</Label>
-                    <Input id="phone" placeholder="(555) 000-0000" value={formData.phone} onChange={handleChange} required className="rounded-2xl border-brand-white-400 focus:ring-brand-teal-deep-300 h-12 bg-white/50" />
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="location" className="text-[10px] font-extrabold text-brand-teal-deep-700 ml-1 uppercase tracking-widest">Your Location</Label>
-                    <Input id="location" placeholder="Austin, TX" value={formData.location} onChange={handleChange} required className="rounded-2xl border-brand-white-400 focus:ring-brand-teal-deep-300 h-12 bg-white/50" />
-                </div>
-            </div>
-
-            {/* Application Questions */}
-            <div className="space-y-10 mt-12 md:bg-brand-white-300 p-0 md:p-10 rounded-[2.5rem] md:border md:border-brand-white-400 md:shadow-inner">
-                <h4 className="text-xl font-extrabold text-brand-teal-deep-700 flex items-center gap-3 mb-6">
-                    Adoption Questions
-                </h4>
-                <div className="space-y-10">
-                    {[
-                        "Why are you interested in adopting a puppy at this time?",
-                        "Do you have a secure, fenced yard or a safe plan for outdoor time?",
-                        "Who will be the primary caregiver for the puppy?",
-                        "Are there any other pets in your home? (Please list species and ages)",
-                        "Do you have experience with this breed's grooming and exercise needs?",
-                        "How many hours a day will the puppy be left alone?",
-                        "Are all members of your household in agreement about this adoption?",
-                        "Have you ever had to rehome a pet before? If so, please explain."
-                    ].map((q, i) => (
-                        <div key={i} className="space-y-4 group">
-                            <Label className="text-[15px] font-bold text-brand-teal-deep-900 group-focus-within:text-brand-red-700 transition-colors leading-relaxed block">
-                                {i + 1}. {q}
-                            </Label>
-                            <Textarea
-                                className="rounded-[1.5rem] border-brand-white-400 focus:ring-brand-teal-deep-300 min-h-[120px] resize-none p-5 bg-white shadow-sm transition-shadow focus:shadow-md"
-                                placeholder="Share your details here..."
-                                value={formData.answers[i]}
-                                onChange={(e) => {
-                                    const newAnswers = [...formData.answers];
-                                    newAnswers[i] = e.target.value;
-                                    setFormData({ ...formData, answers: newAnswers });
-                                }}
+        return (
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl border border-brand-forest-100"
+            >
+                <h3 className="text-xl font-black text-brand-forest-900 mb-6 uppercase">Your Contact Information</h3>
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Full Name *</Label>
+                            <Input
+                                value={contactInfo.name}
+                                onChange={(e) => setContactInfo({ ...contactInfo, name: e.target.value })}
                                 required
+                                className="rounded-xl h-12"
                             />
                         </div>
-                    ))}
+                        <div className="space-y-2">
+                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Email *</Label>
+                            <Input
+                                type="email"
+                                value={contactInfo.email}
+                                onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
+                                required
+                                className="rounded-xl h-12"
+                            />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Phone *</Label>
+                            <Input
+                                type="tel"
+                                value={contactInfo.phone}
+                                onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
+                                required
+                                className="rounded-xl h-12"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Location *</Label>
+                            <Input
+                                value={contactInfo.location}
+                                onChange={(e) => setContactInfo({ ...contactInfo, location: e.target.value })}
+                                placeholder="City, State"
+                                required
+                                className="rounded-xl h-12"
+                            />
+                        </div>
+                    </div>
+                    <Button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full h-14 bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase tracking-wider mt-6"
+                    >
+                        {loading ? "Submitting..." : "Submit Application"}
+                    </Button>
+                </form>
+            </motion.div>
+        );
+    }
+
+    if (!shouldShowQuestion()) {
+        setStep(step + 1);
+        return null;
+    }
+
+    return (
+        <div className="max-w-2xl mx-auto">
+            <div className="mb-8">
+                <div className="flex justify-between text-xs font-bold text-brand-forest-600 uppercase tracking-wider mb-2">
+                    <span>Question {step + 1} of {questions.length}</span>
+                    <span>{Math.round(progress)}%</span>
+                </div>
+                <div className="h-2 bg-brand-forest-100 rounded-full overflow-hidden">
+                    <motion.div 
+                        className="h-full bg-brand-orange-600"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progress}%` }}
+                    />
                 </div>
             </div>
 
-            <Button
-                type="submit"
-                disabled={loading}
-                className="w-full rounded-full bg-brand-red-700 text-white hover:bg-brand-red-600 h-16 text-xl font-extrabold shadow-xl hover:shadow-brand-red/30 transition-all hover:-translate-y-1 active:translate-y-0 border-none mt-8"
-            >
-                {loading ? (
-                    <span className="flex items-center gap-3">
-                        <motion.span
-                            animate={{ rotate: 360 }}
-                            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={step}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl border border-brand-forest-100"
+                >
+                    <Label className="text-base font-medium text-brand-forest-700 leading-relaxed block mb-6">
+                        {currentQuestion.question}
+                    </Label>
+
+                    {currentQuestion.type === "text" && (
+                        <Input
+                            value={formData[currentQuestion.id] || ""}
+                            onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
+                            placeholder="Type your answer..."
+                            className="rounded-xl h-12 border-brand-forest-200"
+                        />
+                    )}
+
+                    {currentQuestion.type === "textarea" && (
+                        <Textarea
+                            value={formData[currentQuestion.id] || ""}
+                            onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
+                            placeholder="Type your answer..."
+                            className="rounded-xl min-h-[150px]"
+                        />
+                    )}
+
+                    {currentQuestion.type === "select" && (
+                        <select
+                            value={formData[currentQuestion.id] || ""}
+                            onChange={(e) => handleAnswer(e.target.value)}
+                            className="w-full h-12 rounded-xl border border-brand-forest-200 px-4 font-medium"
                         >
-                            <Heart className="w-6 h-6 fill-white" />
-                        </motion.span>
-                        Processing...
-                    </span>
-                ) : (
-                    `Apply to Adopt ${puppyName || 'Now'}`
-                )}
-            </Button>
-            <p className="text-center text-brand-white-900 text-sm mt-6 italic font-bold">
-                "Finding the perfect home for every puppy is my top priority." — Tiffany
-            </p>
-        </form>
+                            <option value="">Select an option...</option>
+                            {currentQuestion.options?.map((opt) => (
+                                <option key={opt} value={opt}>{opt}</option>
+                            ))}
+                        </select>
+                    )}
+
+                    {currentQuestion.type === "radio" && (
+                        <div className="space-y-3">
+                            {currentQuestion.options?.map((opt) => (
+                                <label
+                                    key={opt}
+                                    className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                                        formData[currentQuestion.id] === opt
+                                            ? "border-brand-orange-500 bg-brand-orange-50"
+                                            : "border-brand-forest-100 hover:border-brand-forest-200"
+                                    }`}
+                                >
+                                    <input
+                                        type="radio"
+                                        name={currentQuestion.id}
+                                        value={opt}
+                                        checked={formData[currentQuestion.id] === opt}
+                                        onChange={() => handleAnswer(opt)}
+                                        className="w-5 h-5 text-brand-orange-600"
+                                    />
+                                    <span className="font-medium text-brand-forest-800">{opt}</span>
+                                </label>
+                            ))}
+                        </div>
+                    )}
+
+                    {currentQuestion.type === "scale" && (
+                        <div className="space-y-4">
+                            <input
+                                type="range"
+                                min="1"
+                                max="100"
+                                value={formData[currentQuestion.id] || 50}
+                                onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: parseInt(e.target.value) })}
+                                className="w-full h-3 bg-brand-forest-100 rounded-lg appearance-none cursor-pointer"
+                            />
+                            <div className="flex justify-between text-sm font-bold text-brand-forest-600">
+                                <span>1</span>
+                                <span className="text-2xl text-brand-orange-600">{formData[currentQuestion.id] || 50}</span>
+                                <span>100</span>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="mt-8 flex gap-4">
+                        {step > 0 && (
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => setStep(step - 1)}
+                                className="flex-1 h-12 rounded-full font-bold"
+                            >
+                                Back
+                            </Button>
+                        )}
+                        <Button
+                            onClick={() => handleAnswer(formData[currentQuestion.id] || "")}
+                            disabled={currentQuestion.required && !formData[currentQuestion.id]}
+                            className="flex-1 h-12 bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase"
+                        >
+                            {step === questions.length - 1 ? "Finish" : "Continue"}
+                        </Button>
+                    </div>
+                </motion.div>
+            </AnimatePresence>
+        </div>
     );
 }

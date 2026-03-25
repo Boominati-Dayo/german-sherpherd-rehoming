@@ -1,34 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-    /* Teal Deep Palette */
-    --color-brand-teal-deep-900: #1B444A;
-    --color-brand-teal-deep-800: #22545A;
-    --color-brand-teal-deep-700: #28636B;
-    --color-brand-teal-deep-600: #31757E;
-    --color-brand-teal-deep-500: #3F8F99;
-    --color-brand-teal-deep-400: #5AAAB4;
-    --color-brand-teal-deep-300: #7FB6BA;
-    --color-brand-teal-deep-200: #A8D1D4;
-    --color-brand-teal-deep-100: #D9ECEE;
-    --color-brand-teal-deep-50: #EBF7F8;
+    /* Forest Green Palette */
+    --color-brand-forest-900: #1a3a2f;
+    --color-brand-forest-800: #234d3f;
+    --color-brand-forest-700: #2d614f;
+    --color-brand-forest-600: #36755f;
+    --color-brand-forest-500: #408a6f;
+    --color-brand-forest-400: #5a9d86;
+    --color-brand-forest-300: #7fb0a3;
+    --color-brand-forest-200: #a9c7bf;
+    --color-brand-forest-100: #d9e8e2;
+    --color-brand-forest-50: #ecf5f1;
 
-    /* Teal Muted Palette */
-    --color-brand-teal-muted-900: #365E5F;
-    --color-brand-teal-muted-800: #437778;
-    --color-brand-teal-muted-700: #528C8D;
-    --color-brand-teal-muted-600: #63A1A2;
-    --color-brand-teal-muted-500: #74B4B5;
-    --color-brand-teal-muted-100: #E4F3F3;
-
-    /* Red Palette */
-    --color-brand-red-900: #7E1211;
-    --color-brand-red-800: #9E1615;
-    --color-brand-red-700: #BE1C1A;
-    --color-brand-red-600: #D73331;
-    --color-brand-red-500: #E95A58;
-    --color-brand-red-300: #F4A6A5;
-    --color-brand-red-100: #FCE3E3;
+    /* Orange Palette */
+    --color-brand-orange-900: #8c3a0a;
+    --color-brand-orange-800: #a8460d;
+    --color-brand-orange-700: #c45210;
+    --color-brand-orange-600: #e05e14;
+    --color-brand-orange-500: #f06a1a;
+    --color-brand-orange-300: #f7954d;
+    --color-brand-orange-100: #fde4d0;
 
     /* White / Neutral Palette */
     --color-brand-white-100: #FFFFFF;
@@ -39,10 +31,9 @@
     --color-brand-white-700: #B5B5B5;
     --color-brand-white-900: #7A7A7A;
 
-    /* Flattened Aliases - Avoiding var() inside @theme if possible for stability */
-    --color-brand-teal-deep: #28636B;
-    --color-brand-teal-muted: #528C8D;
-    --color-brand-red: #BE1C1A;
+    /* Flattened Aliases */
+    --color-brand-forest: #2d614f;
+    --color-brand-orange: #f06a1a;
     --color-brand-white: #FFFEFE;
 
     --animate-carousel: scroll 20s linear infinite;

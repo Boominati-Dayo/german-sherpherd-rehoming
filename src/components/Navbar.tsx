@@ -1,173 +1,162 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Heart, Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X, Bone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+
+const whiteBgPages = ["/puppies", "/puppies/", "/transport", "/transport/"];
+const darkBgPages = ["/", "/about", "/contact"];
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    const breeds = [
-        { name: "Cavapoos", href: "/puppies?breed=Cavapoo" },
-        { name: "Maltipoos", href: "/puppies?breed=Maltipoo" },
-        { name: "Poochons", href: "/puppies?breed=Poochon" },
-    ];
+    const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+    
+    const isWhiteBgPage = whiteBgPages.includes(pathname);
+    const isDarkBgPage = darkBgPages.includes(pathname);
 
     const navLinks = [
         { name: "Home", href: "/" },
-        { name: "About Us", href: "/about" },
+        { name: "About", href: "/about" },
+        { name: "Transport", href: "/transport" },
         { name: "Contact", href: "/contact" },
     ];
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const isActive = (href: string) => pathname === href;
+    
+    const getNavColors = () => {
+        if (isDarkBgPage) {
+            return {
+                bg: scrolled ? "bg-brand-forest-900 shadow-lg" : "bg-transparent",
+                text: "text-white",
+                textHover: "hover:text-brand-orange-500",
+                logoBg: scrolled ? "bg-brand-orange-700" : "bg-white",
+                logoIcon: scrolled ? "text-white" : "text-brand-forest-800",
+                active: "text-brand-orange-500",
+            };
+        }
+        if (isWhiteBgPage) {
+            return {
+                bg: scrolled ? "bg-white shadow-lg" : "bg-white",
+                text: "text-brand-forest-800",
+                textHover: "hover:text-brand-orange-700",
+                logoBg: scrolled ? "bg-brand-orange-700" : "bg-brand-forest-800",
+                logoIcon: "text-white",
+                active: "text-brand-orange-700",
+            };
+        }
+        return {
+            bg: scrolled ? "bg-white shadow-lg" : "bg-transparent",
+            text: scrolled ? "text-brand-forest-800" : "text-brand-forest-800",
+            textHover: "hover:text-brand-orange-700",
+            logoBg: scrolled ? "bg-brand-orange-700" : "bg-brand-forest-800",
+            logoIcon: "text-white",
+            active: "text-brand-orange-700",
+        };
+    };
+    
+    const colors = getNavColors();
+
     return (
-        <nav className="sticky top-0 z-50 bg-brand-teal-deep-50/95 backdrop-blur-md shadow-sm border-b border-brand-white-400">
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${colors.bg}`}>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-20 items-center justify-between">
+                <div className="flex items-center justify-between h-20">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <span className="text-xl font-black text-brand-teal-deep-700 tracking-tighter uppercase">
-                            Tiffany <span className="text-brand-red-700">Dawson</span>
-                        </span>
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <div className="relative w-36 h-12">
+                            <Image 
+                                src="/assets/RebeccaHermanFosteringLogo.png" 
+                                alt="Rebecca Herman's Fostering"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-10">
+                    <div className="hidden md:flex items-center gap-1">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-sm font-bold text-brand-teal-deep-900 hover:text-brand-red-700 transition-colors uppercase tracking-widest"
+                                className={`relative px-5 py-3 text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
+                                    isActive(link.href)
+                                        ? colors.active
+                                        : `${colors.text} ${colors.textHover}`
+                                }`}
                             >
                                 {link.name}
+                                {isActive(link.href) && (
+                                    <span className={`absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-orange-500 rounded-full`} />
+                                )}
                             </Link>
                         ))}
-
-                        <div
-                            className="relative"
-                            onMouseEnter={() => setIsDropdownOpen(true)}
-                            onMouseLeave={() => setIsDropdownOpen(false)}
-                        >
-                            <button
-                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                className="flex items-center gap-1 text-sm font-bold text-brand-teal-deep-900 hover:text-brand-red-700 transition-colors uppercase tracking-widest outline-none"
-                            >
-                                Available Puppies
-                                <ChevronDown className={cn("w-4 h-4 transition-transform duration-300", isDropdownOpen && "rotate-180")} />
-                            </button>
-
-                            <AnimatePresence>
-                                {isDropdownOpen && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 10 }}
-                                        className="absolute top-full left-0 mt-2 w-56 bg-brand-white-100 rounded-2xl shadow-2xl border border-brand-white-400 overflow-hidden py-3"
-                                    >
-                                        <div className="px-6 py-2">
-                                            <p className="text-[10px] font-extrabold text-brand-white-900 uppercase tracking-widest">Select a Breed</p>
-                                        </div>
-                                        {breeds.map((breed) => (
-                                            <Link
-                                                key={breed.name}
-                                                href={breed.href}
-                                                className="block px-6 py-3 text-sm font-bold text-brand-teal-deep-900 hover:bg-brand-teal-deep-100 hover:text-brand-teal-deep-700 transition-all font-serif italic"
-                                            >
-                                                {breed.name}
-                                            </Link>
-                                        ))}
-                                        <div className="border-t border-brand-white-400 mt-2 pt-2">
-                                            <Link
-                                                href="/puppies"
-                                                className="block px-6 py-3 text-sm font-black text-brand-red-700 hover:bg-brand-red-50 transition-colors"
-                                            >
-                                                View All Puppies →
-                                            </Link>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
                     </div>
 
-                    {/* Desktop CTA */}
-                    <div className="hidden md:flex items-center gap-4">
-                        <Link href="/puppies">
-                            <Button variant="brand" size="sm">
-                                Adopt Now
-                            </Button>
+                    {/* CTA Button */}
+                    <div className="hidden md:block">
+                        <Link 
+                            href="/puppies" 
+                            className="inline-flex items-center justify-center px-6 py-3 text-sm font-black uppercase tracking-wider bg-brand-orange-700 text-white rounded-full hover:bg-brand-orange-800 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+                        >
+                            <Bone className="w-4 h-4 mr-2" />
+                            Meet Our Cavaliers
                         </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="p-2 text-brand-teal-deep-700 hover:bg-brand-teal-deep-100 rounded-xl transition-all active:scale-95"
-                            aria-label="Toggle menu"
-                        >
-                            {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
-                        </button>
-                    </div>
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={`md:hidden p-2 transition-colors duration-300 ${colors.text}`}
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+                    </button>
                 </div>
             </div>
 
-            {/* Mobile Dropdown Menu */}
+            {/* Mobile Menu */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0, y: -20 }}
-                        animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0, y: -20 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="md:hidden bg-white border-b border-brand-white-400 overflow-hidden shadow-2xl absolute top-full left-0 right-0 z-40"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="md:hidden bg-brand-forest-900 text-white overflow-hidden"
                     >
-                        <div className="flex flex-col p-6 space-y-6">
+                        <div className="px-4 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-lg font-black text-brand-teal-deep-900 hover:text-brand-red-700 transition-colors uppercase tracking-tight flex items-center justify-between group"
+                                    className={`block py-4 text-lg font-black uppercase tracking-wider transition-colors border-b border-white/10 ${
+                                        isActive(link.href)
+                                            ? "text-brand-orange-500"
+                                            : "hover:text-brand-orange-500"
+                                    }`}
                                 >
                                     {link.name}
-                                    <ArrowRight className="w-4 h-4 text-brand-red-700" />
                                 </Link>
                             ))}
-
-                            <div className="h-px bg-brand-white-300" />
-
-                            <div className="space-y-4">
-                                <p className="text-[10px] font-black text-brand-white-900 uppercase tracking-widest">Available Breeds</p>
-                                <div className="grid grid-cols-2 gap-4">
-                                    {breeds.map((breed) => (
-                                        <Link
-                                            key={breed.name}
-                                            href={breed.href}
-                                            onClick={() => setIsOpen(false)}
-                                            className="text-sm font-bold text-brand-teal-deep-700 hover:text-brand-red-700 transition-colors italic font-serif flex items-center gap-2"
-                                        >
-                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-red-700" />
-                                            {breed.name}
-                                        </Link>
-                                    ))}
-                                </div>
-                                <Link
-                                    href="/puppies"
-                                    onClick={() => setIsOpen(false)}
-                                    className="inline-block text-sm font-black text-brand-red-700 underline decoration-2 underline-offset-4 mt-2"
-                                >
-                                    View Library →
-                                </Link>
-                            </div>
-
-                            <Link href="/puppies" onClick={() => setIsOpen(false)} className="block pt-4">
-                                <Button className="w-full h-14 text-sm font-black uppercase tracking-widest shadow-lg shadow-brand-red-100" size="default">
-                                    Apply to Adopt
-                                </Button>
+                            <Link 
+                                href="/puppies" 
+                                onClick={() => setIsOpen(false)}
+                                className="block text-center py-4 mt-6 text-sm font-black uppercase tracking-wider bg-brand-orange-700 text-white rounded-full"
+                            >
+                                Meet Our Cavaliers
                             </Link>
                         </div>
                     </motion.div>

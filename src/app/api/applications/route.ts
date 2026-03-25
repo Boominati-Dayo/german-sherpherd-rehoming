@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/db";
 import Application from "@/models/Application";
 import { NextResponse } from "next/server";
-import { sendMail } from "@/lib/mail";
+import { sendMail, getEmailTemplate } from "@/lib/mail";
 
 export async function GET() {
     await dbConnect();
@@ -16,62 +16,91 @@ export async function GET() {
 export async function POST(request: Request) {
     await dbConnect();
     try {
+        const contentType = request.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            return NextResponse.json({ success: false, error: "Invalid content type" }, { status: 400 });
+        }
+        
         const body = await request.json();
-        const application = await Application.create(body);
-
-        // Send email notification to admin
-        const adminEmail = "vanslili265@gmail.com";
-        await sendMail({
-            to: adminEmail,
-            subject: `New Adoption Application for ${application.puppyName || "a puppy"}`,
-            text: `
-                New Adoption Application received from ${application.applicantName}.
-                
-                Applicant Info:
-                Email: ${application.email}
-                Phone: ${application.phone}
-                Location: ${application.location}
-                
-                Answers:
-                1. Status/Children: ${application.answers.q1}
-                2. Yard: ${application.answers.q2}
-                3. Alone time: ${application.answers.q3}
-                4. Experience: ${application.answers.q4}
-                5. Best choice: ${application.answers.q5}
-                6. Timeline: ${application.answers.q6}
-                7. Pickup/Nanny: ${application.answers.q7}
-                8. Location/Delivery: ${application.answers.q8}
-            `,
-            html: `
-                <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                    <h2 style="color: #0d9488;">New Adoption Application</h2>
-                    <p style="font-size: 16px;">New application received for <strong>${application.puppyName || "a puppy"}</strong></p>
-                    
-                    <div style="background: #f0fdfa; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="margin-top: 0; color: #0f766e;">Applicant Information</h3>
-                        <p><strong>Name:</strong> ${application.applicantName}</p>
-                        <p><strong>Email:</strong> ${application.email}</p>
-                        <p><strong>Phone:</strong> ${application.phone}</p>
-                        <p><strong>Location:</strong> ${application.location}</p>
-                    </div>
-
-                    <h3 style="color: #0f766e;">Questionnaire Answers</h3>
-                    <div style="line-height: 1.6; color: #4b5563;">
-                        <p><strong>1. Married/Children:</strong> ${application.answers.q1}</p>
-                        <p><strong>2. Dog Yard/Fence:</strong> ${application.answers.q2}</p>
-                        <p><strong>3. Time Alone:</strong> ${application.answers.q3}</p>
-                        <p><strong>4. Experience with Breed:</strong> ${application.answers.q4}</p>
-                        <p><strong>5. Why are you the best choice?</strong> ${application.answers.q5}</p>
-                        <p><strong>6. When do you want to bring the puppy home?</strong> ${application.answers.q6}</p>
-                        <p><strong>7. Pickup or Nanny Delivery?</strong> ${application.answers.q7}</p>
-                        <p><strong>8. Specific Town/State for Delivery:</strong> ${application.answers.q8}</p>
-                    </div>
-                    
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
-                    <p style="font-size: 12px; color: #9ca3af;">You can review and manage this application in the Admin Dashboard.</p>
-                </div>
-            `,
+        
+        // Extract answers from body (new questionnaire format)
+        const answers: Record<string, any> = {};
+        const questionFields = [
+            "homeLifestyle", "canineExperience", "currentPets", "currentPetsDetails",
+            "hoursAlone", "careArrangement", "livingEnvironment", "livingEnvironmentOther",
+            "outdoorSpace", "outdoorSpaceDetails", "readinessScore", "readinessExplanation",
+            "veterinarian", "vetDetails", "agreement"
+        ];
+        
+        questionFields.forEach(field => {
+            if (body[field]) {
+                answers[field] = body[field];
+            }
         });
+
+        const applicationData = {
+            puppyName: body.puppyName || "General Inquiry",
+            puppyId: body.puppyId,
+            applicantName: body.applicantName,
+            email: body.email,
+            phone: body.phone,
+            location: body.location,
+            answers,
+            status: "new"
+        };
+
+        const application = await Application.create(applicationData);
+
+        // Send confirmation email to applicant
+        try {
+            await sendMail({
+                to: application.email,
+                subject: `Application Submitted - ${application.puppyName} | Rebecca Herman`,
+                text: `Thank you for your application! Rebecca will review it within 24-48 hours.`,
+                html: getEmailTemplate("application_submitted", {
+                    name: application.applicantName,
+                    puppyName: application.puppyName
+                })
+            });
+        } catch (emailError) {
+            console.error("Failed to send applicant confirmation email:", emailError);
+        }
+
+        // Send notification to admin
+        const adminEmail = process.env.ADMIN_EMAIL || "vanslili265@gmail.com";
+        let answersHtml = "";
+        Object.entries(answers).forEach(([key, value]) => {
+            if (value) {
+                answersHtml += `<p style="margin: 10px 0; padding: 10px; background: #f9fafb; border-radius: 6px;"><strong>${key}:</strong> ${value}</p>`;
+            }
+        });
+
+        try {
+            await sendMail({
+                to: adminEmail,
+                subject: `New Adoption Application - ${application.applicantName} for ${application.puppyName}`,
+                text: `New application received from ${application.applicantName}. Check admin dashboard for details.`,
+                html: `
+                    <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+                        <h2 style="color: #c45210;">New Adoption Application</h2>
+                        <div style="background: #fff7ed; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #c45210;">
+                            <h3 style="margin-top: 0;">Applicant Details</h3>
+                            <p><strong>Name:</strong> ${application.applicantName}</p>
+                            <p><strong>Email:</strong> ${application.email}</p>
+                            <p><strong>Phone:</strong> ${application.phone}</p>
+                            <p><strong>Location:</strong> ${application.location}</p>
+                            <p><strong>Puppy:</strong> ${application.puppyName}</p>
+                        </div>
+                        <h3>Application Answers</h3>
+                        ${answersHtml}
+                        <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
+                        <a href="${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}/admin/applications" style="background: #c45210; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">View in Admin Dashboard</a>
+                    </div>
+                `
+            });
+        } catch (emailError) {
+            console.error("Failed to send admin notification email:", emailError);
+        }
 
         return NextResponse.json(application, { status: 201 });
     } catch (error: any) {

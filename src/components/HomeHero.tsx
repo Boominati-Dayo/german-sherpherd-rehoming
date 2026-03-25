@@ -1,63 +1,94 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
-import Image from "next/image";
+import { PawPrint, Heart, ArrowRight, Bone, Dog } from "lucide-react";
 import Link from "next/link";
-import logo from "../../public/assets/TiffanyDawsonRehomingLogo.png";
+import Image from "next/image";
 
 export function HomeHero() {
     return (
-        <section className="relative bg-brand-teal-deep-50 py-12 sm:py-32 overflow-hidden">
-            <div className="absolute inset-0 bg-brand-teal-deep-100/20 -z-10" />
-            {/* Decorative Circles */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red-700/5 rounded-full -mr-48 -mt-48 blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-teal-deep-700/5 rounded-full -ml-48 -mb-48 blur-3xl" />
+        <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+                <Image
+                    src="/assets/homeHeroImage.jpg"
+                    alt="Rebecca Herman with Cavalier"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-forest-900/90 via-brand-forest-900/80 to-brand-forest-900/60" />
+            </div>
 
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row-reverse items-center gap-8 sm:gap-16">
-                    <div className="flex-1 w-full max-w-2xl px-4 sm:px-0">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative aspect-square rounded-[2rem] sm:rounded-[4rem] overflow-hidden "
-                        >
-                            <Image
-                                src={logo}
-                                alt="Tiffany Dawson Rehoming Logo"
-                                fill
-                                className="object-contain p-8"
-                                priority
-                            />
-                        </motion.div>
-                    </div>
-                    <div className="flex-1 text-center lg:text-left">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h1 className="text-3xl font-black tracking-tighter text-brand-teal-deep-900 sm:text-7xl mb-4 sm:mb-8 uppercase leading-[0.9]">
-                                Giving New Hope <br />
-                                <span className="text-brand-red-700">to Beloved Puppies</span>
-                            </h1>
-                            <p className="text-base sm:text-xl leading-relaxed text-brand-white-900 mb-8 sm:mb-10 font-medium italic">
-                                We specialize in rehoming Cavapoos, Maltipoos, and Poochons, connecting loving families with puppies who need a new forever home.
-                            </p>
-                            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6 px-4 sm:px-0">
-                                <Link
-                                    href="/puppies"
-                                    className="w-full sm:w-auto inline-flex items-center justify-center whitespace-nowrap rounded-full text-base sm:text-lg font-black bg-brand-red-700 text-white hover:bg-brand-red-600 px-8 h-12 sm:px-10 sm:h-16 shadow-2xl hover:shadow-brand-red/30 transition-all hover:-translate-y-1 active:translate-y-0 border-none uppercase tracking-widest"
-                                >
-                                    View Available Puppies
-                                </Link>
-                                <Link href="/about" className="text-xs sm:text-sm font-black leading-6 text-brand-teal-deep-700 hover:text-brand-red-700 transition-colors flex items-center gap-1 group uppercase tracking-widest">
-                                    Read Our Story <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform font-serif text-lg sm:text-xl">→</span>
-                                </Link>
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-32 left-[10%] opacity-10">
+                    <Bone className="w-16 h-16 text-white" />
+                </div>
+                <div className="absolute top-48 right-[15%] opacity-10">
+                    <Dog className="w-24 h-24 text-white" />
+                </div>
+                <div className="absolute bottom-32 left-[20%] opacity-10">
+                    <PawPrint className="w-20 h-20 text-white" />
+                </div>
+                <div className="absolute bottom-48 right-[25%] opacity-10">
+                    <Bone className="w-12 h-12 text-white" />
+                </div>
+            </div>
+
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="flex items-center min-h-[calc(100vh-80px)] py-12">
+                    {/* Text Content */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center max-w-2xl mx-auto"
+                    >
+                        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-[1.1] mb-6">
+                            Finding Forever
+                            <br />
+                            <span className="text-brand-orange-500">Together</span>
+                        </h1>
+
+                        <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
+                            I connect loving families with beautiful Cavalier King Charles Spaniels who are ready to fill your home with unconditional love.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link
+                                href="/puppies"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-orange-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-orange-800 transition-all hover:scale-105 shadow-xl"
+                            >
+                                Meet Our Cavaliers
+                                <ArrowRight className="w-5 h-5" />
+                            </Link>
+                            <Link
+                                href="/about"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-bold uppercase tracking-wider rounded-full hover:bg-white/10 transition-all"
+                            >
+                                <Bone className="w-4 h-4" />
+                                My Story
+                            </Link>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="flex gap-8 justify-center mt-12 pt-8 border-t border-white/10">
+                            <div>
+                                <p className="text-3xl font-black text-brand-orange-500">40+</p>
+                                <p className="text-sm text-white/50 font-medium uppercase tracking-wider">Happy Families</p>
                             </div>
-                        </motion.div>
-                    </div>
+                            <div>
+                                <p className="text-3xl font-black text-brand-orange-500">10+</p>
+                                <p className="text-sm text-white/50 font-medium uppercase tracking-wider">Years Experience</p>
+                            </div>
+                            <div>
+                                <p className="text-3xl font-black text-brand-orange-500">50+</p>
+                                <p className="text-sm text-white/50 font-medium uppercase tracking-wider">Cavaliers Placed</p>
+                            </div>
+                        </div>
+                    </motion.div>
+
 
                 </div>
             </div>
