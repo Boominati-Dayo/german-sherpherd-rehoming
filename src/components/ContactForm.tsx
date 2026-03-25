@@ -73,7 +73,7 @@ export function ContactForm() {
                                     </div>
                                     <div>
                                         <p className="text-xs font-black text-brand-forest-600 uppercase">Phone</p>
-                                        <p className="text-brand-forest-800 font-medium">(555) 123-4567</p>
+                                        <p className="text-brand-forest-800 font-medium">+1 (504) 358-1381</p>
                                         <p className="text-xs text-brand-forest-500">Text messages only</p>
                                     </div>
                                 </div>

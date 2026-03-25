@@ -83,7 +83,7 @@ export function Footer() {
                                     <Phone className="w-5 h-5 text-brand-orange-500" />
                                 </div>
                                 <div>
-                                    <span className="text-white/70 font-medium block">(555) 123-4567</span>
+                                    <span className="text-white/70 font-medium block">+1 (504) 358-1381</span>
                                     <span className="text-xs text-white/50">Text messages only</span>
                                 </div>
                             </li>

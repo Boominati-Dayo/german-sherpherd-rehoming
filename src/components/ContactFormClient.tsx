@@ -159,16 +159,16 @@ export function ContactFormClient() {
                                         </div>
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Email</p>
-                                            <p className="text-sm">rebecca@thecavaliercommunity.com</p>
+                                            <p className="text-sm">admin@rebeccahermanfostering.com</p>
                                         </div>
                                     </a>
-                                    <a href="tel:+15551234567" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-orange-600 transition-colors">
+                                    <a href="tel:+15043581381" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-orange-600 transition-colors">
                                         <div className="w-12 h-12 bg-brand-orange-100 rounded-2xl flex items-center justify-center">
                                             <Phone className="w-5 h-5 text-brand-orange-600" />
                                         </div>
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Phone</p>
-                                            <p className="text-sm">(555) 123-4567</p>
+                                            <p className="text-sm">+1 (504) 358-1381</p>
                                             <p className="text-xs text-brand-forest-500">Text messages only</p>
                                         </div>
                                     </a>
