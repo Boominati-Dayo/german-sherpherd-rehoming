@@ -13,6 +13,16 @@ export interface IPuppy extends Document {
     nannyFee: string;
     description: string;
     story: string;
+    whyRehoming: string;
+    whatDogNeeds: string;
+    currentWeight: string;
+    expectedWeight: string;
+    height: string;
+    sizeCategory: string;
+    personalityTraits: string[];
+    goodWith: string[];
+    specialNeeds: string;
+    location: string;
     slug: string;
     createdAt: Date;
 }
@@ -35,6 +45,16 @@ const PuppySchema: Schema = new Schema(
         nannyFee: { type: String, required: true },
         description: { type: String, required: true },
         story: { type: String, required: true },
+        whyRehoming: { type: String, default: "" },
+        whatDogNeeds: { type: String, default: "" },
+        currentWeight: { type: String, default: "" },
+        expectedWeight: { type: String, default: "" },
+        height: { type: String, default: "" },
+        sizeCategory: { type: String, enum: ["Small", "Medium", "Large", ""], default: "" },
+        personalityTraits: { type: [String], default: [] },
+        goodWith: { type: [String], default: [] },
+        specialNeeds: { type: String, default: "" },
+        location: { type: String, default: "" },
         slug: { type: String, required: true, unique: true },
     },
     { timestamps: true }

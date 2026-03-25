@@ -10,6 +10,9 @@ interface PuppyProps {
     image: string;
     status: "available" | "adopted" | "pending";
     description: string;
+    location?: string;
+    personalityTraits?: string[];
+    sizeCategory?: string;
 }
 
 export function PuppyCard({ puppy }: { puppy: PuppyProps }) {
@@ -43,11 +46,17 @@ export function PuppyCard({ puppy }: { puppy: PuppyProps }) {
                     {/* Name & Info on Image */}
                     <div className="absolute bottom-0 left-0 right-0 p-5">
                         <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-1">{puppy.name}</h3>
-                        <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
+                        <div className="flex flex-wrap items-center gap-2 text-white/80 text-sm font-medium">
                             <span className="flex items-center gap-1">
                                 <Star className="w-4 h-4" />
                                 {puppy.age}
                             </span>
+                            {puppy.sizeCategory && (
+                                <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs">{puppy.sizeCategory}</span>
+                            )}
+                            {puppy.location && (
+                                <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs">{puppy.location}</span>
+                            )}
                         </div>
                     </div>
                 </div>

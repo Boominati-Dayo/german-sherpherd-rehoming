@@ -22,6 +22,16 @@ interface PuppyData {
     nannyFee: string;
     description: string;
     story: string;
+    whyRehoming: string;
+    whatDogNeeds: string;
+    currentWeight: string;
+    expectedWeight: string;
+    height: string;
+    sizeCategory: string;
+    personalityTraits: string[];
+    goodWith: string[];
+    specialNeeds: string;
+    location: string;
 }
 
 interface PuppyFormProps {
@@ -45,6 +55,16 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
             nannyFee: "",
             description: "",
             story: "",
+            whyRehoming: "",
+            whatDogNeeds: "",
+            currentWeight: "",
+            expectedWeight: "",
+            height: "",
+            sizeCategory: "",
+            personalityTraits: [],
+            goodWith: [],
+            specialNeeds: "",
+            location: "",
         }
     );
     const [loading, setLoading] = useState(false);
@@ -172,6 +192,122 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                     <div className="space-y-2">
                         <Label htmlFor="story" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Rehoming Story</Label>
                         <Textarea id="story" value={formData.story} onChange={handleChange} required className="rounded-2xl border-brand-white-400 min-h-[100px] py-3" placeholder="Why is this puppy being rehomed?" />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="location" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Location (City, State)</Label>
+                        <Input id="location" value={formData.location} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Helltown, Ohio" />
+                    </div>
+
+                    {/* Physical Details */}
+                    <div className="pt-4 border-t border-brand-white-400">
+                        <h4 className="text-sm font-black uppercase text-brand-orange-700 mb-4">Physical Details</h4>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="currentWeight" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Current Weight</Label>
+                                <Input id="currentWeight" value={formData.currentWeight} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. 5.5 - 7 kg" />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="expectedWeight" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Expected Adult Weight</Label>
+                                <Input id="expectedWeight" value={formData.expectedWeight} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. 6 - 8 kg" />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="height" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Height</Label>
+                                <Input id="height" value={formData.height} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. 28 - 32 cm" />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="sizeCategory" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Size Category</Label>
+                                <select
+                                    id="sizeCategory"
+                                    className="flex h-11 w-full rounded-xl border border-brand-white-400 bg-white px-3 py-2 text-sm font-medium focus:ring-2 focus:ring-brand-forest-100 transition-all outline-none"
+                                    value={formData.sizeCategory}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Select size...</option>
+                                    <option value="Small">Small</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Large">Large</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Rehoming Details */}
+                    <div className="pt-4 border-t border-brand-white-400">
+                        <h4 className="text-sm font-black uppercase text-brand-orange-700 mb-4">Rehoming Details</h4>
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="whyRehoming" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Why Rehoming (Detailed)</Label>
+                                <Textarea id="whyRehoming" value={formData.whyRehoming} onChange={handleChange} className="rounded-2xl border-brand-white-400 min-h-[80px] py-3" placeholder="Detailed story about why the dog needs a new home..." />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="whatDogNeeds" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">What This Dog Needs</Label>
+                                <Textarea id="whatDogNeeds" value={formData.whatDogNeeds} onChange={handleChange} className="rounded-2xl border-brand-white-400 min-h-[80px] py-3" placeholder="What kind of home/environment is best for this dog..." />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Personality & Good With */}
+                    <div className="pt-4 border-t border-brand-white-400">
+                        <h4 className="text-sm font-black uppercase text-brand-orange-700 mb-4">Personality & Compatibility</h4>
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Personality Traits</Label>
+                                <div className="flex flex-wrap gap-2">
+                                    {["Affectionate", "Playful", "Calm", "Energetic", "Gentle", "Confident", "Curious", "Intelligent", "Loyal", "Social"].map((trait) => (
+                                        <button
+                                            key={trait}
+                                            type="button"
+                                            onClick={() => {
+                                                const traits = formData.personalityTraits || [];
+                                                if (traits.includes(trait)) {
+                                                    setFormData({ ...formData, personalityTraits: traits.filter((t: string) => t !== trait) });
+                                                } else {
+                                                    setFormData({ ...formData, personalityTraits: [...traits, trait] });
+                                                }
+                                            }}
+                                            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                                                formData.personalityTraits?.includes(trait)
+                                                    ? "bg-brand-orange-600 text-white"
+                                                    : "bg-brand-white-200 text-brand-forest-700 hover:bg-brand-orange-100"
+                                            }`}
+                                        >
+                                            {trait}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Good With</Label>
+                                <div className="flex flex-wrap gap-2">
+                                    {["Children", "Seniors", "Other Dogs", "Cats"].map((item) => (
+                                        <button
+                                            key={item}
+                                            type="button"
+                                            onClick={() => {
+                                                const goodWith = formData.goodWith || [];
+                                                if (goodWith.includes(item)) {
+                                                    setFormData({ ...formData, goodWith: goodWith.filter((g: string) => g !== item) });
+                                                } else {
+                                                    setFormData({ ...formData, goodWith: [...goodWith, item] });
+                                                }
+                                            }}
+                                            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                                                formData.goodWith?.includes(item)
+                                                    ? "bg-green-600 text-white"
+                                                    : "bg-brand-white-200 text-brand-forest-700 hover:bg-green-100"
+                                            }`}
+                                        >
+                                            {item}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="specialNeeds" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Special Needs / Notes</Label>
+                                <Textarea id="specialNeeds" value={formData.specialNeeds} onChange={handleChange} className="rounded-2xl border-brand-white-400 min-h-[60px] py-3" placeholder="Any special requirements or notes..." />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
