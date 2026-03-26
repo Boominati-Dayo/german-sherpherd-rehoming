@@ -17,10 +17,11 @@ interface PuppyProps {
 
 export function PuppyCard({ puppy }: { puppy: PuppyProps }) {
     const isAvailable = puppy.status === "available";
+    const isAdopted = puppy.status === "adopted";
     
     return (
-        <Link href={`/puppies/${puppy.id}`} className="block">
-            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 h-full flex flex-col">
+        <Link href={`/puppies/${puppy.id}`} className={`block ${isAdopted ? 'pointer-events-none' : ''}`}>
+            <div className={`bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2 h-full flex flex-col ${isAdopted ? 'opacity-75' : 'hover:-translate-y-2'}`}>
                 {/* Image Section */}
                 <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
@@ -37,6 +38,8 @@ export function PuppyCard({ puppy }: { puppy: PuppyProps }) {
                         <span className={`px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider ${
                             isAvailable 
                                 ? "bg-brand-orange-600 text-white" 
+                                : isAdopted
+                                ? "bg-green-600 text-white"
                                 : "bg-gray-500 text-white"
                         }`}>
                             {puppy.status}

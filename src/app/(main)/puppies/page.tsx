@@ -13,9 +13,10 @@ export const revalidate = 0;
 
 export default async function PuppiesPage() {
     await dbConnect();
-    const puppiesDocs = await Puppy.find({ status: "available" }).sort({ createdAt: -1 }).lean();
+    const availableDocs = await Puppy.find({ status: "available" }).sort({ createdAt: -1 }).lean();
+    const adoptedDocs = await Puppy.find({ status: "adopted" }).sort({ createdAt: -1 }).lean();
 
-    const puppies = JSON.parse(JSON.stringify(puppiesDocs)).map((p: any) => ({
+    const availablePuppies = JSON.parse(JSON.stringify(availableDocs)).map((p: any) => ({
         id: p._id.toString(),
         name: p.name,
         breed: p.breed,
@@ -27,5 +28,17 @@ export default async function PuppiesPage() {
         description: p.description,
     }));
 
-    return <PuppiesContainer initialPuppies={puppies} />;
+    const adoptedPuppies = JSON.parse(JSON.stringify(adoptedDocs)).map((p: any) => ({
+        id: p._id.toString(),
+        name: p.name,
+        breed: p.breed,
+        gender: p.gender || "Unknown",
+        age: p.age,
+        image: p.image,
+        status: p.status,
+        fee: p.fee || "Contact us",
+        description: p.description,
+    }));
+
+    return <PuppiesContainer initialPuppies={availablePuppies} adoptedPuppies={adoptedPuppies} />;
 }

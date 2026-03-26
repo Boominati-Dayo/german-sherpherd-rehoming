@@ -23,11 +23,10 @@ interface Puppy {
 
 interface PuppiesContainerProps {
     initialPuppies: Puppy[];
+    adoptedPuppies?: Puppy[];
 }
 
-const CORE_BREEDS = ["Cavalier King Charles Spaniel"];
-
-export function PuppiesContainer({ initialPuppies }: PuppiesContainerProps) {
+export function PuppiesContainer({ initialPuppies, adoptedPuppies = [] }: PuppiesContainerProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -190,6 +189,21 @@ export function PuppiesContainer({ initialPuppies }: PuppiesContainerProps) {
                             >
                                 View All Cavaliers
                             </Button>
+                        </div>
+                    )}
+
+                    {/* Adopted Puppies Section */}
+                    {adoptedPuppies.length > 0 && (
+                        <div className="mt-16 pt-12 border-t border-brand-forest-200">
+                            <h3 className="text-2xl sm:text-3xl font-black text-brand-forest-900 uppercase mb-2">
+                                Already <span className="text-brand-forest-400">Adopted</span>
+                            </h3>
+                            <p className="text-brand-forest-600 mb-8">These beautiful Cavaliers have found their forever homes.</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {adoptedPuppies.map((puppy) => (
+                                    <PuppyCard key={puppy.id} puppy={puppy} />
+                                ))}
+                            </div>
                         </div>
                     )}
                 </div>

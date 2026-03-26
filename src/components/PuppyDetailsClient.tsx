@@ -252,6 +252,11 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
                                     Apply to Adopt
                                 </Button>
                             </div>
+                        ) : puppy.status === "adopted" ? (
+                            <div className="bg-green-50 p-6 sm:p-8 rounded-3xl text-center border border-green-200">
+                                <p className="text-lg sm:text-xl font-bold text-green-700 mb-2">Adopted</p>
+                                <p className="text-brand-forest-600">This beautiful Cavalier has found their forever home!</p>
+                            </div>
                         ) : (
                             <div className="bg-brand-forest-100 p-8 rounded-3xl text-center border border-brand-forest-200">
                                 <p className="text-lg sm:text-xl font-bold text-brand-forest-700">Found a forever home.</p>
