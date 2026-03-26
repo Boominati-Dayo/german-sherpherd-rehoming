@@ -97,16 +97,13 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
                                     >
                                         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </button>
-                                    {/* Pagination indicator */}
                                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-brand-forest-900/60 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest z-10">
                                         {currentImageIndex + 1} / {gallery.length}
                                     </div>
                                 </>
                             )}
-
                         </div>
 
-                        {/* Thumbnails */}
                         {gallery.length > 1 && (
                             <div className="flex gap-3 overflow-x-auto py-2 no-scrollbar px-1">
                                 {gallery.map((img, index) => (
@@ -121,6 +118,74 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
                                 ))}
                             </div>
                         )}
+
+                        {/* Physical Details Grid - Left Column */}
+                        {(puppy.currentWeight || puppy.expectedWeight || puppy.height) && (
+                            <div className="grid grid-cols-3 gap-3 p-4 bg-brand-white-200/50 rounded-2xl">
+                                {puppy.currentWeight && (
+                                    <div className="text-center">
+                                        <p className="text-[10px] font-black uppercase text-brand-forest-500 mb-1">Current Weight</p>
+                                        <p className="text-xs font-bold text-brand-forest-800">{puppy.currentWeight}</p>
+                                    </div>
+                                )}
+                                {puppy.expectedWeight && (
+                                    <div className="text-center">
+                                        <p className="text-[10px] font-black uppercase text-brand-forest-500 mb-1">Adult Weight</p>
+                                        <p className="text-xs font-bold text-brand-forest-800">{puppy.expectedWeight}</p>
+                                    </div>
+                                )}
+                                {puppy.height && (
+                                    <div className="text-center">
+                                        <p className="text-[10px] font-black uppercase text-brand-forest-500 mb-1">Height</p>
+                                        <p className="text-xs font-bold text-brand-forest-800">{puppy.height}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Personality & Compatibility Grid - Left Column */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {puppy.personalityTraits && puppy.personalityTraits.length > 0 && (
+                                <div className="bg-brand-orange-50 p-4 rounded-2xl border border-brand-orange-200">
+                                    <p className="text-xs font-black text-brand-orange-700 uppercase mb-2">Personality</p>
+                                    <div className="flex flex-wrap gap-1">
+                                        {puppy.personalityTraits.map((trait: string) => (
+                                            <span key={trait} className="bg-brand-orange-100 text-brand-orange-700 px-2 py-1 rounded-full text-xs font-bold">
+                                                {trait}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {puppy.goodWith && puppy.goodWith.length > 0 && (
+                                <div className="bg-green-50 p-4 rounded-2xl border border-green-200">
+                                    <p className="text-xs font-black text-green-700 uppercase mb-2">Good With</p>
+                                    <div className="flex flex-wrap gap-1">
+                                        {puppy.goodWith.includes("Children") && (
+                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Baby className="w-3 h-3" />Kids</span>
+                                        )}
+                                        {puppy.goodWith.includes("Seniors") && (
+                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Users className="w-3 h-3" />Seniors</span>
+                                        )}
+                                        {puppy.goodWith.includes("Other Dogs") && (
+                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Dog className="w-3 h-3" />Dogs</span>
+                                        )}
+                                        {puppy.goodWith.includes("Cats") && (
+                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Cat className="w-3 h-3" />Cats</span>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* What Dog Needs - Left Column */}
+                        {puppy.whatDogNeeds && (
+                            <div className="bg-brand-forest-900 text-white p-4 rounded-2xl">
+                                <p className="text-xs font-black text-brand-orange-400 uppercase mb-2">What {puppy.name} Needs</p>
+                                <p className="text-sm text-brand-white-100 leading-relaxed whitespace-pre-line">{puppy.whatDogNeeds}</p>
+                            </div>
+                        )}
                     </div>
 
                     {/* Info Column */}
@@ -131,71 +196,38 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-forest-900 mb-4 sm:mb-6 uppercase tracking-tight">
                             {puppy.name}
                         </h1>
-                        <div className="flex flex-wrap gap-3 mb-6">
-                            <span className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200">{puppy.age}</span>
-                            <span className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200">{puppy.gender}</span>
-                            {puppy.sizeCategory && <span className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200">{puppy.sizeCategory}</span>}
-                            {puppy.location && <span className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 flex items-center gap-1"><Home className="w-3 h-3" />{puppy.location}</span>}
-                            {puppy.status === "available" && <span className="bg-brand-orange-100 text-brand-orange-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-orange-200">Fee: {puppy.fee}</span>}
+                        
+                        {/* Basic Info Grid */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                            {puppy.age && (
+                                <div className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 text-center">
+                                    {puppy.age}
+                                </div>
+                            )}
+                            {puppy.gender && (
+                                <div className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 text-center">
+                                    {puppy.gender}
+                                </div>
+                            )}
+                            {puppy.sizeCategory && (
+                                <div className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 text-center">
+                                    {puppy.sizeCategory}
+                                </div>
+                            )}
+                            {puppy.location && (
+                                <div className="col-span-2 sm:col-span-3 bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 flex items-center justify-center gap-1">
+                                    <Home className="w-3 h-3" /> {puppy.location}
+                                </div>
+                            )}
+                            {puppy.status === "available" && (
+                                <div className="col-span-2 sm:col-span-3 bg-brand-orange-100 text-brand-orange-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-orange-200 text-center">
+                                    Fee: {puppy.fee}
+                                </div>
+                            )}
                         </div>
 
-                        {/* Physical Details */}
-                        {(puppy.currentWeight || puppy.expectedWeight || puppy.height) && (
-                            <div className="flex flex-wrap gap-4 mb-6 p-4 bg-brand-white-200/50 rounded-2xl">
-                                {puppy.currentWeight && (
-                                    <div className="text-center">
-                                        <p className="text-xs font-black uppercase text-brand-forest-500 mb-1">Current Weight</p>
-                                        <p className="text-sm font-bold text-brand-forest-800">{puppy.currentWeight}</p>
-                                    </div>
-                                )}
-                                {puppy.expectedWeight && (
-                                    <div className="text-center">
-                                        <p className="text-xs font-black uppercase text-brand-forest-500 mb-1">Expected Adult</p>
-                                        <p className="text-sm font-bold text-brand-forest-800">{puppy.expectedWeight}</p>
-                                    </div>
-                                )}
-                                {puppy.height && (
-                                    <div className="text-center">
-                                        <p className="text-xs font-black uppercase text-brand-forest-500 mb-1">Height</p>
-                                        <p className="text-sm font-bold text-brand-forest-800">{puppy.height}</p>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* Personality Traits */}
-                        {puppy.personalityTraits && puppy.personalityTraits.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-6">
-                                {puppy.personalityTraits.map((trait: string) => (
-                                    <span key={trait} className="bg-brand-orange-100 text-brand-orange-700 px-3 py-1.5 rounded-full text-xs font-bold border border-brand-orange-200">
-                                        {trait}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
-
-                        {/* Good With */}
-                        {puppy.goodWith && puppy.goodWith.length > 0 && (
-                            <div className="flex items-center gap-4 mb-6 text-sm">
-                                <span className="font-bold text-brand-forest-600">Good with:</span>
-                                <div className="flex gap-2">
-                                    {puppy.goodWith.includes("Children") && (
-                                        <span className="flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold"><Baby className="w-3 h-3" />Kids</span>
-                                    )}
-                                    {puppy.goodWith.includes("Seniors") && (
-                                        <span className="flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold"><Users className="w-3 h-3" />Seniors</span>
-                                    )}
-                                    {puppy.goodWith.includes("Other Dogs") && (
-                                        <span className="flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold"><Dog className="w-3 h-3" />Dogs</span>
-                                    )}
-                                    {puppy.goodWith.includes("Cats") && (
-                                        <span className="flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold"><Cat className="w-3 h-3" />Cats</span>
-                                    )}
-                                </div>
-                            </div>
-                        )}
                         {puppy.status === "available" && (
-                            <div className="mb-8 flex items-center gap-2 bg-brand-forest-50 p-4 rounded-2xl border border-brand-forest-200">
+                            <div className="mb-6 flex items-center justify-center gap-2 bg-brand-forest-50 p-4 rounded-2xl border border-brand-forest-200">
                                 <Truck className="w-5 h-5 text-brand-orange-600" />
                                 <span className="text-sm font-medium text-brand-forest-700">Final delivery fee depends on your location</span>
                             </div>
@@ -206,22 +238,12 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
                             <p className="text-brand-forest-600 text-base sm:text-lg leading-relaxed italic mb-8">{puppy.description}</p>
 
                             {/* Why Rehoming */}
-                            {(puppy.whyRehoming || puppy.story) && (
+                            {puppy.whyRehoming && (
                                 <>
                                     <h3 className="text-xl sm:text-2xl font-black text-brand-orange-600 mb-4 uppercase">Why {puppy.name} Is Looking for a New Home</h3>
                                     <div className="bg-brand-orange-50 p-6 sm:p-8 rounded-3xl border border-brand-orange-200 relative mb-6">
                                         <Heart className="w-6 h-6 text-brand-orange-600 absolute -top-3 -left-3 bg-white rounded-full p-1 shadow-md" />
-                                        <p className="text-brand-forest-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">{puppy.whyRehoming || puppy.story}</p>
-                                    </div>
-                                </>
-                            )}
-
-                            {/* What Dog Needs */}
-                            {puppy.whatDogNeeds && (
-                                <>
-                                    <h3 className="text-xl sm:text-2xl font-black text-brand-forest-900 mb-4 uppercase">What {puppy.name} Needs</h3>
-                                    <div className="bg-brand-forest-900 text-white p-6 sm:p-8 rounded-3xl mb-6">
-                                        <p className="text-base sm:text-lg leading-relaxed whitespace-pre-line">{puppy.whatDogNeeds}</p>
+                                        <p className="text-brand-forest-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">{puppy.whyRehoming}</p>
                                     </div>
                                 </>
                             )}

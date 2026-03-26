@@ -27,7 +27,10 @@ const questionLabels: Record<string, string> = {
     veterinarian: "Has Veterinarian",
     vetDetails: "Veterinarian Details",
     pickupOrShipping: "Pickup or Shipping",
-    agreement: "Agreement"
+    agreement: "Agreement",
+    nearestAirport: "Nearest Major Airport",
+    deliveryOption: "Preferred Delivery Option",
+    arrivalAvailability: "Day of Arrival Availability"
 };
 
 export function ApplicationDetail({ application, onBack, onUpdate }: ApplicationDetailProps) {
@@ -109,22 +112,28 @@ export function ApplicationDetail({ application, onBack, onUpdate }: Application
             <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
                 <div>
                     <h2 className="text-2xl font-black text-brand-forest-900 uppercase">{application.applicantName}</h2>
-                    <p className="text-brand-forest-600">{application.email}</p>
-                    <p className="text-brand-forest-500 text-sm">{application.phone}</p>
-                    <p className="text-brand-forest-500 text-sm">{application.location}</p>
+                    
+                    {/* Contact Details */}
+                    <div className="mt-4 p-4 bg-brand-forest-50 rounded-xl border border-brand-forest-200">
+                        <p className="text-xs font-black text-brand-forest-700 uppercase mb-2">Contact Details</p>
+                        <p className="text-sm text-brand-forest-700"><span className="font-bold">Email:</span> {application.email}</p>
+                        <p className="text-sm text-brand-forest-700"><span className="font-bold">Phone:</span> {application.phone}</p>
+                        <p className="text-sm text-brand-forest-700"><span className="font-bold">Address:</span> {application.location}</p>
+                    </div>
                     
                     {/* Delivery Details */}
-                    {(application.nearestAirport || application.deliveryOption || application.arrivalAvailability) && (
+                    {((application.nearestAirport || application.deliveryOption || application.arrivalAvailability) || 
+                      (answers.nearestAirport || answers.deliveryOption || answers.arrivalAvailability)) && (
                         <div className="mt-4 p-4 bg-brand-orange-50 rounded-xl border border-brand-orange-200">
                             <p className="text-xs font-black text-brand-orange-700 uppercase mb-2">Delivery Details</p>
-                            {application.nearestAirport && (
-                                <p className="text-sm text-brand-forest-700"><span className="font-bold">Nearest Airport:</span> {application.nearestAirport}</p>
+                            {(application.nearestAirport || answers.nearestAirport) && (
+                                <p className="text-sm text-brand-forest-700"><span className="font-bold">Nearest Airport:</span> {application.nearestAirport || answers.nearestAirport}</p>
                             )}
-                            {application.deliveryOption && (
-                                <p className="text-sm text-brand-forest-700"><span className="font-bold">Delivery Option:</span> {application.deliveryOption}</p>
+                            {(application.deliveryOption || answers.deliveryOption) && (
+                                <p className="text-sm text-brand-forest-700"><span className="font-bold">Delivery Option:</span> {application.deliveryOption || answers.deliveryOption}</p>
                             )}
-                            {application.arrivalAvailability && (
-                                <p className="text-sm text-brand-forest-700"><span className="font-bold">Day of Arrival:</span> {application.arrivalAvailability}</p>
+                            {(application.arrivalAvailability || answers.arrivalAvailability) && (
+                                <p className="text-sm text-brand-forest-700"><span className="font-bold">Day of Arrival:</span> {application.arrivalAvailability || answers.arrivalAvailability}</p>
                             )}
                         </div>
                     )}
