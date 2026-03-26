@@ -136,10 +136,13 @@ export function AdoptionForm({ puppyName, puppyId, onSuccess }: AdoptionFormProp
     const [showContactForm, setShowContactForm] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [contactInfo, setContactInfo] = useState({
-        name: "",
+        fullLegalName: "",
         email: "",
-        phone: "",
-        location: ""
+        residentialAddress: "",
+        telephone: "",
+        nearestAirport: "",
+        deliveryOption: "",
+        arrivalAvailability: ""
     });
 
     const currentQuestion = questions[step];
@@ -157,10 +160,13 @@ export function AdoptionForm({ puppyName, puppyId, onSuccess }: AdoptionFormProp
         try {
             const fullData = {
                 ...formData,
-                applicantName: contactInfo.name,
+                applicantName: contactInfo.fullLegalName,
                 email: contactInfo.email,
-                phone: contactInfo.phone,
-                location: contactInfo.location,
+                phone: contactInfo.telephone,
+                location: contactInfo.residentialAddress,
+                nearestAirport: contactInfo.nearestAirport,
+                deliveryOption: contactInfo.deliveryOption,
+                arrivalAvailability: contactInfo.arrivalAvailability,
                 puppyName,
                 puppyId
             };
@@ -234,51 +240,89 @@ export function AdoptionForm({ puppyName, puppyId, onSuccess }: AdoptionFormProp
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl border border-brand-forest-100"
             >
-                <h3 className="text-xl font-black text-brand-forest-900 mb-6 uppercase">Your Contact Information</h3>
+                <h3 className="text-xl font-black text-brand-forest-900 mb-6 uppercase">Final Details</h3>
+                <p className="text-brand-forest-600 mb-6">Please provide your contact and delivery information to complete your application.</p>
                 <form onSubmit={handleContactSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Full Name *</Label>
-                            <Input
-                                value={contactInfo.name}
-                                onChange={(e) => setContactInfo({ ...contactInfo, name: e.target.value })}
-                                required
-                                className="rounded-xl h-12"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Email *</Label>
-                            <Input
-                                type="email"
-                                value={contactInfo.email}
-                                onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
-                                required
-                                className="rounded-xl h-12"
-                            />
-                        </div>
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Full Legal Name(s) *</Label>
+                        <Input
+                            value={contactInfo.fullLegalName}
+                            onChange={(e) => setContactInfo({ ...contactInfo, fullLegalName: e.target.value })}
+                            placeholder="Enter full legal name(s)"
+                            required
+                            className="rounded-xl h-12"
+                        />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Phone *</Label>
-                            <Input
-                                type="tel"
-                                value={contactInfo.phone}
-                                onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
-                                required
-                                className="rounded-xl h-12"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Location *</Label>
-                            <Input
-                                value={contactInfo.location}
-                                onChange={(e) => setContactInfo({ ...contactInfo, location: e.target.value })}
-                                placeholder="City, State"
-                                required
-                                className="rounded-xl h-12"
-                            />
-                        </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Email Address *</Label>
+                        <Input
+                            type="email"
+                            value={contactInfo.email}
+                            onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
+                            required
+                            className="rounded-xl h-12"
+                        />
                     </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Residential Address *</Label>
+                        <Input
+                            value={contactInfo.residentialAddress}
+                            onChange={(e) => setContactInfo({ ...contactInfo, residentialAddress: e.target.value })}
+                            placeholder="Full street address, city, state, zip"
+                            required
+                            className="rounded-xl h-12"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Telephone Number *</Label>
+                        <Input
+                            type="tel"
+                            value={contactInfo.telephone}
+                            onChange={(e) => setContactInfo({ ...contactInfo, telephone: e.target.value })}
+                            required
+                            className="rounded-xl h-12"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Nearest Major Airport *</Label>
+                        <Input
+                            value={contactInfo.nearestAirport}
+                            onChange={(e) => setContactInfo({ ...contactInfo, nearestAirport: e.target.value })}
+                            placeholder="e.g. John F. Kennedy International Airport"
+                            required
+                            className="rounded-xl h-12"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Preferred Delivery Option *</Label>
+                        <select
+                            value={contactInfo.deliveryOption}
+                            onChange={(e) => setContactInfo({ ...contactInfo, deliveryOption: e.target.value })}
+                            required
+                            className="flex h-12 w-full rounded-xl border border-brand-forest-200 bg-white px-3 py-2 text-sm font-medium"
+                        >
+                            <option value="">Select delivery option...</option>
+                            <option value="Airport Pickup">Airport Pickup</option>
+                            <option value="Home Delivery">Home Delivery</option>
+                        </select>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black text-brand-forest-700 uppercase">Availability on Day of Arrival *</Label>
+                        <Input
+                            value={contactInfo.arrivalAvailability}
+                            onChange={(e) => setContactInfo({ ...contactInfo, arrivalAvailability: e.target.value })}
+                            placeholder="e.g. Available all day / Between 9am-5pm"
+                            required
+                            className="rounded-xl h-12"
+                        />
+                    </div>
+
                     <Button
                         type="submit"
                         disabled={loading}
