@@ -122,18 +122,18 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div className="space-y-2">
                             <Label htmlFor="name" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Name</Label>
-                            <Input id="name" value={formData.name} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Charlie" />
+                            <Input id="name" value={formData.name} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Charlie" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="breed" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Breed</Label>
-                            <Input id="breed" value={formData.breed} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Cavalier King Charles Spaniel" />
+                            <Input id="breed" value={formData.breed} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Cavalier King Charles Spaniel" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div className="space-y-2">
                             <Label htmlFor="age" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Age</Label>
-                            <Input id="age" value={formData.age} onChange={handleChange} placeholder="e.g. 3 months" required className="rounded-xl border-brand-white-400 h-11" />
+                            <Input id="age" value={formData.age} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. 3 months" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="gender" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Gender</Label>
@@ -165,11 +165,11 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="fee" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Adoption Fee</Label>
-                            <Input id="fee" value={formData.fee} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="$1,500" />
+                            <Input id="fee" value={formData.fee} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="$1,500" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="nannyFee" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Nanny Fee</Label>
-                            <Input id="nannyFee" value={formData.nannyFee} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="$350" />
+                            <Input id="nannyFee" value={formData.nannyFee} onChange={handleChange} className="rounded-xl border-brand-white-400 h-11" placeholder="$350" />
                         </div>
                     </div>
 
@@ -186,12 +186,12 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
 
                     <div className="space-y-2">
                         <Label htmlFor="description" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Description</Label>
-                        <Textarea id="description" value={formData.description} onChange={handleChange} required className="rounded-2xl border-brand-white-400 min-h-[100px] py-3" placeholder="Tell us about the puppy's personality..." />
+                        <Textarea id="description" value={formData.description} onChange={handleChange} className="rounded-2xl border-brand-white-400 min-h-[100px] py-3" placeholder="Tell us about the puppy's personality..." />
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="story" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Rehoming Story</Label>
-                        <Textarea id="story" value={formData.story} onChange={handleChange} required className="rounded-2xl border-brand-white-400 min-h-[100px] py-3" placeholder="Why is this puppy being rehomed?" />
+                        <Textarea id="story" value={formData.story} onChange={handleChange} className="rounded-2xl border-brand-white-400 min-h-[100px] py-3" placeholder="Why is this puppy being rehomed?" />
                     </div>
 
                     <div className="space-y-2">

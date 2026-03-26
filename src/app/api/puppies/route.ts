@@ -19,7 +19,8 @@ export async function POST(request: Request) {
 
         // Generate slug if not provided
         if (!body.slug) {
-            body.slug = body.name.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "") + "-" + Math.random().toString(36).substring(2, 7);
+            const namePart = body.name ? body.name.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "") : "puppy";
+            body.slug = namePart + "-" + Math.random().toString(36).substring(2, 7);
         }
 
         const puppy = await Puppy.create(body);
