@@ -320,37 +320,8 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                             {formData.image ? (
                                 <>
                                     <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                                        <div className="relative">
-                                            <input
-                                                type="file"
-                                                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                                                onChange={async (e) => {
-                                                    const file = e.target.files?.[0];
-                                                    if (!file) return;
-                                                    const promise = (async () => {
-                                                        const fd = new FormData();
-                                                        fd.append("file", file);
-                                                        const res = await fetch("/api/upload", { method: "POST", body: fd });
-                                                        const data = await res.json();
-                                                        if (data.success) {
-                                                            setFormData((prev: PuppyData) => ({ ...prev, image: data.url }));
-                                                            return "Image uploaded!";
-                                                        }
-                                                        throw new Error("Upload failed");
-                                                    })();
-                                                    toast.promise(promise, {
-                                                        loading: "Uploading...",
-                                                        success: (m) => m,
-                                                        error: (e) => e.message
-                                                    });
-                                                }}
-                                            />
-                                            <Button type="button" size="sm" variant="outline" className="rounded-full flex items-center gap-2">
-                                                <Upload className="w-4 h-4" /> Change
-                                            </Button>
-                                        </div>
-                                        <Button type="button" size="sm" variant="destructive" className="rounded-full" onClick={() => setFormData({ ...formData, image: "" })}>
+                                    <div className="absolute top-2 right-2">
+                                        <Button type="button" size="sm" variant="destructive" className="h-8 w-8 rounded-full p-0" onClick={() => setFormData({ ...formData, image: "" })}>
                                             <X className="w-4 h-4" />
                                         </Button>
                                     </div>
@@ -428,36 +399,20 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
 
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
                             {(formData.images || []).filter(img => img && img.trim() !== "").map((img, index) => (
-                                <div key={index} className="relative aspect-square rounded-2xl overflow-hidden border border-brand-white-400 bg-white group">
+                                <div key={index} className="relative aspect-square rounded-2xl overflow-hidden border border-brand-white-400 bg-white">
                                     <img src={img} alt="" className="w-full h-full object-cover" />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
-                                        <Button
-                                            type="button"
-                                            size="sm"
-                                            variant="outline"
-                                            className="h-8 w-8 rounded-full p-0"
-                                            onClick={() => {
-                                                const newUrl = prompt("Enter new image URL:", img);
-                                                if (newUrl && newUrl !== img) {
-                                                    const newImages = [...formData.images];
-                                                    newImages[index] = newUrl;
-                                                    setFormData({ ...formData, images: newImages });
-                                                }
-                                            }}
-                                        >
-                                            <Plus className="w-4 h-4 rotate-45" /> {/* Use Plus as edit icon for now or just generic */}
-                                        </Button>
+                                    <div className="absolute top-2 right-2 flex gap-1">
                                         <Button
                                             type="button"
                                             size="sm"
                                             variant="destructive"
-                                            className="h-8 w-8 rounded-full p-0"
+                                            className="h-7 w-7 rounded-full p-0"
                                             onClick={() => {
                                                 const newImages = formData.images.filter((_, i) => i !== index);
                                                 setFormData({ ...formData, images: newImages });
                                             }}
                                         >
-                                            <X className="w-4 h-4" />
+                                            <X className="w-3 h-3" />
                                         </Button>
                                     </div>
                                 </div>
