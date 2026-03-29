@@ -193,8 +193,8 @@ export default async function Home() {
             className="object-cover"
             priority
           />
-          {/* Radial overlay - less green in center, more green at edges */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-forest-900/20 via-brand-forest-900/60 to-brand-forest-900" />
+          {/* Linear overlay - 90% on left, 60% on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-forest-900/90 via-brand-forest-900/80 to-brand-forest-900/60" />
         </div>
         
         {/* Background decorative elements */}
