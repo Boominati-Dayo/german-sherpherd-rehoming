@@ -210,23 +210,6 @@ export default async function Home() {
             <PawPrint className="w-14 h-14 text-white" />
           </div>
         </div>
-            <div className="absolute top-40 right-[15%] opacity-20">
-              <PawPrint className="w-16 h-16 text-white" />
-            </div>
-            <div className="absolute bottom-32 left-[20%] opacity-20">
-              <Bone className="w-10 h-10 text-white" />
-            </div>
-            <div className="absolute bottom-20 right-[25%] opacity-20">
-              <PawPrint className="w-14 h-14 text-white" />
-            </div>
-            <div className="absolute top-1/3 left-[30%] opacity-15">
-              <Bone className="w-8 h-8 text-white" />
-            </div>
-            <div className="absolute bottom-1/3 right-[35%] opacity-15">
-              <PawPrint className="w-10 h-10 text-white" />
-            </div>
-          </div>
-        </div>
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
