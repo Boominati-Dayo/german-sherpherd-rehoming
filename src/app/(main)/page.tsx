@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
-import { ShieldCheck, Heart, Truck, PawPrint, ArrowRight, MapPin, Clock, CheckCircle } from "lucide-react";
+import { ShieldCheck, Heart, Truck, PawPrint, ArrowRight, MapPin, Clock, CheckCircle, Bone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PuppyCard } from "@/components/PuppyCard";
 import { HomeHero } from "@/components/HomeHero";
