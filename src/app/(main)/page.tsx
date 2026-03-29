@@ -193,8 +193,8 @@ export default async function Home() {
             className="object-cover"
             priority
           />
-          {/* Overlay covers entire image - 100% on left to 30% on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-forest-900 via-brand-forest-900/65 to-brand-forest-900/30" />
+          {/* Circular overlay - more transparent in center, opaque at edges */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-forest-900/30 via-brand-forest-900/60 to-brand-forest-900" />
         </div>
         
         {/* Background decorative elements */}
