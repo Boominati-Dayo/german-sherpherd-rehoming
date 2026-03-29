@@ -221,7 +221,7 @@ export default async function Home() {
             <div className="relative">
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
                 <Image 
-                  src="/assets/cavalierKingCharlesAboutBreedImages/image2.jpg" 
+                  src="/thumbnail.png" 
                   alt="Cavalier King Charles Rehoming Center"
                   fill
                   className="object-cover"

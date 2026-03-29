@@ -2,33 +2,26 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { seoConfig } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rebeccahermanfostering.com"),
+  metadataBase: new URL(seoConfig.socialImage.replace("/thumbnail.png", "")),
 
   title: {
-    default: "Cavalier King Charles Rehoming Center",
-    template: "%s | Cavalier King Charles Rehoming Center",
+    default: seoConfig.siteName,
+    template: `%s | ${seoConfig.siteName}`,
   },
 
-  description:
-    "Find healthy, home-raised Cavalier King Charles Spaniels ready for loving homes. Vet-checked, vaccinated, and responsibly rehomed across the U.S.",
+  description: seoConfig.description,
 
-  keywords: [
-    "Cavalier King Charles Spaniel puppies",
-    "Cavalier puppies for adoption",
-    "Cavalier King Charles Spaniel rehoming",
-    " Cavalier King Charles Spaniel puppies",
-    "family puppies",
-    "Cavalier King Charles Rehoming Center"
-  ],
+  keywords: seoConfig.keywords,
 
-  authors: [{ name: "Cavalier King Charles Rehoming Center" }],
-  creator: "Cavalier King Charles Rehoming Center",
-  publisher: "Cavalier King Charles Rehoming Center",
+  authors: [{ name: seoConfig.ownerName }],
+  creator: seoConfig.ownerName,
+  publisher: seoConfig.siteName,
 
   robots: {
     index: true,
@@ -43,23 +36,21 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://rebeccahermanfostering.com",
+    canonical: seoConfig.socialImage.replace("/thumbnail.png", ""),
   },
 
   openGraph: {
     type: "website",
-    url: "https://rebeccahermanfostering.com",
-    title:
-      "Cavalier King Charles Rehoming Center",
-    description:
-      "Healthy, vet-checked Cavalier King Charles Spaniels raised with care and ready for loving homes.",
-    siteName: "Cavalier King Charles Rehoming Center",
+    url: seoConfig.socialImage.replace("/thumbnail.png", ""),
+    title: seoConfig.siteName,
+    description: seoConfig.description,
+    siteName: seoConfig.siteName,
     images: [
       {
-        url: "https://rebeccahermanfostering.com/thumbnail.png",
+        url: seoConfig.socialImage,
         width: 1200,
         height: 630,
-        alt: "Cavalier King Charles Rehoming Center",
+        alt: seoConfig.siteName,
       },
     ],
     locale: "en_US",
@@ -71,11 +62,10 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title:
-      "Cavalier King Charles Rehoming Center",
-    description:
-      "Find healthy, home-raised Cavalier King Charles Spaniels ready for loving families.",
-    images: ["https://rebeccahermanfostering.com/thumbnail.png"],
+    title: seoConfig.siteName,
+    description: seoConfig.description,
+    creator: seoConfig.twitterHandle,
+    images: [seoConfig.socialImage],
   },
 
   category: "Pets",
