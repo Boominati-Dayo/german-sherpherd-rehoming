@@ -193,8 +193,8 @@ export default async function Home() {
             className="object-cover"
             priority
           />
-          {/* Circular overlay - more transparent in center, opaque at edges */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-forest-900/30 via-brand-forest-900/60 to-brand-forest-900" />
+          {/* Radial overlay - less green in center, more green at edges */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-forest-900/20 via-brand-forest-900/60 to-brand-forest-900" />
         </div>
         
         {/* Background decorative elements */}
