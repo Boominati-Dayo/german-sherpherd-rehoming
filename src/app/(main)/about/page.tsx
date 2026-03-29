@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Heart, ShieldCheck, Star, PawPrint, ArrowRight, Bone, Dog, Clock, Home, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { generatePageMetadata } from "@/lib/seo";
-import { FamilyCarousel } from "@/components/FamilyCarousel";
 
 export const metadata: Metadata = generatePageMetadata({
     title: "About Us",
@@ -86,9 +85,6 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-
-            {/* Family Images - Continuous Carousel */}
-            <FamilyCarousel />
 
             {/* My Mission */}
             <section className="py-24 bg-brand-forest-900 text-white relative overflow-hidden">
