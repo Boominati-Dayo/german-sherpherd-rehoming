@@ -185,18 +185,16 @@ export default async function Home() {
       {/* About Us Section */}
       <section className="py-24 text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          {/* Left side green overlay that fades to right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-forest-900 via-brand-forest-900/70 to-transparent lg:w-2/3" />
-          {/* Image on the right */}
-          <div className="absolute right-0 top-0 bottom-0 w-full lg:w-2/3">
-            <Image 
-              src="/thumbnail.png" 
-              alt="Cavalier King Charles Rehoming Center"
-              fill
-              className="object-cover object-left"
-              priority
-            />
-          </div>
+          {/* Image covers entire section */}
+          <Image 
+            src="/thumbnail.png" 
+            alt="Cavalier King Charles Rehoming Center"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Overlay covers entire image - 100% on left to 30% on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-forest-900 via-brand-forest-900/65 to-brand-forest-900/30" />
         </div>
         
         {/* Background decorative elements */}
