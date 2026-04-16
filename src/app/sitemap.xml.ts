@@ -1,50 +1,79 @@
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://cavalierkingcharlesrehomingcenter.com";
+const baseUrl = "https://cavalierkingcharlesrehomingcenter.com";
 
-  return [
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily",
+      lastModified: now,
+      changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/puppies`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/transport`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.5,
+      priority: 0.3,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.5,
+      priority: 0.3,
     },
   ];
+
+  try {
+    const { MongoClient } = await import("mongodb");
+    
+    const client = new MongoClient(process.env.MONGODB_URI!);
+    await client.connect();
+    const db = client.db();
+    
+    const puppies = await db.collection("puppies").find({ 
+      status: { $ne: "adopted" }
+    }).project({ _id: 1, updatedAt: 1 }).limit(1000).toArray();
+
+    await client.close();
+
+    const puppyPages: MetadataRoute.Sitemap = puppies.map((puppy) => ({
+      url: `${baseUrl}/puppies/${puppy._id}`,
+      lastModified: puppy.updatedAt ? new Date(puppy.updatedAt) : now,
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    }));
+
+    return [...staticPages, ...puppyPages];
+  } catch {
+    return staticPages;
+  }
 }
