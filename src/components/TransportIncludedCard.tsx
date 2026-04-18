@@ -23,7 +23,7 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
 
     if (images.length === 0) {
         return (
-            <div className="bg-gradient-to-br from-brand-orange-600/20 to-brand-forest-800/50 rounded-3xl p-8">
+            <div className="bg-gradient-to-br from-brand-copper-600/20 to-brand-black-800/50 rounded-3xl p-8">
                 <h3 className="text-xl font-black uppercase mb-6 text-center">What's Included</h3>
                 <div className="space-y-4">
                     {[
@@ -33,11 +33,11 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
                         "Food and water provided",
                         "Comfort stops every 2-3 hours",
                         "Fully insured transport",
-                        "Experienced Cavalier handlers",
+                        "Experienced German Shepherd handlers",
                         "Climate-controlled vehicles"
                     ].map((item, idx) => (
                         <div key={idx} className="flex items-center gap-3">
-                            <CheckCircle className="w-5 h-5 text-brand-orange-500 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-brand-copper-500 shrink-0" />
                             <span className="text-white/80">{item}</span>
                         </div>
                     ))}
@@ -65,7 +65,7 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
             ))}
             
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-forest-900/80 via-brand-forest-900/70 to-brand-forest-900/80" />
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-black-900/80 via-brand-black-900/70 to-brand-black-900/80" />
 
             {/* Content */}
             <div className="relative z-10 p-8">
@@ -78,11 +78,11 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
                         "Food and water provided",
                         "Comfort stops every 2-3 hours",
                         "Fully insured transport",
-                        "Experienced Cavalier handlers",
+                        "Experienced German Shepherd handlers",
                         "Climate-controlled vehicles"
                     ].map((item, idx) => (
                         <div key={idx} className="flex items-center gap-3">
-                            <CheckCircle className="w-5 h-5 text-brand-orange-500 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-brand-copper-500 shrink-0" />
                             <span className="text-white/90">{item}</span>
                         </div>
                     ))}
@@ -97,7 +97,7 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
                                 onClick={() => setCurrentImageIndex(idx)}
                                 className={`w-2 h-2 rounded-full transition-all ${
                                     idx === currentImageIndex 
-                                        ? "bg-brand-orange-500 w-4" 
+                                        ? "bg-brand-copper-500 w-4" 
                                         : "bg-white/30 hover:bg-white/50"
                                 }`}
                                 aria-label={`Go to image ${idx + 1}`}

@@ -38,31 +38,31 @@ export function Navbar() {
     const getNavColors = () => {
         if (isDarkBgPage) {
             return {
-                bg: scrolled ? "bg-brand-forest-900 shadow-lg" : "bg-transparent",
+                bg: scrolled ? "bg-brand-black-900" : "bg-transparent",
                 text: "text-white",
-                textHover: "hover:text-brand-orange-500",
-                logoBg: scrolled ? "bg-brand-orange-700" : "bg-white",
-                logoIcon: scrolled ? "text-white" : "text-brand-forest-800",
-                active: "text-brand-orange-500",
+                textHover: "hover:text-brand-copper-500",
+                logoBg: scrolled ? "bg-brand-copper-700" : "bg-white",
+                logoIcon: scrolled ? "text-white" : "text-brand-black-800",
+                active: "text-brand-copper-500",
             };
         }
         if (isWhiteBgPage) {
             return {
-                bg: scrolled ? "bg-white shadow-lg" : "bg-white",
-                text: "text-brand-forest-800",
-                textHover: "hover:text-brand-orange-700",
-                logoBg: scrolled ? "bg-brand-orange-700" : "bg-brand-forest-800",
+                bg: scrolled ? "bg-white" : "bg-white",
+                text: "text-brand-black-800",
+                textHover: "hover:text-brand-copper-700",
+                logoBg: scrolled ? "bg-brand-copper-700" : "bg-brand-black-800",
                 logoIcon: "text-white",
-                active: "text-brand-orange-700",
+                active: "text-brand-copper-700",
             };
         }
         return {
-            bg: scrolled ? "bg-white shadow-lg" : "bg-transparent",
-            text: scrolled ? "text-brand-forest-800" : "text-brand-forest-800",
-            textHover: "hover:text-brand-orange-700",
-            logoBg: scrolled ? "bg-brand-orange-700" : "bg-brand-forest-800",
+            bg: scrolled ? "bg-white" : "bg-transparent",
+            text: scrolled ? "text-brand-black-800" : "text-brand-black-800",
+            textHover: "hover:text-brand-copper-700",
+            logoBg: scrolled ? "bg-brand-copper-700" : "bg-brand-black-800",
             logoIcon: "text-white",
-            active: "text-brand-orange-700",
+            active: "text-brand-copper-700",
         };
     };
     
@@ -77,7 +77,7 @@ export function Navbar() {
                         <div className="relative w-36 h-12">
                             <Image 
                                 src="/assets/CRCRehomingCenterLogo.png" 
-                                alt="Cavalier King Charles Rehoming Center"
+                                alt="German Shepherd Rehoming Center"
                                 fill
                                 className="object-contain"
                             />
@@ -98,7 +98,7 @@ export function Navbar() {
                             >
                                 {link.name}
                                 {isActive(link.href) && (
-                                    <span className={`absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-orange-500 rounded-full`} />
+                                    <span className={`absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-copper-500 rounded-full`} />
                                 )}
                             </Link>
                         ))}
@@ -108,10 +108,10 @@ export function Navbar() {
                     <div className="hidden md:block">
                         <Link 
                             href="/puppies" 
-                            className="inline-flex items-center justify-center px-6 py-3 text-sm font-black uppercase tracking-wider bg-brand-orange-700 text-white rounded-full hover:bg-brand-orange-800 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+                            className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-black uppercase tracking-wider bg-brand-copper-700 text-white rounded-full hover:bg-brand-copper-800 hover:-translate-y-0.5 transition-all duration-300"
                         >
-                            <Bone className="w-4 h-4 mr-2" />
-                            Meet Our Cavaliers
+                            <Bone className="w-4 h-4 mr-1.5" />
+                            Puppies
                         </Link>
                     </div>
 
@@ -134,7 +134,7 @@ export function Navbar() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden bg-brand-forest-900 text-white overflow-hidden"
+                        className="md:hidden bg-brand-black-900 text-white overflow-hidden"
                     >
                         <div className="px-4 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
                             {navLinks.map((link) => (
@@ -144,8 +144,8 @@ export function Navbar() {
                                     onClick={() => setIsOpen(false)}
                                     className={`block py-4 text-lg font-black uppercase tracking-wider transition-colors border-b border-white/10 ${
                                         isActive(link.href)
-                                            ? "text-brand-orange-500"
-                                            : "hover:text-brand-orange-500"
+                                            ? "text-brand-copper-500"
+                                            : "hover:text-brand-copper-500"
                                     }`}
                                 >
                                     {link.name}
@@ -154,9 +154,9 @@ export function Navbar() {
                             <Link 
                                 href="/puppies" 
                                 onClick={() => setIsOpen(false)}
-                                className="block text-center py-4 mt-6 text-sm font-black uppercase tracking-wider bg-brand-orange-700 text-white rounded-full"
+                                className="block text-center py-4 mt-6 text-sm font-black uppercase tracking-wider bg-brand-copper-700 text-white rounded-full"
                             >
-                                Meet Our Cavaliers
+                                View Puppies
                             </Link>
                         </div>
                     </motion.div>

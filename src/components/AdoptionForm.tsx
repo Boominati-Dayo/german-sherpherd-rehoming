@@ -26,7 +26,7 @@ const questions: Question[] = [
     },
     {
         id: "canineExperience",
-        question: "2. Canine Experience - Kindly share your experience with dogs, particularly companion or small breeds such as the Cavalier King Charles Spaniel. If applicable, include details of any current or previous pets.",
+        question: "2. Canine Experience - Kindly share your experience with dogs, particularly German Shepherds or larger breeds. If applicable, include details of any current or previous pets.",
         type: "textarea",
         required: true
     },
@@ -45,14 +45,14 @@ const questions: Question[] = [
     },
     {
         id: "hoursAlone",
-        question: "3. Time, Presence & Care Plan - Approximately how many hours per day would the Cavalier be alone?",
+        question: "3. Time, Presence & Care Plan - Approximately how many hours per day would the German Shepherd be alone?",
         type: "select",
         options: ["Less than 2 hours", "2-4 hours", "4-6 hours", "6-8 hours", "More than 8 hours"],
         required: true
     },
     {
         id: "careArrangement",
-        question: "What arrangements are in place to ensure the Cavalier's mental stimulation, care, and emotional well-being when you're away?",
+        question: "What arrangements are in place to ensure the German Shepherd's mental stimulation, care, and emotional well-being when you're away?",
         type: "textarea",
         required: true
     },
@@ -84,7 +84,7 @@ const questions: Question[] = [
     },
     {
         id: "readinessScore",
-        question: "5. Readiness & Long-Term Commitment - On a scale of 1-100, how prepared do you feel to welcome a Cavalier into your home at this time?",
+        question: "5. Readiness & Long-Term Commitment - On a scale of 1-100, how prepared do you feel to welcome a German Shepherd into your home at this time?",
         type: "scale",
         required: true
     },
@@ -109,7 +109,7 @@ const questions: Question[] = [
     },
     {
         id: "pickupOrShipping",
-        question: "6. Pickup or Shipping - Would you prefer to pick up the Cavalier yourself, or would you like us to arrange professional pet transport/shipping?",
+        question: "6. Pickup or Shipping - Would you prefer to pick up the German Shepherd yourself, or would you like us to arrange professional pet transport/shipping?",
         type: "radio",
         options: ["I will pick up in person", "Please arrange pet transport/shipping"],
         required: true
@@ -323,13 +323,13 @@ export function AdoptionForm({ puppyName, puppyId, onSuccess }: AdoptionFormProp
                         />
                     </div>
 
-                    <Button
+                    <button
                         type="submit"
                         disabled={loading}
-                        className="w-full h-14 bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase tracking-wider mt-6"
+                        className="w-full h-14 bg-brand-copper-700 hover:bg-brand-copper-600 rounded-full font-black uppercase tracking-wider mt-6 text-white transition-colors disabled:opacity-50"
                     >
                         {loading ? "Submitting..." : "Submit Application"}
-                    </Button>
+                    </button>
                 </form>
             </motion.div>
         );
@@ -442,24 +442,23 @@ export function AdoptionForm({ puppyName, puppyId, onSuccess }: AdoptionFormProp
                         </div>
                     )}
 
-                    <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                    <div className="mt-8 flex gap-4">
                         {step > 0 && (
-                            <Button
+                            <button
                                 type="button"
-                                variant="outline"
                                 onClick={() => setStep(step - 1)}
-                                className="flex-1 h-12 rounded-full font-bold"
+                                className="flex-1 h-12 px-6 border-2 border-brand-copper-500 text-brand-copper-600 rounded-full font-bold hover:bg-brand-copper-50 transition-colors"
                             >
                                 Back
-                            </Button>
+                            </button>
                         )}
-                        <Button
+                        <button
                             onClick={() => handleAnswer(formData[currentQuestion.id] || "")}
                             disabled={currentQuestion.required && !formData[currentQuestion.id]}
-                            className="flex-1 h-12 bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase"
+                            className="flex-1 h-12 bg-brand-copper-700 hover:bg-brand-copper-600 rounded-full font-black uppercase text-white transition-colors disabled:opacity-50"
                         >
                             {step === questions.length - 1 ? "Finish" : "Continue"}
-                        </Button>
+                        </button>
                     </div>
                 </motion.div>
             </AnimatePresence>

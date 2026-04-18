@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         if (doc) {
             const p = doc as any;
             return generatePuppyMetadata({
-                puppyName: p.name || "Cavalier Puppy",
-                puppyBreed: p.breed || "Cavalier King Charles Spaniel",
+                puppyName: p.name || "German Shepherd Puppy",
+                puppyBreed: p.breed || "German Shepherd",
                 puppyAge: p.age || "Puppy",
                 puppyDescription: p.description || "",
                 puppyImage: p.image || "",

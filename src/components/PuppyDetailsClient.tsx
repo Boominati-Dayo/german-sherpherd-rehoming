@@ -3,12 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheck, ArrowLeft, ArrowRight, Heart, ChevronLeft, ChevronRight, Truck, Home, Users, Dog, Cat, Baby } from "lucide-react";
+import { ArrowLeft, Heart, Truck, Home, PawPrint, Shield, Calendar, ArrowRight, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AdoptionForm } from "@/components/AdoptionForm";
 import { Modal } from "@/components/ui/Modal";
 import { PuppyCard } from "@/components/PuppyCard";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface PuppyDetailsClientProps {
     puppy: {
@@ -39,6 +38,7 @@ interface PuppyDetailsClientProps {
 
 export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClientProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const gallery = [puppy.image, ...(puppy.images || [])].filter(Boolean);
@@ -51,67 +51,59 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
         setCurrentImageIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
     };
 
+    const isAvailable = puppy.status === "available";
+
     return (
-        <div className="bg-brand-forest-50 min-h-screen pt-24 pb-12">
+        <div className="min-h-screen bg-brand-black-50 pt-24 pb-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <Link href="/puppies" className="inline-flex items-center text-sm font-bold text-brand-forest-700 hover:text-brand-forest-700 mb-8 transition-all hover:gap-2 group bg-white px-4 py-2 rounded-full shadow-md">
+                <Link href="/puppies" className="inline-flex items-center text-sm font-bold text-brand-black-600 hover:text-brand-copper-700 mb-8 transition-all hover:gap-2 group">
                     <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
-                    Back to Available Cavaliers
+                    Back to Puppies
                 </Link>
 
-                {/* Hero / Details */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-10 sm:mb-16">
-                    {/* Image Carousel Column */}
-                    <div className="space-y-4">
-                        <div className="relative aspect-square rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl bg-brand-white-300 group ring-1 ring-brand-white-400">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={currentImageIndex}
-                                    initial={{ opacity: 0, scale: 1.05 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 1.05 }}
-                                    transition={{ duration: 0.5, ease: "easeOut" }}
-                                    className="relative w-full h-full"
-                                >
-                                    <Image
-                                        src={gallery[currentImageIndex]}
-                                        alt={`${puppy.name} - image ${currentImageIndex + 1}`}
-                                        fill
-                                        className="object-cover"
-                                        priority
-                                    />
-                                </motion.div>
-                            </AnimatePresence>
+                {/* Two Column - Image Left, Info Right */}
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
+                    {/* Image Column - 2 cols */}
+                    <div className="lg:col-span-2 space-y-4">
+                        <div 
+                            className="relative h-[400px] lg:h-[500px] w-full rounded-3xl overflow-hidden bg-white shadow-lg cursor-pointer"
+                            onClick={() => setIsFullscreenOpen(true)}
+                        >
+                            <Image
+                                src={gallery[currentImageIndex]}
+                                alt={`${puppy.name}`}
+                                fill
+                                className="object-cover"
+                                priority
+                            />
 
                             {gallery.length > 1 && (
                                 <>
-                                    <button
-                                        onClick={prevImage}
-                                        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm text-brand-forest-700 shadow-lg hover:bg-brand-forest-700 hover:text-white transition-all z-10"
-                                    >
-                                        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                                    <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow hover:bg-gray-50 z-10">
+                                        <ArrowLeft className="w-5 h-5 text-brand-black-800" />
                                     </button>
-                                    <button
-                                        onClick={nextImage}
-                                        className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-white/90 backdrop-blur-sm text-brand-forest-700 shadow-lg hover:bg-brand-forest-700 hover:text-white transition-all z-10"
-                                    >
-                                        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                                    <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow hover:bg-gray-50 z-10">
+                                        <ArrowRight className="w-5 h-5 text-brand-black-800" />
                                     </button>
-                                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-brand-forest-900/60 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest z-10">
-                                        {currentImageIndex + 1} / {gallery.length}
-                                    </div>
                                 </>
                             )}
+
+                            <div className="absolute top-4 left-4 z-10">
+                                <span className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase ${
+                                    isAvailable ? "bg-green-600 text-white" : "bg-gray-500 text-white"
+                                }`}>
+                                    {puppy.status}
+                                </span>
+                            </div>
                         </div>
 
                         {gallery.length > 1 && (
-                            <div className="flex gap-3 overflow-x-auto py-2 no-scrollbar px-1">
-                                {gallery.map((img, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setCurrentImageIndex(index)}
-                                        className={`relative w-16 h-16 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0 border-2 transition-all duration-300 ${currentImageIndex === index ? "border-brand-orange-700 scale-105 shadow-md" : "border-brand-white-400 opacity-60"
-                                            }`}
+                            <div className="flex gap-2 overflow-x-auto pb-2">
+                                {gallery.map((img, idx) => (
+                                    <button 
+                                        key={idx} 
+                                        onClick={() => setCurrentImageIndex(idx)} 
+                                        className={`w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 relative border-2 ${currentImageIndex === idx ? "border-brand-copper-500" : "border-transparent opacity-60 hover:opacity-100"}`}
                                     >
                                         <Image src={img} alt="" fill className="object-cover" />
                                     </button>
@@ -119,195 +111,182 @@ export function PuppyDetailsClient({ puppy, relatedPuppies }: PuppyDetailsClient
                             </div>
                         )}
 
-                        {/* Physical Details Grid - Left Column */}
-                        {(puppy.currentWeight || puppy.expectedWeight || puppy.height) && (
-                            <div className="grid grid-cols-3 gap-3 p-4 bg-brand-white-200/50 rounded-2xl">
-                                {puppy.currentWeight && (
-                                    <div className="text-center">
-                                        <p className="text-[10px] font-black uppercase text-brand-forest-500 mb-1">Current Weight</p>
-                                        <p className="text-xs font-bold text-brand-forest-800">{puppy.currentWeight}</p>
-                                    </div>
-                                )}
-                                {puppy.expectedWeight && (
-                                    <div className="text-center">
-                                        <p className="text-[10px] font-black uppercase text-brand-forest-500 mb-1">Adult Weight</p>
-                                        <p className="text-xs font-bold text-brand-forest-800">{puppy.expectedWeight}</p>
-                                    </div>
-                                )}
-                                {puppy.height && (
-                                    <div className="text-center">
-                                        <p className="text-[10px] font-black uppercase text-brand-forest-500 mb-1">Height</p>
-                                        <p className="text-xs font-bold text-brand-forest-800">{puppy.height}</p>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* Personality & Compatibility Grid - Left Column */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {puppy.personalityTraits && puppy.personalityTraits.length > 0 && (
-                                <div className="bg-brand-orange-50 p-4 rounded-2xl border border-brand-orange-200">
-                                    <p className="text-xs font-black text-brand-orange-700 uppercase mb-2">Personality</p>
-                                    <div className="flex flex-wrap gap-1">
-                                        {puppy.personalityTraits.map((trait: string) => (
-                                            <span key={trait} className="bg-brand-orange-100 text-brand-orange-700 px-2 py-1 rounded-full text-xs font-bold">
-                                                {trait}
-                                            </span>
-                                        ))}
-                                    </div>
+                        {/* Quick Stats Row */}
+                        <div className="grid grid-cols-3 gap-2">
+                            {puppy.age && (
+                                <div className="bg-white p-3 rounded-xl text-center shadow-sm">
+                                    <Calendar className="w-4 h-4 mx-auto mb-1 text-brand-copper-600" />
+                                    <p className="text-xs font-bold text-brand-black-600">{puppy.age}</p>
                                 </div>
                             )}
-
-                            {puppy.goodWith && puppy.goodWith.length > 0 && (
-                                <div className="bg-green-50 p-4 rounded-2xl border border-green-200">
-                                    <p className="text-xs font-black text-green-700 uppercase mb-2">Good With</p>
-                                    <div className="flex flex-wrap gap-1">
-                                        {puppy.goodWith.includes("Children") && (
-                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Baby className="w-3 h-3" />Kids</span>
-                                        )}
-                                        {puppy.goodWith.includes("Seniors") && (
-                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Users className="w-3 h-3" />Seniors</span>
-                                        )}
-                                        {puppy.goodWith.includes("Other Dogs") && (
-                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Dog className="w-3 h-3" />Dogs</span>
-                                        )}
-                                        {puppy.goodWith.includes("Cats") && (
-                                            <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold"><Cat className="w-3 h-3" />Cats</span>
-                                        )}
-                                    </div>
+                            {puppy.gender && (
+                                <div className="bg-white p-3 rounded-xl text-center shadow-sm">
+                                    <PawPrint className="w-4 h-4 mx-auto mb-1 text-brand-copper-600" />
+                                    <p className="text-xs font-bold text-brand-black-600">{puppy.gender}</p>
+                                </div>
+                            )}
+                            {puppy.sizeCategory && (
+                                <div className="bg-white p-3 rounded-xl text-center shadow-sm">
+                                    <Shield className="w-4 h-4 mx-auto mb-1 text-brand-copper-600" />
+                                    <p className="text-xs font-bold text-brand-black-600">{puppy.sizeCategory}</p>
                                 </div>
                             )}
                         </div>
 
-                        {/* What Dog Needs - Left Column */}
-                        {puppy.whatDogNeeds && (
-                            <div className="bg-brand-forest-900 text-white p-4 rounded-2xl">
-                                <p className="text-xs font-black text-brand-orange-400 uppercase mb-2">What {puppy.name} Needs</p>
-                                <p className="text-sm text-brand-white-100 leading-relaxed whitespace-pre-line">{puppy.whatDogNeeds}</p>
+                        {/* Personality */}
+                        {puppy.personalityTraits && puppy.personalityTraits.length > 0 && (
+                            <div className="bg-white p-4 rounded-xl shadow-sm">
+                                <p className="text-xs font-bold text-brand-black-500 uppercase mb-2">Personality</p>
+                                <div className="flex flex-wrap gap-1">
+                                    {puppy.personalityTraits.map((trait: string) => (
+                                        <span key={trait} className="bg-brand-copper-100 text-brand-copper-700 px-2 py-1 rounded-full text-xs font-bold">
+                                            {trait}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Good With */}
+                        {puppy.goodWith && puppy.goodWith.length > 0 && (
+                            <div className="bg-white p-4 rounded-xl shadow-sm">
+                                <p className="text-xs font-bold text-brand-black-500 uppercase mb-2">Good With</p>
+                                <div className="flex flex-wrap gap-1">
+                                    {puppy.goodWith.includes("Children") && <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold">Kids</span>}
+                                    {puppy.goodWith.includes("Other Dogs") && <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold">Dogs</span>}
+                                    {puppy.goodWith.includes("Cats") && <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold">Cats</span>}
+                                </div>
                             </div>
                         )}
                     </div>
 
-                    {/* Info Column */}
-                    <div className="flex flex-col justify-center">
-                        <span className="inline-block px-4 py-1.5 bg-brand-orange-600 text-white rounded-full text-xs font-black uppercase tracking-wider w-fit mb-4">
-                            {puppy.status}
-                        </span>
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-forest-900 mb-4 sm:mb-6 uppercase tracking-tight">
-                            {puppy.name}
-                        </h1>
-                        
-                        {/* Basic Info Grid */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-                            {puppy.age && (
-                                <div className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 text-center">
-                                    {puppy.age}
-                                </div>
-                            )}
-                            {puppy.gender && (
-                                <div className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 text-center">
-                                    {puppy.gender}
-                                </div>
-                            )}
-                            {puppy.sizeCategory && (
-                                <div className="bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 text-center">
-                                    {puppy.sizeCategory}
-                                </div>
-                            )}
+                    {/* Info Column - 3 cols */}
+                    <div className="lg:col-span-3 space-y-6">
+                        <div>
+                            <h1 className="text-4xl sm:text-5xl font-black text-brand-black-900 uppercase tracking-tight mb-2">
+                                {puppy.name}
+                            </h1>
                             {puppy.location && (
-                                <div className="col-span-2 sm:col-span-3 bg-brand-forest-100 text-brand-forest-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-forest-200 flex items-center justify-center gap-1">
-                                    <Home className="w-3 h-3" /> {puppy.location}
-                                </div>
-                            )}
-                            {puppy.status === "available" && (
-                                <div className="col-span-2 sm:col-span-3 bg-brand-orange-100 text-brand-orange-700 px-4 py-2 rounded-full font-bold text-sm border border-brand-orange-200 text-center">
-                                    Fee: {puppy.fee}
-                                </div>
+                                <p className="text-brand-black-500 flex items-center gap-1">
+                                    <Home className="w-4 h-4" /> {puppy.location}
+                                </p>
                             )}
                         </div>
 
-                        {puppy.status === "available" && (
-                            <div className="mb-6 flex items-center justify-center gap-2 bg-brand-forest-50 p-4 rounded-2xl border border-brand-forest-200">
-                                <Truck className="w-5 h-5 text-brand-orange-600" />
-                                <span className="text-sm font-medium text-brand-forest-700">Final delivery fee depends on your location</span>
+                        {isAvailable && (
+                            <div className="inline-block bg-brand-copper-700 px-6 py-3 rounded-xl">
+                                <p className="text-2xl font-bold text-white">{puppy.fee}</p>
                             </div>
                         )}
 
-                        <div className="mb-8 sm:mb-10">
-                            <h3 className="text-xl sm:text-2xl font-black text-brand-forest-900 mb-4 uppercase">About {puppy.name}</h3>
-                            <p className="text-brand-forest-600 text-base sm:text-lg leading-relaxed italic mb-8">{puppy.description}</p>
-
-                            {/* Why Rehoming */}
-                            {puppy.whyRehoming && (
-                                <>
-                                    <h3 className="text-xl sm:text-2xl font-black text-brand-orange-600 mb-4 uppercase">Why {puppy.name} Is Looking for a New Home</h3>
-                                    <div className="bg-brand-orange-50 p-6 sm:p-8 rounded-3xl border border-brand-orange-200 relative mb-6">
-                                        <Heart className="w-6 h-6 text-brand-orange-600 absolute -top-3 -left-3 bg-white rounded-full p-1 shadow-md" />
-                                        <p className="text-brand-forest-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">{puppy.whyRehoming}</p>
-                                    </div>
-                                </>
-                            )}
-
-                            {/* Special Needs */}
-                            {puppy.specialNeeds && (
-                                <>
-                                    <h3 className="text-xl sm:text-2xl font-black text-brand-forest-900 mb-4 uppercase">Special Needs / Notes</h3>
-                                    <div className="bg-yellow-50 p-6 sm:p-8 rounded-3xl border border-yellow-200">
-                                        <p className="text-brand-forest-700 text-base sm:text-lg leading-relaxed">{puppy.specialNeeds}</p>
-                                    </div>
-                                </>
-                            )}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm">
+                            <p className="text-brand-black-700 leading-relaxed">{puppy.description}</p>
                         </div>
 
-                        {/* CTA / Modal Trigger */}
-                        {puppy.status === "available" ? (
-                            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-brand-forest-100">
-                                <h4 className="text-xl font-black text-brand-forest-900 mb-3 uppercase">Meet {puppy.name}</h4>
-                                <p className="text-brand-forest-600 mb-6">Start the journey by filling out our adoption application.</p>
-                                <Button onClick={() => setIsModalOpen(true)} className="w-full bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full h-14 text-base font-black uppercase tracking-wider">
+                        {puppy.whyRehoming && (
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-brand-copper-500">
+                                <h3 className="font-bold text-brand-black-900 uppercase mb-2">Looking for a New Home</h3>
+                                <p className="text-brand-black-600">{puppy.whyRehoming}</p>
+                            </div>
+                        )}
+
+                        {puppy.whatDogNeeds && (
+                            <div className="bg-white p-6 rounded-2xl shadow-sm">
+                                <h3 className="font-bold text-brand-black-900 uppercase mb-2">What {puppy.name} Needs</h3>
+                                <p className="text-brand-black-600">{puppy.whatDogNeeds}</p>
+                            </div>
+                        )}
+
+                        {puppy.specialNeeds && (
+                            <div className="bg-yellow-50 p-6 rounded-2xl border border-yellow-300">
+                                <h3 className="font-bold text-yellow-800 uppercase mb-2">Special Needs / Notes</h3>
+                                <p className="text-yellow-700">{puppy.specialNeeds}</p>
+                            </div>
+                        )}
+
+                        {isAvailable && (
+                            <div className="bg-white p-6 rounded-2xl shadow-sm">
+                                <p className="text-sm text-brand-black-500 mb-4 flex items-center gap-2">
+                                    <Truck className="w-4 h-4" /> Transport fee varies by location
+                                </p>
+                                <Button onClick={() => setIsModalOpen(true)} className="w-full bg-brand-copper-700 hover:bg-brand-copper-600 rounded-full h-12 font-bold uppercase">
                                     Apply to Adopt
                                 </Button>
                             </div>
-                        ) : puppy.status === "adopted" ? (
-                            <div className="bg-green-50 p-6 sm:p-8 rounded-3xl text-center border border-green-200">
-                                <p className="text-lg sm:text-xl font-bold text-green-700 mb-2">Adopted</p>
-                                <p className="text-brand-forest-600">This beautiful Cavalier has found their forever home!</p>
-                            </div>
-                        ) : (
-                            <div className="bg-brand-forest-100 p-8 rounded-3xl text-center border border-brand-forest-200">
-                                <p className="text-lg sm:text-xl font-bold text-brand-forest-700">Found a forever home.</p>
+                        )}
+
+                        {!isAvailable && (
+                            <div className="bg-green-50 p-6 rounded-2xl border border-green-200 text-center">
+                                <p className="font-bold text-green-700">Adopted</p>
+                                <p className="text-brand-black-500">This German Shepherd has found their forever home!</p>
                             </div>
                         )}
                     </div>
                 </div>
 
-                {/* Related Puppies Section */}
+                {/* Related Puppies - Horizontal scroll */}
                 {relatedPuppies && relatedPuppies.length > 0 && (
-                    <div className="mt-20 sm:mt-32 border-t border-brand-forest-100 pt-16 sm:pt-20">
-                        <div className="flex items-end justify-between mb-8 sm:mb-12 px-4 lg:px-0">
-                            <div>
-                                <h2 className="text-xl sm:text-4xl font-black text-brand-forest-900 tracking-tight uppercase">You Might Also <span className="text-brand-orange-600">Like</span></h2>
-                                <p className="text-brand-forest-600 mt-1 sm:mt-3 text-sm sm:text-lg italic font-medium">More Cavaliers waiting for their forever homes</p>
-                            </div>
-                            <Link href="/puppies" className="text-[10px] sm:text-sm font-black text-brand-orange-600 hover:text-brand-orange-700 transition-all flex items-center gap-1.5 sm:gap-2 group mb-1 uppercase tracking-widest">
-                                View all
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </div>
-                        <div className="flex gap-6 overflow-x-auto pb-4 px-4 snap-x">
-                            {relatedPuppies.map((relatedPuppy) => (
-                                <div key={relatedPuppy.id} className="flex-none w-72 sm:w-80 snap-center">
-                                    <PuppyCard puppy={relatedPuppy} />
+                    <div className="mt-16 pt-12 border-t border-brand-black-200">
+                        <h2 className="text-2xl font-black text-brand-black-900 uppercase mb-8">
+                            You Might Also Like
+                        </h2>
+                        <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
+                            {relatedPuppies.map((p) => (
+                                <div key={p.id} className="flex-none w-72 sm:w-80 snap-center">
+                                    <PuppyCard puppy={p} />
                                 </div>
                             ))}
                         </div>
                     </div>
                 )}
 
-                {/* Modal for Adoption Form */}
-                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={`Adoption Application for ${puppy.name}`}>
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={`Adopt ${puppy.name}`}>
                     <AdoptionForm puppyName={puppy.name} puppyId={puppy.id} onSuccess={() => setIsModalOpen(false)} />
                 </Modal>
+
+                {/* Fullscreen Image Modal */}
+                {isFullscreenOpen && (
+                    <div 
+                        className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+                        onClick={() => setIsFullscreenOpen(false)}
+                    >
+                        <button 
+                            className="absolute top-4 right-4 p-2 text-white hover:bg-white/20 rounded-full"
+                            onClick={() => setIsFullscreenOpen(false)}
+                        >
+                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        {gallery.length > 1 && (
+                            <>
+                                <button 
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white hover:bg-white/20 rounded-full"
+                                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                                >
+                                    <ArrowLeft className="w-6 h-6" />
+                                </button>
+                                <button 
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white hover:bg-white/20 rounded-full"
+                                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                                >
+                                    <ArrowRight className="w-6 h-6" />
+                                </button>
+                            </>
+                        )}
+                        <div className="relative w-full h-full max-w-4xl max-h-[80vh] p-8">
+                            <Image
+                                src={gallery[currentImageIndex]}
+                                alt={`${puppy.name}`}
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm">
+                            {currentImageIndex + 1} / {gallery.length}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -5,8 +5,8 @@ import { PuppiesContainer } from "@/components/PuppiesContainer";
 import { generatePageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageMetadata({
-    title: "Available Cavalier King Charles Spaniel Puppies for Adoption",
-    description: "Browse available Cavalier King Charles Spaniel puppies for adoption. Meet our loving, healthy Cavalier puppies looking for their forever families. Apply today!",
+    title: "Available German Shepherd Puppies for Adoption",
+    description: "Browse available German Shepherd puppies for adoption. Meet our loving, healthy German Shepherd puppies looking for their forever families. Apply today!",
 });
 
 export const revalidate = 0;

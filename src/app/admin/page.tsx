@@ -66,7 +66,7 @@ export default function AdminDashboard() {
         <div>
             {/* Header */}
             <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h1 className="text-2xl font-black text-brand-forest-900 uppercase">
+                <h1 className="text-2xl font-black text-brand-black-900 uppercase">
                     {activeTab === "puppies" && "Manage Puppies"}
                     {activeTab === "applications" && "Applications"}
                     {activeTab === "testimonials" && "Testimonials"}
@@ -74,12 +74,12 @@ export default function AdminDashboard() {
                 </h1>
                 <div className="flex gap-2">
                     {activeTab === "puppies" && !isEditing && (
-                        <Button onClick={() => { setCurrentPuppy(null); setIsEditing(true); }} className="bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase text-sm">
+                        <Button onClick={() => { setCurrentPuppy(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-sm">
                             <Plus className="w-4 h-4 mr-2" /> Add Puppy
                         </Button>
                     )}
                     {activeTab === "testimonials" && !isEditing && (
-                        <Button onClick={() => { setCurrentTestimonial(null); setIsEditing(true); }} className="bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase text-sm">
+                        <Button onClick={() => { setCurrentTestimonial(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-sm">
                             <Plus className="w-4 h-4 mr-2" /> Add Testimonial
                         </Button>
                     )}
@@ -90,7 +90,7 @@ export default function AdminDashboard() {
             {activeTab === "puppies" && (
                 isEditing ? (
                     <div className="bg-white p-6 rounded-3xl shadow-lg">
-                        <h3 className="text-xl font-black text-brand-forest-900 mb-6 uppercase">{currentPuppy ? "Edit Puppy" : "Add New Puppy"}</h3>
+                        <h3 className="text-xl font-black text-brand-black-900 mb-6 uppercase">{currentPuppy ? "Edit Puppy" : "Add New Puppy"}</h3>
                         <PuppyForm
                             initialData={currentPuppy}
                             onSuccess={() => { setIsEditing(false); fetchPuppies(); }}
@@ -102,21 +102,21 @@ export default function AdminDashboard() {
                         {/* Desktop Table - Hidden on mobile */}
                         <div className="hidden md:block overflow-x-auto">
                             <table className="w-full text-left">
-                                <thead className="bg-brand-forest-50">
+                                <thead className="bg-brand-black-50">
                                     <tr>
-                                        <th className="p-4 font-black text-brand-forest-700 uppercase text-xs">Name</th>
-                                        <th className="p-4 font-black text-brand-forest-700 uppercase text-xs">Breed</th>
-                                        <th className="p-4 font-black text-brand-forest-700 uppercase text-xs">Age</th>
-                                        <th className="p-4 font-black text-brand-forest-700 uppercase text-xs">Status</th>
-                                        <th className="p-4 font-black text-brand-forest-700 uppercase text-xs text-right">Actions</th>
+                                        <th className="p-4 font-black text-brand-black-700 uppercase text-xs">Name</th>
+                                        <th className="p-4 font-black text-brand-black-700 uppercase text-xs">Breed</th>
+                                        <th className="p-4 font-black text-brand-black-700 uppercase text-xs">Age</th>
+                                        <th className="p-4 font-black text-brand-black-700 uppercase text-xs">Status</th>
+                                        <th className="p-4 font-black text-brand-black-700 uppercase text-xs text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
                                     {puppies.map((puppy) => (
                                         <tr key={puppy._id} className="hover:bg-gray-50">
-                                            <td className="p-4 font-bold text-brand-forest-900">{puppy.name}</td>
-                                            <td className="p-4 text-brand-forest-600">{puppy.breed}</td>
-                                            <td className="p-4 text-brand-forest-600">{puppy.age}</td>
+                                            <td className="p-4 font-bold text-brand-black-900">{puppy.name}</td>
+                                            <td className="p-4 text-brand-black-600">{puppy.breed}</td>
+                                            <td className="p-4 text-brand-black-600">{puppy.age}</td>
                                             <td className="p-4">
                                                 <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase ${
                                                     puppy.status === 'available' ? 'bg-green-100 text-green-700' :
@@ -150,8 +150,8 @@ export default function AdminDashboard() {
                                 <div key={puppy._id} className="p-4 hover:bg-gray-50">
                                     <div className="flex justify-between items-start mb-2">
                                         <div>
-                                            <p className="font-bold text-brand-forest-900">{puppy.name}</p>
-                                            <p className="text-sm text-brand-forest-600">{puppy.breed} • {puppy.age}</p>
+                                            <p className="font-bold text-brand-black-900">{puppy.name}</p>
+                                            <p className="text-sm text-brand-black-600">{puppy.breed} • {puppy.age}</p>
                                         </div>
                                         <span className={`inline-flex px-2 py-1 rounded-full text-xs font-bold uppercase shrink-0 ${
                                             puppy.status === 'available' ? 'bg-green-100 text-green-700' :
@@ -183,7 +183,7 @@ export default function AdminDashboard() {
             {activeTab === "testimonials" && (
                 isEditing ? (
                     <div className="bg-white p-6 rounded-3xl shadow-lg max-w-2xl">
-                        <h3 className="text-xl font-black text-brand-forest-900 mb-6 uppercase">{currentTestimonial ? "Edit Testimonial" : "Add New Testimonial"}</h3>
+                        <h3 className="text-xl font-black text-brand-black-900 mb-6 uppercase">{currentTestimonial ? "Edit Testimonial" : "Add New Testimonial"}</h3>
                         <TestimonialForm
                             initialData={currentTestimonial}
                             onSuccess={() => { setIsEditing(false); fetchTestimonials(); }}
@@ -196,11 +196,11 @@ export default function AdminDashboard() {
                             <div key={t._id} className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col sm:flex-row justify-between items-stretch sm:items-start gap-3 sm:gap-4">
                                 <div className="flex-1 min-w-0">
                                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                                        <h4 className="font-black text-brand-forest-900 truncate">{t.name}</h4>
+                                        <h4 className="font-black text-brand-black-900 truncate">{t.name}</h4>
                                         <span className="text-gray-400 text-sm">({t.location})</span>
                                         <span className="text-yellow-500 shrink-0">{"★".repeat(t.rating)}</span>
                                     </div>
-                                    <p className="text-brand-forest-600 italic line-clamp-2 sm:line-clamp-none">"{t.text}"</p>
+                                    <p className="text-brand-black-600 italic line-clamp-2 sm:line-clamp-none">"{t.text}"</p>
                                     {t.image && <img src={t.image} alt={t.name} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mt-2 sm:mt-3" />}
                                 </div>
                                 <div className="flex space-x-2 justify-end sm:justify-start">
@@ -234,7 +234,7 @@ export default function AdminDashboard() {
                             <div key={app._id} className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col sm:flex-row justify-between items-stretch sm:items-start gap-3 sm:gap-4">
                                 <div className="flex-1 min-w-0">
                                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                                        <h4 className="font-black text-brand-forest-900 truncate">{app.applicantName}</h4>
+                                        <h4 className="font-black text-brand-black-900 truncate">{app.applicantName}</h4>
                                         <span className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase shrink-0 ${
                                             app.status === 'approved' ? 'bg-green-100 text-green-700' :
                                             app.status === 'rejected' ? 'bg-red-100 text-red-700' :
@@ -243,7 +243,7 @@ export default function AdminDashboard() {
                                             {app.status}
                                         </span>
                                     </div>
-                                    <p className="text-brand-forest-600 text-sm truncate">{app.email}</p>
+                                    <p className="text-brand-black-600 text-sm truncate">{app.email}</p>
                                     <p className="text-gray-400 text-xs mt-1">For: {app.puppyName || "General Inquiry"} • {new Date(app.createdAt).toLocaleDateString()}</p>
                                 </div>
                                 <Button variant="outline" onClick={() => setCurrentApplication(app)} className="rounded-full font-bold text-xs sm:text-sm shrink-0 w-full sm:w-auto">

@@ -136,17 +136,17 @@ export default function NannyImagesPage() {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-2xl font-black text-brand-forest-900 uppercase">Pet Nanny Images</h1>
-                <p className="text-brand-forest-600">Manage images shown on the transport page</p>
+                <h1 className="text-2xl font-black text-brand-black-900 uppercase">Pet Nanny Images</h1>
+                <p className="text-brand-black-600">Manage images shown on the transport page</p>
             </div>
 
             {/* Add New Image */}
             <div className="bg-white p-6 rounded-3xl shadow-lg mb-8">
-                <h3 className="text-lg font-black text-brand-forest-900 uppercase mb-4">Add New Image</h3>
+                <h3 className="text-lg font-black text-brand-black-900 uppercase mb-4">Add New Image</h3>
                 
                 {/* File Upload */}
                 <div className="mb-6">
-                    <Label className="text-xs font-black text-brand-forest-700 uppercase mb-2 block">Upload Image</Label>
+                    <Label className="text-xs font-black text-brand-black-700 uppercase mb-2 block">Upload Image</Label>
                     <div className="flex items-center gap-4">
                         <input
                             type="file"
@@ -158,7 +158,7 @@ export default function NannyImagesPage() {
                         />
                         <label
                             htmlFor="nanny-image-upload"
-                            className="flex items-center gap-2 px-6 py-3 bg-brand-forest-100 hover:bg-brand-forest-200 text-brand-forest-800 font-bold rounded-full cursor-pointer transition-colors"
+                            className="flex items-center gap-2 px-6 py-3 bg-brand-black-100 hover:bg-brand-black-200 text-brand-black-800 font-bold rounded-full cursor-pointer transition-colors"
                         >
                             {uploading ? (
                                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -167,7 +167,7 @@ export default function NannyImagesPage() {
                             )}
                             {uploading ? "Uploading..." : "Choose File"}
                         </label>
-                        <span className="text-sm text-brand-forest-600">or paste a URL below</span>
+                        <span className="text-sm text-brand-black-600">or paste a URL below</span>
                     </div>
                 </div>
 
@@ -175,7 +175,7 @@ export default function NannyImagesPage() {
                 <form onSubmit={handleAddImage} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="md:col-span-2">
-                            <Label className="text-xs font-black text-brand-forest-700 uppercase">Image URL</Label>
+                            <Label className="text-xs font-black text-brand-black-700 uppercase">Image URL</Label>
                             <Input
                                 value={newImageUrl}
                                 onChange={(e) => setNewImageUrl(e.target.value)}
@@ -192,12 +192,12 @@ export default function NannyImagesPage() {
                                     onChange={(e) => setMakeFeatured(e.target.checked)}
                                     className="w-5 h-5 rounded"
                                 />
-                                <Label htmlFor="makeFeatured" className="text-sm font-bold text-brand-forest-700">Set as Featured</Label>
+                                <Label htmlFor="makeFeatured" className="text-sm font-bold text-brand-black-700">Set as Featured</Label>
                             </div>
                             <Button 
                                 type="submit" 
                                 disabled={loading || !newImageUrl.trim()}
-                                className="bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase"
+                                className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase"
                             >
                                 <Plus className="w-4 h-4 mr-2" /> Add
                             </Button>
@@ -209,8 +209,8 @@ export default function NannyImagesPage() {
             {/* Featured Image */}
             {featuredImage && (
                 <div className="mb-8">
-                    <h3 className="text-lg font-black text-brand-forest-900 uppercase mb-4 flex items-center gap-2">
-                        <Star className="w-5 h-5 text-brand-orange-600" />
+                    <h3 className="text-lg font-black text-brand-black-900 uppercase mb-4 flex items-center gap-2">
+                        <Star className="w-5 h-5 text-brand-copper-600" />
                         Featured Image
                     </h3>
                     <div className="bg-white p-4 rounded-3xl shadow-lg">
@@ -223,7 +223,7 @@ export default function NannyImagesPage() {
                             />
                         </div>
                         <div className="flex justify-between items-center mt-4">
-                            <span className="text-sm font-bold text-brand-forest-600">Used on homepage hero</span>
+                            <span className="text-sm font-bold text-brand-black-600">Used on homepage hero</span>
                             <div className="flex gap-2">
                                 <Button
                                     variant="outline"
@@ -247,8 +247,8 @@ export default function NannyImagesPage() {
 
             {/* Other Images */}
             <div>
-                <h3 className="text-lg font-black text-brand-forest-900 uppercase mb-4 flex items-center gap-2">
-                    <ImageIcon className="w-5 h-5 text-brand-forest-700" />
+                <h3 className="text-lg font-black text-brand-black-900 uppercase mb-4 flex items-center gap-2">
+                    <ImageIcon className="w-5 h-5 text-brand-black-700" />
                     All Images ({otherImages.length})
                 </h3>
                 

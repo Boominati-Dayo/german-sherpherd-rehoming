@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Heart, Send } from "lucide-react";
+import { Mail, Phone, Heart, Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -50,43 +50,53 @@ export function ContactForm() {
     };
 
     return (
-        <section className="py-20 -mt-10">
+        <section className="py-20 -mt-10 relative z-20">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Contact Info - Combined Card */}
+                    {/* Contact Info */}
                     <div className="space-y-6">
-                        <div className="bg-white rounded-3xl p-8 shadow-lg">
-                            <h3 className="text-lg font-black text-brand-forest-900 uppercase mb-6">Contact Info</h3>
-                            <div className="space-y-4">
+                        <div className="bg-brand-black-900 rounded-3xl p-8 border border-brand-copper-700/30">
+                            <h3 className="text-lg font-black text-white uppercase mb-6">Get In Touch</h3>
+                            <div className="space-y-5">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-brand-orange-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 bg-brand-copper-700 rounded-2xl flex items-center justify-center flex-shrink-0">
                                         <Mail className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black text-brand-forest-600 uppercase">Email</p>
-                                        <p className="text-brand-forest-800 font-medium break-all">admin@cavalierkingcharlesrehomingcenter.com</p>
+                                        <p className="text-xs font-bold text-brand-copper-400 uppercase">Email</p>
+                                        <p className="text-white font-medium break-all">admin@germanshepherdrehoming.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-brand-orange-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 bg-brand-copper-700 rounded-2xl flex items-center justify-center flex-shrink-0">
                                         <Phone className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black text-brand-forest-600 uppercase">Phone</p>
-                                        <p className="text-brand-forest-800 font-medium">+1 (504) 358-1381</p>
-                                        <p className="text-xs text-brand-forest-500">Text messages only</p>
+                                        <p className="text-xs font-bold text-brand-copper-400 uppercase">Phone</p>
+                                        <p className="text-white font-medium">+1 (504) 358-1381</p>
+                                        <p className="text-xs text-brand-copper-300">Text messages only</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-brand-forest-900 rounded-3xl p-8 text-white">
-                            <Heart className="w-10 h-10 text-brand-orange-500 mb-4" />
-                            <h3 className="text-lg font-black uppercase mb-2">Our Promise</h3>
-                            <p className="text-white/70 font-medium italic">
-                                "Finding the perfect home for every puppy is not just our job, it's our promise to every family we work with."
+                        <div className="bg-brand-copper-700 rounded-3xl p-8 text-white">
+                            <MessageCircle className="w-10 h-10 text-white/80 mb-4" />
+                            <h3 className="text-lg font-black uppercase mb-2">We Are Here to Help</h3>
+                            <p className="text-white/80 font-medium">
+                                "Every family deserves the perfect German Shepherd companion. Let's find yours together."
                             </p>
-                            <p className="mt-4 font-black text-brand-orange-500">— The Team</p>
+                            <p className="mt-4 font-black text-white">— The Team</p>
+                        </div>
+
+                        <div className="bg-brand-black-800 rounded-3xl p-8 border border-brand-copper-600/20">
+                            <div className="text-center">
+                                <Heart className="w-10 h-10 text-brand-copper-500 mx-auto mb-3" />
+                                <h3 className="text-lg font-black text-white uppercase mb-2">Our Promise</h3>
+                                <p className="text-brand-copper-200 font-medium italic text-sm">
+                                    "We match every German Shepherd with their perfect forever home."
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -98,18 +108,18 @@ export function ContactForm() {
                                     key="success"
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className="bg-white p-10 rounded-3xl shadow-lg text-center min-h-[400px] flex flex-col items-center justify-center"
+                                    className="bg-brand-black-900 border-2 border-brand-copper-500 p-10 rounded-3xl text-center min-h-[400px] flex flex-col items-center justify-center"
                                 >
-                                    <div className="w-20 h-20 bg-brand-orange-100 rounded-full flex items-center justify-center mb-6">
-                                        <Send className="w-10 h-10 text-brand-orange-700" />
+                                    <div className="w-20 h-20 bg-brand-copper-700 rounded-full flex items-center justify-center mb-6">
+                                        <Send className="w-10 h-10 text-white" />
                                     </div>
-                                    <h2 className="text-3xl font-black text-brand-forest-900 mb-4 uppercase">Message Sent!</h2>
-                                    <p className="text-brand-forest-600 mb-8 max-w-md">
+                                    <h2 className="text-3xl font-black text-white mb-4 uppercase">Message Sent!</h2>
+                                    <p className="text-brand-copper-200 mb-8 max-w-md">
                                         Thank you for reaching out. We will get back to you within 24 hours.
                                     </p>
                                     <Button
                                         onClick={() => setSubmitted(false)}
-                                        className="bg-brand-forest-900 text-white rounded-full px-8 py-3 font-black uppercase"
+                                        className="bg-brand-copper-700 text-white rounded-full px-8 py-3 font-black uppercase"
                                     >
                                         Send Another
                                     </Button>
@@ -120,56 +130,58 @@ export function ContactForm() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
-                                    className="bg-white p-8 md:p-10 rounded-3xl shadow-lg"
+                                    className="bg-brand-black-900 border-2 border-brand-copper-600/30 p-8 md:p-10 rounded-3xl"
                                 >
-                                    <h2 className="text-2xl font-black text-brand-forest-900 mb-8 uppercase">Send a Message</h2>
+                                    <h2 className="text-2xl font-black text-white mb-2 uppercase">Send Us a Message</h2>
+                                    <p className="text-brand-copper-300 mb-8">Have questions? We'd love to hear from you.</p>
+                                    
                                     <form onSubmit={handleSubmit} className="space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-2">
-                                                <Label htmlFor="name" className="text-xs font-black text-brand-forest-700 uppercase">Your Name</Label>
+                                                <Label htmlFor="name" className="text-xs font-black text-brand-copper-300 uppercase">Your Name</Label>
                                                 <Input 
                                                     id="name" 
                                                     placeholder="John Doe" 
                                                     value={formData.name} 
                                                     onChange={handleChange} 
-                                                    className="rounded-xl border-brand-forest-200 h-12 focus:ring-brand-orange-500" 
+                                                    className="bg-brand-black-800 border-brand-copper-700/30 text-white placeholder:text-brand-copper-400 h-12 focus:ring-brand-copper-500 rounded-xl" 
                                                     required 
                                                 />
                                             </div>
                                             <div className="space-y-2">
-                                                <Label htmlFor="email" className="text-xs font-black text-brand-forest-700 uppercase">Email</Label>
+                                                <Label htmlFor="email" className="text-xs font-black text-brand-copper-300 uppercase">Email</Label>
                                                 <Input 
                                                     id="email" 
                                                     type="email" 
                                                     placeholder="john@example.com" 
                                                     value={formData.email} 
                                                     onChange={handleChange} 
-                                                    className="rounded-xl border-brand-forest-200 h-12 focus:ring-brand-orange-500" 
+                                                    className="bg-brand-black-800 border-brand-copper-700/30 text-white placeholder:text-brand-copper-400 h-12 focus:ring-brand-copper-500 rounded-xl" 
                                                     required 
                                                 />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="subject" className="text-xs font-black text-brand-forest-700 uppercase">Subject</Label>
+                                            <Label htmlFor="subject" className="text-xs font-black text-brand-copper-300 uppercase">Subject</Label>
                                             <Input 
                                                 id="subject" 
                                                 placeholder="General Inquiry / Adoption / Shipping" 
                                                 value={formData.subject} 
                                                 onChange={handleChange} 
-                                                className="rounded-xl border-brand-forest-200 h-12 focus:ring-brand-orange-500" 
+                                                className="bg-brand-black-800 border-brand-copper-700/30 text-white placeholder:text-brand-copper-400 h-12 focus:ring-brand-copper-500 rounded-xl" 
                                                 required 
                                             />
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="message" className="text-xs font-black text-brand-forest-700 uppercase">Message</Label>
+                                            <Label htmlFor="message" className="text-xs font-black text-brand-copper-300 uppercase">Message</Label>
                                             <Textarea 
                                                 id="message" 
-                                                placeholder="Tell me about yourself and what you're looking for..." 
+                                                placeholder="Tell us about yourself and what you're looking for..." 
                                                 value={formData.message} 
                                                 onChange={handleChange} 
-                                                className="rounded-xl border-brand-forest-200 min-h-[150px] focus:ring-brand-orange-500" 
+                                                className="bg-brand-black-800 border-brand-copper-700/30 text-white placeholder:text-brand-copper-400 min-h-[150px] focus:ring-brand-copper-500 rounded-xl" 
                                                 required 
                                             />
                                         </div>
@@ -177,7 +189,7 @@ export function ContactForm() {
                                         <Button 
                                             type="submit" 
                                             disabled={loading}
-                                            className="w-full h-14 bg-brand-orange-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-orange-800 transition-all"
+                                            className="w-full h-14 bg-brand-copper-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-copper-600 transition-all"
                                         >
                                             {loading ? "Sending..." : "Send Message"}
                                         </Button>

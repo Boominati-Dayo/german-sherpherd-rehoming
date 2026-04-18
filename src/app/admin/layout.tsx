@@ -39,7 +39,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Mobile sidebar toggle */}
-            <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-brand-forest-900 text-white px-4 py-3 flex items-center justify-between">
+            <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-brand-black-900 text-white px-4 py-3 flex items-center justify-between">
                 <button
                     onClick={() => setSidebarOpen(true)}
                     className="p-2"
@@ -64,7 +64,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             )}
 
             {/* Sidebar */}
-            <aside className={`fixed top-0 left-0 h-full w-64 bg-brand-forest-900 text-white z-50 transform transition-transform duration-300 lg:translate-x-0 ${
+            <aside className={`fixed top-0 left-0 h-full w-64 bg-brand-black-900 text-white z-50 transform transition-transform duration-300 lg:translate-x-0 ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}>
                 <div className="flex flex-col h-full">
@@ -79,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
-                        <p className="text-white/60 text-sm mt-1">Cavalier King Charles Rehoming Center</p>
+                        <p className="text-white/60 text-sm mt-1">German Shepherd Rehoming Center</p>
                     </div>
 
                     {/* Navigation - Scrollable */}

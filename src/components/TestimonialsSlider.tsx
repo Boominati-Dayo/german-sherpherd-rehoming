@@ -65,7 +65,7 @@ export function TestimonialsSlider({ testimonials }: TestimonialsSliderProps) {
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: current.image ? `url(${current.image})` : undefined }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-forest-900 via-brand-forest-900/70 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-black-900 via-brand-black-900/70 to-transparent" />
                     <div className="absolute inset-0 flex items-end pb-8 px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ export function TestimonialsSlider({ testimonials }: TestimonialsSliderProps) {
                             className="absolute inset-0 bg-cover bg-center"
                             style={{ backgroundImage: next.image ? `url(${next.image})` : undefined }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-brand-forest-900 via-brand-forest-900/70 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-brand-black-900 via-brand-black-900/70 to-transparent" />
                         <div className="absolute inset-0 flex items-end pb-8 px-8">
                             <div className="w-full">
                                 <div className="flex gap-1 mb-3">
@@ -132,7 +132,7 @@ export function TestimonialsSlider({ testimonials }: TestimonialsSliderProps) {
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: current.image ? `url(${current.image})` : undefined }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-forest-900 via-brand-forest-900/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black-900 via-brand-black-900/70 to-transparent" />
                 <div className="absolute inset-0 flex items-end pb-8 px-6">
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -183,10 +183,10 @@ export function TestimonialsSlider({ testimonials }: TestimonialsSliderProps) {
             {/* Navigation for large screens */}
             {testimonials.length > 1 && (
                 <div className="hidden lg:flex justify-center gap-4 mt-6">
-                    <button onClick={prevSlide} className="p-3 rounded-full bg-brand-forest-100 text-brand-forest-700 hover:bg-brand-forest-200">
+                    <button onClick={prevSlide} className="p-3 rounded-full bg-brand-black-100 text-brand-black-700 hover:bg-brand-black-200">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <button onClick={nextSlide} className="p-3 rounded-full bg-brand-forest-100 text-brand-forest-700 hover:bg-brand-forest-200">
+                    <button onClick={nextSlide} className="p-3 rounded-full bg-brand-black-100 text-brand-black-700 hover:bg-brand-black-200">
                         <ChevronRight className="w-5 h-5" />
                     </button>
                 </div>

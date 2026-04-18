@@ -25,7 +25,7 @@ export async function sendMail({ to, subject, text, html, replyTo }: MailOptions
 
     try {
         const info = await transporter.sendMail({
-            from: `"Cavalier King Charles Rehoming Center" <${process.env.SMTP_USER}>`,
+            from: `"German Shepherd Rehoming Center" <${process.env.SMTP_USER}>`,
             to,
             subject,
             text,
@@ -46,10 +46,10 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
     message?: string;
     subject?: string;
 }) {
-    const brandColor = "#c45210";
-    const brandColorLight = "#fde4d0";
-    const logoText = "Cavalier King Charles Rehoming Center";
-    const logoUrl = "https://cavalierkingcharlesrehomingcenter.com/CRCRehomingCenterLogo.png";
+    const brandColor = "#b87333";
+    const brandColorLight = "#fcecd0";
+    const logoText = "German Shepherd Rehoming Center";
+    const logoUrl = "https://gsrcenter.com/logo.png";
 
     let headerContent = "";
     let mainContent = "";
@@ -57,7 +57,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
     switch (type) {
         case "application_submitted":
             headerContent = `
-                <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a8460d 100%); padding: 30px 40px; text-align: center;">
+                <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a06b35 100%); padding: 30px 40px; text-align: center;">
                     <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="display: block; height: 60px; width: 200px; max-width: 100%; margin: 0 auto 15px auto;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">Application Received</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
@@ -65,13 +65,13 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
             `;
             mainContent = `
                 <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Hi${data.name ? ` ${data.name}` : ""},</p>
-                <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Thank you for your interest in <strong>${data.puppyName || "a Cavalier"}</strong>!</p>
+                <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Thank you for your interest in <strong>${data.puppyName || "a German Shepherd"}</strong>!</p>
                 <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Your application has been successfully submitted. Our team will personally review your application and get back to you within <strong>24-48 hours</strong>.</p>
                 <div style="background: ${brandColorLight}; padding: 20px; border-radius: 12px; margin: 30px 0;">
                     <p style="margin: 0; font-size: 14px; color: #666;">While you wait, feel free to:</p>
                     <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 14px; color: #666;">
                         <li>Prepare your home for your new furry family member</li>
-                        <li>Research Cavalier King Charles Spaniel care</li>
+                        <li>Research German Shepherd care</li>
                         <li>Gather any additional documents that may be needed</li>
                     </ul>
                 </div>
@@ -88,7 +88,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
             `;
             mainContent = `
                 <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Hi${data.name ? ` ${data.name}` : ""},</p>
-                <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Great news! Your application to adopt <strong>${data.puppyName || "a Cavalier"}</strong> has been <strong style="color: #22c55e;">APPROVED</strong>!</p>
+                <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Great news! Your application to adopt <strong>${data.puppyName || "a German Shepherd"}</strong> has been <strong style="color: #22c55e;">APPROVED</strong>!</p>
                 ${data.message ? `<div style="background: #f0fdf4; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #22c55e;"><p style="margin: 0; font-size: 15px; color: #333;">${data.message}</p></div>` : ""}
                 <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Please reply to this email to discuss the next steps, including adoption fees and pickup/shipping arrangements.</p>
                 <p style="font-size: 16px; color: #333; margin-bottom: 0;">We look forward to welcoming your new furry family member!</p>
@@ -114,7 +114,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
 
         case "contact_submitted":
             headerContent = `
-                <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a8460d 100%); padding: 30px 40px; text-align: center;">
+                <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a06b35 100%); padding: 30px 40px; text-align: center;">
                     <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="display: block; height: 60px; width: 200px; max-width: 100%; margin: 0 auto 15px auto;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">Message Received</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
@@ -131,7 +131,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
 
         case "admin_reply":
             headerContent = `
-                <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a8460d 100%); padding: 30px 40px; text-align: center;">
+                <div style="background: linear-gradient(135deg, ${brandColor} 0%, #a06b35 100%); padding: 30px 40px; text-align: center;">
                     <img src="${logoUrl}" alt="${logoText}" width="200" height="60" style="display: block; height: 60px; width: 200px; max-width: 100%; margin: 0 auto 15px auto;" />
                     <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800;">New Message</h1>
                     <p style="color: white; opacity: 0.9; margin: 10px 0 0 0;">${logoText}</p>
@@ -154,7 +154,7 @@ export function getEmailTemplate(type: "application_submitted" | "application_ap
         <div style="background: #f5f5f5; padding: 30px; text-align: center;">
             <p style="margin: 0; font-size: 13px; color: #999;">
                 © ${new Date().getFullYear()} ${logoText}. All rights reserved.<br/>
-                <span style="color: ${brandColor};">Made with love for Cavaliers</span>
+                <span style="color: ${brandColor};">Made with love for German Shepherds</span>
             </p>
         </div>
     `;

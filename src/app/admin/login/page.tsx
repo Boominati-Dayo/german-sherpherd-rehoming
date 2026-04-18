@@ -63,21 +63,21 @@ export default function AdminLogin() {
 
     if (isAuthenticated || initialCheck) {
         return (
-            <div className="flex bg-brand-forest-900 min-h-screen items-center justify-center p-4">
+            <div className="flex bg-brand-black-900 min-h-screen items-center justify-center p-4">
                 <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-3xl shadow-2xl text-center">
-                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-orange-700" />
-                    <p className="text-brand-forest-600">Checking authentication...</p>
+                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-copper-700" />
+                    <p className="text-brand-black-600">Checking authentication...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="flex bg-brand-forest-900 min-h-screen items-center justify-center p-4">
+        <div className="flex bg-brand-black-900 min-h-screen items-center justify-center p-4">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-3xl shadow-2xl">
                 <div className="text-center">
-                    <h1 className="text-2xl font-black text-brand-forest-900 uppercase tracking-tight">Admin Login</h1>
-                    <p className="text-brand-forest-600 text-sm mt-2">Enter your credentials to access the dashboard</p>
+                    <h1 className="text-2xl font-black text-brand-black-900 uppercase tracking-tight">Admin Login</h1>
+                    <p className="text-brand-black-600 text-sm mt-2">Enter your credentials to access the dashboard</p>
                 </div>
                 
                 {success && (
@@ -96,7 +96,7 @@ export default function AdminLogin() {
                 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="email" className="text-xs font-black text-brand-forest-700 uppercase">Email</Label>
+                        <Label htmlFor="email" className="text-xs font-black text-brand-black-700 uppercase">Email</Label>
                         <Input
                             id="email"
                             type="email"
@@ -104,11 +104,11 @@ export default function AdminLogin() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             disabled={loading || success}
-                            className="rounded-xl h-12 border-brand-forest-200"
+                            className="rounded-xl h-12 border-brand-black-200"
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="password" className="text-xs font-black text-brand-forest-700 uppercase">Password</Label>
+                        <Label htmlFor="password" className="text-xs font-black text-brand-black-700 uppercase">Password</Label>
                         <Input
                             id="password"
                             type="password"
@@ -116,13 +116,13 @@ export default function AdminLogin() {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             disabled={loading || success}
-                            className="rounded-xl h-12 border-brand-forest-200"
+                            className="rounded-xl h-12 border-brand-black-200"
                         />
                     </div>
                     <Button 
                         type="submit" 
                         disabled={loading || success}
-                        className="w-full h-12 bg-brand-orange-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-orange-800 disabled:opacity-50"
+                        className="w-full h-12 bg-brand-copper-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-copper-800 disabled:opacity-50"
                     >
                         {loading ? (
                             <>
@@ -140,10 +140,10 @@ export default function AdminLogin() {
                     </Button>
                 </form>
                 
-                <div className="pt-4 border-t border-brand-forest-100">
+                <div className="pt-4 border-t border-brand-black-100">
                     <Link 
                         href="/" 
-                        className="flex items-center justify-center gap-2 text-brand-forest-600 hover:text-brand-orange-700 font-medium transition-colors"
+                        className="flex items-center justify-center gap-2 text-brand-black-600 hover:text-brand-copper-700 font-medium transition-colors"
                     >
                         <Home className="w-4 h-4" />
                         Back to Main Site

@@ -59,7 +59,7 @@ export async function POST(request: Request) {
         try {
             await sendMail({
                 to: application.email,
-                subject: `Application Submitted - ${application.puppyName} | Cavalier King Charles Rehoming Center`,
+                subject: `Application Submitted - ${application.puppyName} | German Shepherd Rehoming Center`,
                 text: `Thank you for your application! Our team will review it within 24-48 hours.`,
                 html: getEmailTemplate("application_submitted", {
                     name: application.applicantName,
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
         }
 
         // Send notification to admin
-        const adminEmail = process.env.ADMIN_EMAIL || "admin@cavalierkingcharlesrehomingcenter.com";
+        const adminEmail = process.env.ADMIN_EMAIL || "admin@gsrcenter.com";
         
         const labels: Record<string, string> = {
             homeLifestyle: "Home & Lifestyle",
@@ -110,8 +110,8 @@ export async function POST(request: Request) {
                 text: `New application received from ${application.applicantName}. Check admin dashboard for details.`,
                 html: `
                     <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px;">
-                        <h2 style="color: #c45210;">New Adoption Application</h2>
-                        <div style="background: #fff7ed; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #c45210;">
+                        <h2 style="color: #b87333;">New Adoption Application</h2>
+                        <div style="background: #fef6eb; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #b87333;">
                             <h3 style="margin-top: 0;">Applicant Details</h3>
                             <p><strong>Name:</strong> ${application.applicantName}</p>
                             <p><strong>Email:</strong> ${application.email}</p>
@@ -125,7 +125,7 @@ export async function POST(request: Request) {
                         <h3>Application Answers</h3>
                         ${answersHtml}
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
-                        <a href="${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}/admin/applications" style="background: #c45210; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">View in Admin Dashboard</a>
+                        <a href="${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}/admin/applications" style="background: #b87333; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">View in Admin Dashboard</a>
                     </div>
                 `
             });

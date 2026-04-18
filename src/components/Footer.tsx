@@ -4,7 +4,7 @@ import { PawPrint, Mail, Phone, Bone, Dog } from "lucide-react";
 
 export function Footer() {
     return (
-        <footer className="bg-brand-forest-900 text-white pt-20 pb-8 relative overflow-hidden">
+        <footer className="bg-brand-black-900 text-white pt-20 pb-8 relative overflow-hidden">
             {/* Dog-themed Pattern */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-10 left-10">
@@ -36,50 +36,50 @@ export function Footer() {
                             <div className="relative w-48 h-16">
                                 <Image 
                                     src="/assets/CRCRehomingCenterLogo.png" 
-                                    alt="Cavalier King Charles Rehoming Center"
+                                    alt="German Shepherd Rehoming Center"
                                     fill
                                     className="object-contain"
                                 />
                             </div>
                         </Link>
                         <p className="text-white/70 leading-relaxed font-medium italic">
-                            "Connecting loving families with their perfect Cavalier companions."
+                            "Connecting loving families with their perfect German Shepherd companions."
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-brand-orange-500">Quick Links</h4>
+                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-brand-copper-500">Quick Links</h4>
                         <ul className="space-y-3">
-                            <li><Link href="/" className="text-white/70 hover:text-brand-orange-500 transition-colors font-medium">Home</Link></li>
-                            <li><Link href="/about" className="text-white/70 hover:text-brand-orange-500 transition-colors font-medium">About Us</Link></li>
-                            <li><Link href="/puppies" className="text-white/70 hover:text-brand-orange-500 transition-colors font-medium">Available Cavaliers</Link></li>
-                            <li><Link href="/contact" className="text-white/70 hover:text-brand-orange-500 transition-colors font-medium">Contact</Link></li>
+                            <li><Link href="/" className="text-white/70 hover:text-brand-copper-500 transition-colors font-medium">Home</Link></li>
+                            <li><Link href="/about" className="text-white/70 hover:text-brand-copper-500 transition-colors font-medium">About Us</Link></li>
+                            <li><Link href="/puppies" className="text-white/70 hover:text-brand-copper-500 transition-colors font-medium">Available German Shepherds</Link></li>
+                            <li><Link href="/contact" className="text-white/70 hover:text-brand-copper-500 transition-colors font-medium">Contact</Link></li>
                         </ul>
                     </div>
 
                     {/* Resources */}
                     <div>
-                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-brand-orange-500">Resources</h4>
+                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-brand-copper-500">Resources</h4>
                         <ul className="space-y-3">
-                            <li><Link href="/terms" className="text-white/70 hover:text-brand-orange-500 transition-colors font-medium">Terms of Service</Link></li>
-                            <li><Link href="/privacy" className="text-white/70 hover:text-brand-orange-500 transition-colors font-medium">Privacy Policy</Link></li>
+                            <li><Link href="/terms" className="text-white/70 hover:text-brand-copper-500 transition-colors font-medium">Terms of Service</Link></li>
+                            <li><Link href="/privacy" className="text-white/70 hover:text-brand-copper-500 transition-colors font-medium">Privacy Policy</Link></li>
                         </ul>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-brand-orange-500">Get in Touch</h4>
+                        <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-brand-copper-500">Get in Touch</h4>
                         <ul className="space-y-4">
                             <li className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-brand-orange-700/20 rounded-full flex items-center justify-center">
-                                    <Mail className="w-5 h-5 text-brand-orange-500" />
+                                <div className="w-10 h-10 bg-brand-copper-700/20 rounded-full flex items-center justify-center">
+                                    <Mail className="w-5 h-5 text-brand-copper-500" />
                                 </div>
-                                <span className="text-white/70 font-medium break-all">admin@cavalierkingcharlesrehomingcenter.com</span>
+                                <span className="text-white/70 font-medium break-all">admin@gsrcenter.com</span>
                             </li>
                             <li className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-brand-orange-700/20 rounded-full flex items-center justify-center">
-                                    <Phone className="w-5 h-5 text-brand-orange-500" />
+                                <div className="w-10 h-10 bg-brand-copper-700/20 rounded-full flex items-center justify-center">
+                                    <Phone className="w-5 h-5 text-brand-copper-500" />
                                 </div>
                                 <div>
                                     <span className="text-white/70 font-medium block">+1 (504) 358-1381</span>
@@ -93,7 +93,7 @@ export function Footer() {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/10">
                     <p className="text-center text-xs font-medium text-white/50">
-                        &copy; {new Date().getFullYear()} Cavalier King Charles Rehoming Center. All rights reserved.
+                        &copy; {new Date().getFullYear()} German Shepherd Rehoming Center. All rights reserved.
                     </p>
                 </div>
             </div>

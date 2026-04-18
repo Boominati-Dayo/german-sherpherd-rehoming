@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             message,
         });
 
-        const adminEmail = process.env.ADMIN_EMAIL || "admin@cavalierkingcharlesrehomingcenter.com";
+        const adminEmail = process.env.ADMIN_EMAIL || "admin@gsrcenter.com";
 
         await sendMail({
             to: adminEmail,
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
             `,
             html: `
                 <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                    <h2 style="color: #c45210;">New Contact Form Submission</h2>
+                    <h2 style="color: #b87333;">New Contact Form Submission</h2>
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
                     <p><strong>Phone:</strong> ${phone || "N/A"}</p>
@@ -49,8 +49,8 @@ export async function POST(request: Request) {
 
         await sendMail({
             to: email,
-            subject: `Thank You for Reaching Out | Cavalier King Charles Rehoming Center`,
-            text: `Hi ${name},\n\nThank you for contacting Cavalier King Charles Rehoming Center! We will get back to you within 24 hours.\n\nBest regards,\nCavalier King Charles Rehoming Center`,
+            subject: `Thank You for Reaching Out | German Shepherd Rehoming Center`,
+            text: `Hi ${name},\n\nThank you for contacting German Shepherd Rehoming Center! We will get back to you within 24 hours.\n\nBest regards,\nGerman Shepherd Rehoming Center`,
             html: getEmailTemplate("contact_submitted", {
                 name,
                 message

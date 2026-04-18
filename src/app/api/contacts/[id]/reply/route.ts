@@ -19,7 +19,7 @@ export async function POST(
 
         await sendMail({
             to: contact.email,
-            subject: `Re: ${contact.subject || "Your inquiry"} - Cavalier King Charles Rehoming Center`,
+            subject: `Re: ${contact.subject || "Your inquiry"} - German Shepherd Rehoming Center`,
             text: message,
             html: getEmailTemplate("admin_reply", {
                 name: contact.name,

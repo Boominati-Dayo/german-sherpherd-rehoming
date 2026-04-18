@@ -1,63 +1,44 @@
 import { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://cavalierkingcharlesrehomingcenter.com";
+const siteUrl = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const seoConfig = {
-    siteName: "Cavalier King Charles Rehoming Center",
-    siteNameShort: "CKC Rehoming Center",
-    ownerName: "Cavalier King Charles Rehoming Center",
-    tagline: "Finding Loving Forever Homes for Cavalier King Charles Spaniels",
-    description: "Cavalier King Charles Rehoming Center - Trusted rehoming service for Cavalier King Charles Spaniels. We connect loving families with healthy, vet-checked Cavalier puppies. Responsible adoption with health guarantees.",
+    siteName: "German Shepherd Rehoming Center",
+    siteNameShort: "GSR Center",
+    ownerName: "German Shepherd Rehoming Center",
+    tagline: "Finding Loving Forever Homes for German Shepherds",
+    description: "German Shepherd Rehoming Center - Trusted rehoming service for German Shepherds. We connect loving families with healthy, vet-checked German Shepherd puppies. Responsible adoption with health guarantees.",
     keywords: [
-        // Full name variations
-        "Cavalier King Charles Rehoming Center",
-        "Cavalier King Charles Spaniel Rehoming Center",
-        "CKC Rehoming Center",
-        // Full name keywords
-        "Cavalier King Charles Spaniel adoption",
-        "Cavalier King Charles Spaniel rehoming",
-        "Cavalier King Charles Spaniel puppies for adoption",
-        "Cavalier King Charles Spaniel rescue",
-        "Cavalier King Charles Spaniel puppies",
-        // Short name variations
-        "Cavalier adoption",
-        "Cavalier rehoming",
-        "Cavalier rescue",
-        "Cavalier puppies",
-        "Cavalier puppy adoption",
-        "Cavalier King Charles adoption",
-        // Specific breed terms
-        "King Charles Spaniel",
-        "King Charles Spaniel adoption",
-        "King Charles Spaniel puppies",
-        "Cavalier Spaniel",
-        "Cavalier dog",
-        "Cavalier King Charles dog",
-        // Geographic & service terms
-        "Cavalier King Charles Spaniel near me",
-        "Cavalier puppy for adoption near me",
-        "Cavalier rescue near me",
-        " Cavalier King Charles Spaniel adoption center",
-        "Cavalier rehoming service",
-        // Health & quality terms
-        " Cavalier King Charles Spaniel health guaranteed",
-        "vet checked Cavalier puppies",
-        "healthy Cavalier puppies for adoption",
-        "registered Cavalier King Charles Spaniel",
-        // Family & companion terms
-        "family Cavalier puppies",
-        "Cavalier companion dog",
-        "Cavalier King Charles Spaniel family pet",
-        // Action terms
-        "adopt a Cavalier",
-        "rehome a Cavalier",
-        "find a Cavalier puppy",
-        "Cavalier King Charles Spaniel for sale",
+        "German Shepherd Rehoming Center",
+        "German Shepherd puppies rehoming",
+        "GSR Rehoming Center",
+        "German Shepherd adoption",
+        "German Shepherd rehoming",
+        "German Shepherd rescue",
+        "German Shepherd puppies",
+        "German Shepherd puppies for adoption",
+        "German Shepherd puppy adoption",
+        "German Shepherd adoption near me",
+        "German Shepherd puppy for adoption near me",
+        "German Shepherd rescue near me",
+        "German Shepherd rehoming service",
+        "German Shepherd puppies near me",
+        "German Shepherd health guaranteed",
+        "vet checked German Shepherd puppies",
+        "healthy German Shepherd puppies for adoption",
+        "registered German Shepherd puppies",
+        "family German Shepherd puppies",
+        "German Shepherd companion dog",
+        "German Shepherd family pet",
+        "adopt a German Shepherd",
+        "rehome a German Shepherd",
+        "find a German Shepherd puppy",
+        "German Shepherd for sale",
     ],
     socialImage: `${siteUrl}/thumbnail.png`,
-    twitterHandle: "@CKCRehoming",
+    twitterHandle: "@GSRCenter",
     phone: "+1 (504) 358-1381",
-    email: "admin@cavalierkingcharlesrehomingcenter.com",
+    email: "admin@gsrcenter.com",
 };
 
 export function generatePageMetadata({

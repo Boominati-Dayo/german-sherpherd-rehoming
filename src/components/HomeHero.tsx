@@ -12,12 +12,12 @@ export function HomeHero() {
             <div className="absolute inset-0">
                 <Image
                     src="/assets/homeHeroImage.jpg"
-                    alt="Cavalier King Charles Rehoming Center"
+                    alt="German Shepherd Rehoming Center"
                     fill
                     className="object-cover"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-forest-900/90 via-brand-forest-900/80 to-brand-forest-900/60" />
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-black-900/90 via-brand-black-900/80 to-brand-black-900/60" />
             </div>
 
             {/* Background decorative elements */}
@@ -48,22 +48,22 @@ export function HomeHero() {
                         <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-[1.1] mb-6">
                             Finding Forever
                             <br />
-                            <span className="text-brand-orange-500">Together</span>
+                            <span className="text-brand-copper-500">Together</span>
                         </h1>
 
                         <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
-                            Connecting Families with Cavalier Love
+                            Connecting Families with German Shepherd Love
                         </p>
                         <p className="text-white/60 mb-4 max-w-xl mx-auto">
-                            We are a dedicated team passionate about finding loving forever homes for Cavalier King Charles Spaniels.
+                            We are a dedicated team passionate about finding loving forever homes for German Shepherds.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
                                 href="/puppies"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-orange-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-orange-800 transition-all hover:scale-105 shadow-xl"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-copper-700 text-white font-black uppercase tracking-wider rounded-full hover:bg-brand-copper-800 transition-all hover:scale-105"
                             >
-                                Meet Our Cavaliers
+                                Meet Our German Shepherds
                                 <ArrowRight className="w-5 h-5" />
                             </Link>
                             <Link
@@ -78,16 +78,16 @@ export function HomeHero() {
                         {/* Stats */}
                         <div className="flex gap-8 justify-center mt-12 pt-8 border-t border-white/10">
                             <div>
-                                <p className="text-3xl font-black text-brand-orange-500">40+</p>
+                                <p className="text-3xl font-black text-brand-copper-500">40+</p>
                                 <p className="text-sm text-white/50 font-medium uppercase tracking-wider">Happy Families</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-black text-brand-orange-500">10+</p>
+                                <p className="text-3xl font-black text-brand-copper-500">10+</p>
                                 <p className="text-sm text-white/50 font-medium uppercase tracking-wider">Years Experience</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-black text-brand-orange-500">50+</p>
-                                <p className="text-sm text-white/50 font-medium uppercase tracking-wider">Cavaliers Placed</p>
+                                <p className="text-3xl font-black text-brand-copper-500">50+</p>
+                                <p className="text-sm text-white/50 font-medium uppercase tracking-wider">German Shepherds Placed</p>
                             </div>
                         </div>
                     </motion.div>

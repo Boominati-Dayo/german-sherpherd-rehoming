@@ -29,9 +29,9 @@ export default function TestimonialsPage() {
     return (
         <div>
             <div className="mb-8 flex justify-between items-center">
-                <h1 className="text-2xl font-black text-brand-forest-900 uppercase">Testimonials</h1>
+                <h1 className="text-2xl font-black text-brand-black-900 uppercase">Testimonials</h1>
                 {!isEditing && (
-                    <Button onClick={() => { setCurrentTestimonial(null); setIsEditing(true); }} className="bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase text-sm">
+                    <Button onClick={() => { setCurrentTestimonial(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-sm">
                         <Plus className="w-4 h-4 mr-2" /> Add Testimonial
                     </Button>
                 )}
@@ -39,7 +39,7 @@ export default function TestimonialsPage() {
 
             {isEditing ? (
                 <div className="bg-white p-6 rounded-3xl shadow-lg max-w-2xl">
-                    <h3 className="text-xl font-black text-brand-forest-900 mb-6 uppercase">{currentTestimonial ? "Edit Testimonial" : "Add New Testimonial"}</h3>
+                    <h3 className="text-xl font-black text-brand-black-900 mb-6 uppercase">{currentTestimonial ? "Edit Testimonial" : "Add New Testimonial"}</h3>
                     <TestimonialForm
                         initialData={currentTestimonial}
                         onSuccess={() => { setIsEditing(false); fetchTestimonials(); }}
@@ -52,11 +52,11 @@ export default function TestimonialsPage() {
                         <div key={t._id} className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg flex flex-col sm:flex-row justify-between items-stretch sm:items-start gap-3 sm:gap-4">
                             <div className="flex-1 min-w-0">
                                 <div className="flex flex-wrap items-center gap-2 mb-2">
-                                    <h4 className="font-black text-brand-forest-900 truncate">{t.name}</h4>
+                                    <h4 className="font-black text-brand-black-900 truncate">{t.name}</h4>
                                     <span className="text-gray-400 text-sm">({t.location})</span>
                                     <span className="text-yellow-500 shrink-0">{"★".repeat(t.rating)}</span>
                                 </div>
-                                <p className="text-brand-forest-600 italic line-clamp-2 sm:line-clamp-none">"{t.text}"</p>
+                                <p className="text-brand-black-600 italic line-clamp-2 sm:line-clamp-none">"{t.text}"</p>
                                 {t.image && <img src={t.image} alt={t.name} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mt-2 sm:mt-3" />}
                             </div>
                             <div className="flex space-x-2 justify-end sm:justify-start">

@@ -1,64 +1,144 @@
 @import "tailwindcss";
 
 @theme {
-    /* Forest Green Palette */
-    --color-brand-forest-900: #1a3a2f;
-    --color-brand-forest-800: #234d3f;
-    --color-brand-forest-700: #2d614f;
-    --color-brand-forest-600: #36755f;
-    --color-brand-forest-500: #408a6f;
-    --color-brand-forest-400: #5a9d86;
-    --color-brand-forest-300: #7fb0a3;
-    --color-brand-forest-200: #a9c7bf;
-    --color-brand-forest-100: #d9e8e2;
-    --color-brand-forest-50: #ecf5f1;
+    /* Jet Black / Charcoal Palette */
+    --color-brand-black-900: #0f0f0f;
+    --color-brand-black-800: #1a1a1a;
+    --color-brand-black-700: #2d2d2d;
+    --color-brand-black-600: #404040;
+    --color-brand-black-500: #525252;
+    --color-brand-black-400: #6b6b6b;
+    --color-brand-black-300: #8a8a8a;
+    --color-brand-black-200: #a8a8a8;
+    --color-brand-black-100: #d1d1d1;
+    --color-brand-black-50: #f0f0f0;
 
-    /* Orange Palette */
-    --color-brand-orange-900: #8c3a0a;
-    --color-brand-orange-800: #a8460d;
-    --color-brand-orange-700: #c45210;
-    --color-brand-orange-600: #e05e14;
-    --color-brand-orange-500: #f06a1a;
-    --color-brand-orange-300: #f7954d;
-    --color-brand-orange-100: #fde4d0;
+    /* Copper / Amber Palette */
+    --color-brand-copper-900: #8b5a2b;
+    --color-brand-copper-800: #a06b35;
+    --color-brand-copper-700: #b87333;
+    --color-brand-copper-600: #d4853f;
+    --color-brand-copper-500: #e6954a;
+    --color-brand-copper-400: #f0a862;
+    --color-brand-copper-300: #f5be82;
+    --color-brand-copper-200: #fad9a8;
+    --color-brand-copper-100: #fcecd0;
+    --color-brand-copper-50: #fef6eb;
 
-    /* White / Neutral Palette */
-    --color-brand-white-100: #FFFFFF;
-    --color-brand-white-200: #FFFEFE;
-    --color-brand-white-300: #F5F5F5;
-    --color-brand-white-400: #EAEAEA;
-    --color-brand-white-500: #DCDCDC;
-    --color-brand-white-700: #B5B5B5;
-    --color-brand-white-900: #7A7A7A;
+    /* Cool Gray Palette */
+    --color-brand-gray-900: #1f2937;
+    --color-brand-gray-800: #374151;
+    --color-brand-gray-700: #4b5563;
+    --color-brand-gray-600: #6b7280;
+    --color-brand-gray-500: #9ca3af;
+    --color-brand-gray-400: #d1d5db;
+    --color-brand-gray-300: #e5e7eb;
+    --color-brand-gray-200: #f3f4f6;
+    --color-brand-gray-100: #f9fafb;
 
     /* Flattened Aliases */
-    --color-brand-forest: #2d614f;
-    --color-brand-orange: #f06a1a;
-    --color-brand-white: #FFFEFE;
+    --color-brand-primary: #0f0f0f;
+    --color-brand-accent: #b87333;
+    --color-brand-secondary: #6b7280;
+    --color-brand-white: #f9fafb;
 
     --animate-carousel: scroll 20s linear infinite;
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-glow: glow 2s ease-in-out infinite alternate;
+    --animate-shimmer: shimmer 3s linear infinite;
 
     @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
 
-        100% {
-            transform: translateX(-50%);
-        }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    @keyframes glow {
+        0% { box-shadow: 0 0 20px rgba(184, 115, 51, 0.3); }
+        100% { box-shadow: 0 0 40px rgba(184, 115, 51, 0.6); }
+    }
+
+    @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
     }
 }
 
 @layer base {
     body {
-        background-color: #FFFEFE;
-        /* Same as brand-white-200 */
+        background-color: #f9fafb;
         color: #111827;
-        /* gray-900 */
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    ::selection {
+        background-color: #b87333;
+        color: white;
     }
 }
 
 @layer utilities {
+    /* Glassmorphism */
+    .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .glass-dark {
+        background: rgba(15, 15, 15, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Modern shadows */
+    .shadow-soft {
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    }
+    
+    .shadow-glow {
+        box-shadow: 0 0 30px rgba(184, 115, 51, 0.3);
+    }
+    
+    .shadow-glow-lg {
+        box-shadow: 0 0 60px rgba(184, 115, 51, 0.4);
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+        background: linear-gradient(135deg, #b87333 0%, #e6954a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    /* Shimmer effect */
+    .shimmer {
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 3s linear infinite;
+    }
+    
+    /* Section dividers */
+    .divider-wave {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f9fafb' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Custom scrollbar */
     .custom-scrollbar::-webkit-scrollbar {
         width: 6px;
     }
@@ -74,5 +154,40 @@
 
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #d1d5db;
+    }
+    
+    /* Hover lift effect */
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Modern card hover */
+    .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .card-hover:hover {
+        transform: translateY(-10px) scale(1.02);
+    }
+    
+    /* Animated gradient border */
+    .gradient-border {
+        position: relative;
+    }
+    
+    .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg, #b87333, #e6954a, #b87333);
+        border-radius: inherit;
+        z-index: -1;
+        background-size: 200% 200%;
+        animation: shimmer 3s linear infinite;
     }
 }

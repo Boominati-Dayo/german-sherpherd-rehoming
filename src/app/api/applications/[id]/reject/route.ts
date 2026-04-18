@@ -22,12 +22,12 @@ export async function POST(request: Request, { params }: RouteParams) {
 
         await sendMail({
             to: app.email,
-            subject: `Update on Your Application - ${app.puppyName || "Cavalier"} | Cavalier King Charles Rehoming Center`,
-            text: `Dear ${app.applicantName},\n\nThank you for your interest in adopting from Cavalier King Charles Rehoming Center. After careful consideration, we're unable to move forward with your application at this time.\n\nWe wish you the best in your search for the perfect companion.\n\nWarm regards,\nCavalier King Charles Rehoming Center`,
+            subject: `Update on Your Application - ${app.puppyName || "German Shepherd"} | German Shepherd Rehoming Center`,
+            text: `Dear ${app.applicantName},\n\nThank you for your interest in adopting from German Shepherd Rehoming Center. After careful consideration, we're unable to move forward with your application at this time.\n\nWe wish you the best in your search for the perfect companion.\n\nWarm regards,\nGerman Shepherd Rehoming Center`,
             html: getEmailTemplate("application_rejected", {
                 name: app.applicantName,
                 puppyName: app.puppyName,
-                message: message || "We appreciate your interest in our Cavaliers and wish you the best in finding your perfect companion."
+                message: message || "We appreciate your interest in our German Shepherds and wish you the best in finding your perfect companion."
             })
         });
 

@@ -18,7 +18,7 @@ export default function ContactsPage() {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-2xl font-black text-brand-forest-900 uppercase">Contact Messages</h1>
+                <h1 className="text-2xl font-black text-brand-black-900 uppercase">Contact Messages</h1>
             </div>
 
             <ContactList contacts={contacts} onUpdate={fetchContacts} />

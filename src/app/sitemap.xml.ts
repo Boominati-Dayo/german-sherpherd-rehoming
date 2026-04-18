@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl = "https://cavalierkingcharlesrehomingcenter.com";
+const baseUrl = "http://localhost:3000";
 
 export const dynamic = "force-dynamic";
 
