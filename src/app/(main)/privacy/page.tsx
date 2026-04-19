@@ -44,7 +44,7 @@ export default function PrivacyPage() {
                                 {
                                     icon: FileText,
                                     title: "4. Your Rights",
-                                    content: "You have the right to request access to the information we hold about you or to request that we delete your application from our records. Please contact us at admin@cavalierkingcharlesrehomingcenter.com to make such a request."
+                                    content: "You have the right to request access to the information we hold about you or to request that we delete your application from our records. Please contact us at admin@germanshepherdrehoming.com to make such a request."
                                 }
                             ].map((section, idx) => (
                                 <div key={idx} className="group">

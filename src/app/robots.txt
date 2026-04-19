@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cavalierkingcharlesrehomingcenter.com/sitemap.xml
+Sitemap: https://germanshepherdrehoming.com/sitemap.xml

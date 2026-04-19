@@ -228,7 +228,7 @@ export default function AboutPage() {
                     <div className="absolute top-20 left-[5%] w-48 h-48 rotate-[-12deg] hidden lg:block">
                         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                             <Image 
-                                src="/assets/cavalierKingCharlesAboutBreedImages/image1.jpg" 
+                                src="/assets/GermanShepherdAboutBreedImages/image1.png" 
                                 alt="German Shepherd"
                                 fill
                                 className="object-cover"
@@ -238,7 +238,7 @@ export default function AboutPage() {
                     <div className="absolute top-40 right-[8%] w-40 h-40 rotate-[8deg] hidden lg:block">
                         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                             <Image 
-                                src="/assets/cavalierKingCharlesAboutBreedImages/image2.jpg" 
+                                src="/assets/GermanShepherdAboutBreedImages/image2.png" 
                                 alt="German Shepherd Puppy"
                                 fill
                                 className="object-cover"
@@ -248,7 +248,7 @@ export default function AboutPage() {
                     <div className="absolute bottom-32 left-[12%] w-36 h-36 rotate-[-6deg] hidden lg:block">
                         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                             <Image 
-                                src="/assets/cavalierKingCharlesAboutBreedImages/image3.jpg" 
+                                src="/assets/GermanShepherdAboutBreedImages/image3.png" 
                                 alt="German Shepherd Dog"
                                 fill
                                 className="object-cover"
@@ -258,7 +258,7 @@ export default function AboutPage() {
                     <div className="absolute bottom-20 right-[5%] w-44 h-44 rotate-[10deg] hidden lg:block">
                         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                             <Image 
-                                src="/assets/cavalierKingCharlesAboutBreedImages/image4.jpg" 
+                                src="/assets/GermanShepherdAboutBreedImages/image4.png" 
                                 alt="German Shepherd Companion"
                                 fill
                                 className="object-cover"
@@ -268,7 +268,7 @@ export default function AboutPage() {
                     <div className="absolute top-1/3 left-[25%] w-32 h-32 rotate-[-15deg] hidden lg:block">
                         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                             <Image 
-                                src="/assets/cavalierKingCharlesAboutBreedImages/image5.jpg" 
+                                src="/assets/GermanShepherdAboutBreedImages/image5.png" 
                                 alt="German Shepherd Portrait"
                                 fill
                                 className="object-cover"
@@ -278,7 +278,7 @@ export default function AboutPage() {
                     <div className="absolute top-1/2 right-[20%] w-28 h-28 rotate-[5deg] hidden lg:block">
                         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                             <Image 
-                                src="/assets/cavalierKingCharlesAboutBreedImages/image6.jpg" 
+                                src="/assets/GermanShepherdAboutBreedImages/image6.png" 
                                 alt="German Shepherd Playing"
                                 fill
                                 className="object-cover"

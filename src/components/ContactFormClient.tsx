@@ -87,7 +87,7 @@ export function ContactFormClient() {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="rounded-xl h-12 border-brand-forest-200 focus:border-brand-orange-500"
+                                            className="rounded-xl h-12 border-brand-forest-200 focus:border-brand-copper-500"
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -99,7 +99,7 @@ export function ContactFormClient() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="rounded-xl h-12 border-brand-forest-200 focus:border-brand-orange-500"
+                                            className="rounded-xl h-12 border-brand-forest-200 focus:border-brand-copper-500"
                                             placeholder="john@example.com"
                                         />
                                     </div>
@@ -111,7 +111,7 @@ export function ContactFormClient() {
                                         id="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        className="rounded-xl h-12 border-brand-forest-200 focus:border-brand-orange-500"
+                                        className="rounded-xl h-12 border-brand-forest-200 focus:border-brand-copper-500"
                                         placeholder="Adoption inquiry, question about a puppy, etc."
                                     />
                                 </div>
@@ -123,7 +123,7 @@ export function ContactFormClient() {
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        className="rounded-xl border-brand-forest-200 focus:border-brand-orange-500 min-h-[150px]"
+                                        className="rounded-xl border-brand-forest-200 focus:border-brand-copper-500 min-h-[150px]"
                                         placeholder="Tell me about yourself and what you're looking for..."
                                     />
                                 </div>
@@ -131,7 +131,7 @@ export function ContactFormClient() {
                                 <Button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full bg-brand-orange-700 hover:bg-brand-orange-800 rounded-full font-black uppercase h-14 text-lg"
+                                    className="w-full bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase h-14 text-lg"
                                 >
                                     {loading ? (
                                         <span className="flex items-center gap-2">
@@ -153,18 +153,18 @@ export function ContactFormClient() {
                             <div className="bg-white rounded-3xl p-8 shadow-lg">
                                 <h3 className="text-xl font-black text-brand-forest-900 uppercase mb-6">Contact Info</h3>
                                 <div className="space-y-4">
-                                    <a href="mailto:admin@cavalierkingcharlesrehomingcenter.com" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-orange-600 transition-colors">
-                                        <div className="w-12 h-12 bg-brand-orange-100 rounded-2xl flex items-center justify-center">
-                                            <Mail className="w-5 h-5 text-brand-orange-600" />
+                                    <a href="mailto:admin@germanshepherdrehoming.com" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-copper-600 transition-colors">
+                                        <div className="w-12 h-12 bg-brand-copper-100 rounded-2xl flex items-center justify-center">
+                                            <Mail className="w-5 h-5 text-brand-copper-600" />
                                         </div>
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Email</p>
-                                            <p className="text-sm break-all">admin@cavalierkingcharlesrehomingcenter.com</p>
+                                            <p className="text-sm break-all">admin@germanshepherdrehoming.com</p>
                                         </div>
                                     </a>
-                                    <a href="tel:+15043581381" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-orange-600 transition-colors">
-                                        <div className="w-12 h-12 bg-brand-orange-100 rounded-2xl flex items-center justify-center">
-                                            <Phone className="w-5 h-5 text-brand-orange-600" />
+                                    <a href="tel:+15043581381" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-copper-600 transition-colors">
+                                        <div className="w-12 h-12 bg-brand-copper-100 rounded-2xl flex items-center justify-center">
+                                            <Phone className="w-5 h-5 text-brand-copper-600" />
                                         </div>
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Phone</p>
@@ -179,15 +179,15 @@ export function ContactFormClient() {
                                 <h3 className="text-xl font-black uppercase mb-4">Why Adopt?</h3>
                                 <ul className="space-y-3 text-white/70">
                                     <li className="flex items-start gap-2">
-                                        <Heart className="w-5 h-5 text-brand-orange-500 shrink-0 mt-0.5" />
+                                        <Heart className="w-5 h-5 text-brand-copper-500 shrink-0 mt-0.5" />
                                         <span>Give a loving dog a forever home</span>
                                     </li>
                                     <li className="flex items-start gap-2">
-                                        <Heart className="w-5 h-5 text-brand-orange-500 shrink-0 mt-0.5" />
+                                        <Heart className="w-5 h-5 text-brand-copper-500 shrink-0 mt-0.5" />
                                         <span>Health-checked and vaccinated</span>
                                     </li>
                                     <li className="flex items-start gap-2">
-                                        <Heart className="w-5 h-5 text-brand-orange-500 shrink-0 mt-0.5" />
+                                        <Heart className="w-5 h-5 text-brand-copper-500 shrink-0 mt-0.5" />
                                         <span>Support responsible rehoming</span>
                                     </li>
                                 </ul>
