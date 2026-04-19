@@ -112,18 +112,14 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="order-2 lg:order-1">
                             <div className="relative">
-                                <div className="aspect-[4/5] rounded-[3rem] bg-gradient-to-br from-brand-black-100 to-brand-copper-100 overflow-hidden shadow-2xl">
+                                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden">
                                     <Image 
-                                        src="/assets/about_image.jpg"
+                                        src="/assets/about_image.png"
                                         alt="German Shepherd Rehoming Center"
                                         fill
-                                        className="object-cover"
+                                        className="object-contain bg-transparent"
                                         priority
                                     />
-                                </div>
-                                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl">
-                                    <p className="text-4xl font-black text-brand-copper-600">10+</p>
-                                    <p className="text-sm font-bold text-brand-black-600 uppercase">Years of Love</p>
                                 </div>
                             </div>
                         </div>

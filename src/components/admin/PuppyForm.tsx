@@ -126,7 +126,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="breed" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Breed</Label>
-                            <Input id="breed" value={formData.breed} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. Cavalier King Charles Spaniel" />
+                            <Input id="breed" value={formData.breed} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="e.g. German Shepherd" />
                         </div>
                     </div>
 

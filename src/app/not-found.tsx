@@ -32,7 +32,7 @@ export default function NotFound() {
             className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-black uppercase tracking-wider rounded-full hover:bg-white/10 transition-all"
           >
             <PawPrint className="w-5 h-5" />
-            View Cavaliers
+            View Puppies
           </Link>
         </div>
       </div>

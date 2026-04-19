@@ -1,6 +1,6 @@
 {
-  "name": "CKC Rehoming Center",
-  "short_name": "CKC Rehoming Center",
+  "name": "German Sherpherd Rehoming Center",
+  "short_name": "German Sherpherd Rehoming Center",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#294a2e",
-  "background_color": "#294a2e",
+  "theme_color": "#efbc86",
+  "background_color": "#efbc86",
   "display": "standalone"
 }

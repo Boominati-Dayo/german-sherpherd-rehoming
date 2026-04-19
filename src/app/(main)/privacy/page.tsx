@@ -20,7 +20,7 @@ export default function PrivacyPage() {
                         <section>
                             <p className="text-brand-white-900 font-bold mb-4 uppercase tracking-widest text-xs">Last Updated: {new Date().toLocaleDateString()}</p>
                             <p className="text-brand-forest-900 leading-relaxed text-lg font-medium italic">
-                                At Cavalier King Charles Rehoming Center, we respect your privacy and are committed to protecting any personal information you share with us. This policy outlines how we handle data collected through our adoption applications and website.
+                                At German Shepherd Rehoming Center, we respect your privacy and are committed to protecting any personal information you share with us. This policy outlines how we handle data collected through our adoption applications and website.
                             </p>
                         </section>
 

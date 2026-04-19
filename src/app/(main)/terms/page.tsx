@@ -19,7 +19,7 @@ export default function TermsPage() {
                         <section>
                             <p className="text-brand-white-900 font-bold mb-4">Last Updated: {new Date().toLocaleDateString()}</p>
                             <p className="text-brand-forest-900 leading-relaxed text-lg">
-                                By using Cavalier King Charles Rehoming Center website and services, you agree to the following terms and conditions. Our mission is to ensure every puppy finds a safe, loving, and permanent home.
+                                By using German Shepherd Rehoming Center website and services, you agree to the following terms and conditions. Our mission is to ensure every puppy finds a safe, loving, and permanent home.
                             </p>
                         </section>
 
@@ -28,7 +28,7 @@ export default function TermsPage() {
                                 {
                                     id: "1",
                                     title: "Adoption Eligibility",
-                                    content: "Submitting an application does not guarantee adoption. Cavalier King Charles Rehoming Center reserves the right to deny any application if we believe it is not in the best interest of the puppy's welfare. Adoption is at our sole discretion."
+                                    content: "Submitting an application does not guarantee adoption. German Shepherd Rehoming Center reserves the right to deny any application if we believe it is not in the best interest of the puppy's welfare. Adoption is at our sole discretion."
                                 },
                                 {
                                     id: "2",

@@ -60,37 +60,6 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen">
       <HomeHero />
 
-      {/* Modern Stats Section - No cards, inline style */}
-      <section className="py-20 bg-gradient-to-br from-brand-black-900 via-brand-black-800 to-brand-black-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-brand-copper-500 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-copper-600 rounded-full blur-3xl" />
-          {/* Scattered icons as background */}
-          <PawPrint className="absolute top-10 left-[10%] w-8 h-8 text-brand-copper-400/30" />
-          <Bone className="absolute top-20 right-[15%] w-10 h-10 text-brand-copper-400/20" />
-          <Heart className="absolute bottom-20 left-[20%] w-6 h-6 text-brand-copper-400/30" />
-          <PawPrint className="absolute bottom-10 right-[25%] w-12 h-12 text-brand-copper-400/20" />
-        </div>
-        
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
-            {[
-              { icon: Users, number: "20+", label: "Happy Families" },
-              { icon: Heart, number: "2+", label: "Years Experience" },
-              { icon: Star, number: "100%", label: "Dedication" },
-              { icon: TrendingUp, number: "15+", label: "Dogs Placed" }
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center flex items-center gap-4">
-                <stat.icon className="w-8 h-8 text-brand-copper-400" />
-                <div className="text-left">
-                  <p className="text-3xl font-black text-white">{stat.number}</p>
-                  <p className="text-sm text-brand-copper-300 font-medium">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Dog Print Spiral Journey Section */}
       <section className="py-24 bg-brand-black-50 relative overflow-hidden">

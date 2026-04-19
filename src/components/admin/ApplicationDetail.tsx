@@ -139,7 +139,7 @@ export function ApplicationDetail({ application, onBack, onUpdate }: Application
                     )}
                     
                     {application.puppyName && (
-                        <p className="text-brand-orange-700 font-bold mt-2">Cavalier: {application.puppyName}</p>
+                        <p className="text-brand-copper-700 font-bold mt-2">German Shepherd: {application.puppyName}</p>
                     )}
                     <span className={`inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold uppercase ${
                         application.status === 'approved' ? 'bg-green-100 text-green-700' :

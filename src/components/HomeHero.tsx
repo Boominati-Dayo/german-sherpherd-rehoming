@@ -11,7 +11,7 @@ export function HomeHero() {
             {/* Background Image */}
             <div className="absolute inset-0">
                 <Image
-                    src="/assets/homeHeroImage.jpg"
+                    src="/assets/homeHeroImage.png"
                     alt="German Shepherd Rehoming Center"
                     fill
                     className="object-cover"

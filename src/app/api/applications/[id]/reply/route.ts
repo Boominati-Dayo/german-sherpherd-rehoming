@@ -17,8 +17,8 @@ export async function POST(request: Request, { params }: RouteParams) {
 
         await sendMail({
             to: app.email,
-            subject: `Update on Your Application - ${app.puppyName || "Cavalier"} | Cavalier King Charles Rehoming Center`,
-            text: `Dear ${app.applicantName},\n\n${message}\n\nWarm regards,\nCavalier King Charles Rehoming Center`,
+            subject: `Update on Your Application - ${app.puppyName || "German Shepherd"} | German Shepherd Rehoming Center`,
+            text: `Dear ${app.applicantName},\n\n${message}\n\nWarm regards,\nGerman Shepherd Rehoming Center`,
             html: getEmailTemplate("admin_reply", {
                 name: app.applicantName,
                 puppyName: app.puppyName,
