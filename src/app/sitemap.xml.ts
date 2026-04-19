@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://german-sherpherd-rehoming.vercel.app";
 
 export const dynamic = "force-dynamic";
 
