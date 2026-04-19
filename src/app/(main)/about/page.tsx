@@ -114,7 +114,7 @@ export default function AboutPage() {
                             <div className="relative">
                                 <div className="aspect-[4/5] rounded-[3rem] overflow-hidden">
                                     <Image 
-                                        src="/assets/about_image.png"
+                                        src="/assets/about_image.jpg"
                                         alt="German Shepherd Rehoming Center"
                                         fill
                                         className="object-contain bg-transparent"

@@ -119,7 +119,7 @@ export function PuppiesContainer({ initialPuppies, adoptedPuppies = [] }: Puppie
                         </div>
                         <Button
                             onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-                            className="flex items-center gap-2 rounded-full border-2 border-brand-copper-600 text-brand-copper-700 hover:bg-brand-copper-50 h-10 px-4 text-xs font-bold"
+                            className="flex items-center gap-2 rounded-full border-2 border-brand-copper-600 bg-brand-copper-600 text-white hover:bg-brand-copper-700 h-10 px-4 text-xs font-bold"
                         >
                             <Filter className="w-4 h-4" />
                             {isFiltersOpen ? "Hide" : "Show"} Filters
