@@ -121,7 +121,7 @@ export default async function TransportPage() {
                                     <div className="w-12 h-12 rounded-full bg-brand-copper-700 flex items-center justify-center z-10 shrink-0">
                                         <span className="text-white font-black text-sm">{item.step}</span>
                                     </div>
-                                    <div className="flex-1 text-center md:text-left">
+                                    <div className={`flex-1 flex ${idx % 2 === 1 ? 'md:justify-end' : ''} text-center md:text-left`}>
                                         <div className="bg-brand-black-50 border border-brand-black-100 rounded-2xl p-6 inline-block">
                                             <item.icon className="w-8 h-8 text-brand-copper-600 mx-auto mb-2 md:hidden" />
                                             <h3 className="text-xl font-black text-brand-black-900 uppercase">{item.title}</h3>
