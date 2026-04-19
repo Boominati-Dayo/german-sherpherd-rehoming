@@ -76,7 +76,7 @@ export function Navbar() {
                     <Link href="/" className="flex items-center gap-3 group">
                         <div className="relative w-36 h-12">
                             <Image 
-                                src="/assets/CRCRehomingCenterLogo.png" 
+                                src="/assets/GSRehomingCenterLogo.png" 
                                 alt="German Shepherd Rehoming Center"
                                 fill
                                 className="object-contain"
