@@ -46,7 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 >
                     <Menu className="w-6 h-6" />
                 </button>
-                <span className="font-black uppercase tracking-wider">Admin Dashboard</span>
+                <span className="font-black uppercase tracking-wider text-sm truncate max-w-[120px]">Dashboard</span>
                 <button
                     onClick={handleLogout}
                     className="p-2 text-red-400"

@@ -244,10 +244,10 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
 
                     {/* Personality & Good With */}
                     <div className="pt-4 border-t border-brand-white-400">
-                        <h4 className="text-sm font-black uppercase text-brand-orange-700 mb-4">Personality & Compatibility</h4>
+                        <h4 className="text-sm font-black uppercase text-brand-copper-700 mb-4">Personality & Compatibility</h4>
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Personality Traits</Label>
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-brand-black-900">Personality Traits</Label>
                                 <div className="flex flex-wrap gap-2">
                                     {["Affectionate", "Playful", "Calm", "Energetic", "Gentle", "Confident", "Curious", "Intelligent", "Loyal", "Social"].map((trait) => (
                                         <button
@@ -263,8 +263,8 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                                             }}
                                             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                                                 formData.personalityTraits?.includes(trait)
-                                                    ? "bg-brand-orange-600 text-white"
-                                                    : "bg-brand-white-200 text-brand-forest-700 hover:bg-brand-orange-100"
+                                                    ? "bg-brand-copper-700 text-white"
+                                                    : "bg-brand-copper-100 text-brand-copper-800 hover:bg-brand-copper-200"
                                             }`}
                                         >
                                             {trait}
@@ -273,7 +273,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <Label className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Good With</Label>
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-brand-black-900">Good With</Label>
                                 <div className="flex flex-wrap gap-2">
                                     {["Children", "Seniors", "Other Dogs", "Cats"].map((item) => (
                                         <button
@@ -290,7 +290,7 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                                             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                                                 formData.goodWith?.includes(item)
                                                     ? "bg-green-600 text-white"
-                                                    : "bg-brand-white-200 text-brand-forest-700 hover:bg-green-100"
+                                                    : "bg-brand-copper-100 text-brand-copper-800 hover:bg-brand-copper-200"
                                             }`}
                                         >
                                             {item}
