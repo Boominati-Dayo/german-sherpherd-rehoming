@@ -74,13 +74,13 @@ export default function AdminDashboard() {
                 </h1>
                 <div className="flex gap-2">
                     {activeTab === "puppies" && !isEditing && (
-                        <Button onClick={() => { setCurrentPuppy(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-sm">
-                            <Plus className="w-4 h-4 mr-2" /> Add Puppy
+                        <Button onClick={() => { setCurrentPuppy(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-xs px-2 sm:px-4">
+                            <Plus className="w-3 h-3 mr-1" /> <span className="hidden sm:inline">Add</span> Puppy
                         </Button>
                     )}
                     {activeTab === "testimonials" && !isEditing && (
-                        <Button onClick={() => { setCurrentTestimonial(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-sm">
-                            <Plus className="w-4 h-4 mr-2" /> Add Testimonial
+                        <Button onClick={() => { setCurrentTestimonial(null); setIsEditing(true); }} className="bg-brand-copper-700 hover:bg-brand-copper-800 rounded-full font-black uppercase text-xs px-2 sm:px-4">
+                            <Plus className="w-3 h-3 mr-1" /> <span className="hidden sm:inline">Add</span> Testimonial
                         </Button>
                     )}
                 </div>
