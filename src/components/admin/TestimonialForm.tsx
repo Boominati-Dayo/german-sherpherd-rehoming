@@ -171,8 +171,8 @@ export function TestimonialForm({ initialData, onSuccess, onCancel }: Testimonia
             </div>
 
             <div className="flex flex-col sm:flex-row justify-end gap-3 pt-2">
-                <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-bold border-gray-900 text-gray-900 uppercase tracking-widest">Cancel</Button>
-                <Button type="submit" disabled={loading} className="w-full sm:w-auto rounded-full px-10 h-12 text-sm font-black bg-brand-forest-700 text-white hover:bg-brand-forest-800 shadow-xl uppercase tracking-widest">
+                <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-bold border-gray-400 text-gray-600 hover:bg-gray-200 uppercase tracking-widest">Cancel</Button>
+                <Button type="submit" disabled={loading} className="w-full sm:w-auto rounded-full px-10 h-12 text-sm font-black bg-brand-copper-700 text-white hover:bg-brand-copper-800 shadow-xl uppercase tracking-widest">
                     {loading ? "Saving..." : "Save Testimonial"}
                 </Button>
             </div>

@@ -460,9 +460,9 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
             </div>
 
             {/* Form Footer */}
-            <div className="p-4 sm:p-6 lg:p-8 bg-brand-white-300 border-t border-brand-white-400 flex flex-col sm:flex-row justify-end gap-4 items-center">
-                <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-bold border-brand-white-900 text-brand-white-900 uppercase tracking-widest">Cancel</Button>
-                <Button type="submit" disabled={loading} className="w-full sm:w-auto rounded-full px-10 h-12 text-sm font-black bg-brand-forest-700 text-white hover:bg-brand-forest-800 shadow-xl uppercase tracking-widest">
+            <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 border-t border-gray-300 flex flex-col sm:flex-row justify-end gap-4 items-center">
+                <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-bold border-gray-400 text-gray-600 hover:bg-gray-200 uppercase tracking-widest">Cancel</Button>
+                <Button type="submit" disabled={loading} className="w-full sm:w-auto rounded-full px-10 h-12 text-sm font-black bg-brand-copper-700 text-white hover:bg-brand-copper-800 shadow-xl uppercase tracking-widest">
                     {loading ? "Saving..." : initialData ? "Update Puppy" : "Add Puppy"}
                 </Button>
             </div>
