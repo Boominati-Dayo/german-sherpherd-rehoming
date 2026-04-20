@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl = "https://german-sherpherd-rehoming.vercel.app";
+const baseUrl = "https://germanshepherdrehomingcenter.com";
 
 export const dynamic = "force-dynamic";
 

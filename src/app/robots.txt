@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://german-sherpherd-rehoming.vercel.app/sitemap.xml
+Sitemap: https://germanshepherdrehomingcenter.com/sitemap.xml
