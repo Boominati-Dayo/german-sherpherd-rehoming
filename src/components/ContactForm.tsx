@@ -80,23 +80,15 @@ export function ContactForm() {
                             </div>
                         </div>
 
-                        <div className="bg-brand-copper-700 rounded-3xl p-8 text-white">
-                            <MessageCircle className="w-10 h-10 text-white/80 mb-4" />
-                            <h3 className="text-lg font-black uppercase mb-2">We Are Here to Help</h3>
-                            <p className="text-white/80 font-medium">
+                        <div className="bg-brand-copper-700 rounded-3xl p-8 text-white text-center">
+                            <MessageCircle className="w-10 h-10 text-white/80 mx-auto mb-4" />
+                            <h3 className="text-lg font-black uppercase mb-3">We Are Here to Help</h3>
+                            <p className="text-white/80 font-medium mb-3">
                                 "Every family deserves the perfect German Shepherd companion. Let's find yours together."
                             </p>
-                            <p className="mt-4 font-black text-white">— The Team</p>
-                        </div>
-
-                        <div className="bg-brand-black-800 rounded-3xl p-8 border border-brand-copper-600/20">
-                            <div className="text-center">
-                                <Heart className="w-10 h-10 text-brand-copper-500 mx-auto mb-3" />
-                                <h3 className="text-lg font-black text-white uppercase mb-2">Our Promise</h3>
-                                <p className="text-brand-copper-200 font-medium italic text-sm">
-                                    "We match every German Shepherd with their perfect forever home."
-                                </p>
-                            </div>
+                            <p className="text-white/60 text-sm italic">
+                                "We match every German Shepherd with their perfect forever home."
+                            </p>
                         </div>
                     </div>
 
