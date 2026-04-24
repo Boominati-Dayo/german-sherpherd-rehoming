@@ -81,6 +81,18 @@ export default function RootLayout({
       <body className={`${inter.className} bg-white text-gray-900`}>
         <Toaster position="top-right" />
         {children}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            var _smartsupp = _smartsupp || {};
+            _smartsupp.key = '14e81f3733646bb54f501f447d38d96d21e29bdc';
+            window.smartsupp||(function(d) {
+              var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+              s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+              c.type='text/javascript';c.charset='utf-8';c.async=true;
+              c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+            })(document);
+          `
+        }} />
       </body>
     </html>
   );
