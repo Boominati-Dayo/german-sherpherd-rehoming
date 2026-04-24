@@ -196,7 +196,7 @@ export default async function TransportPage() {
 
                     <div className="space-y-3">
                         {[
-                            { q: "How long does transport take?", a: "Same-day delivery within 500 miles. Longer distances may need an overnight stop." },
+                            { q: "How long does transport take?", a: "Same-day delivery within 800 km. Longer distances may need an overnight stop." },
                             { q: "Can I track my puppy?", a: "Yes! We send photo and video updates throughout the journey." },
                             { q: "Is it safe?", a: "Absolutely. Climate-controlled vehicles and experienced handlers. Fully insured." }
                         ].map((faq, idx) => (

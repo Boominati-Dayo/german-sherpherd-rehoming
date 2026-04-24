@@ -27,7 +27,7 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
                 <h3 className="text-xl font-black uppercase mb-6 text-center">What's Included</h3>
                 <div className="space-y-4">
                     {[
-                        "Door-to-door service within 500 miles",
+                        "Door-to-door service within 800 km",
                         "One-on-one transport (no shared rides)",
                         "Regular photo and video updates",
                         "Food and water provided",
@@ -72,7 +72,7 @@ export function TransportIncludedCard({ images }: TransportIncludedCardProps) {
                 <h3 className="text-xl font-black uppercase mb-6 text-center text-white">What's Included</h3>
                 <div className="space-y-4">
                     {[
-                        "Door-to-door service within 500 miles",
+                        "Door-to-door service within 800 km",
                         "One-on-one transport (no shared rides)",
                         "Regular photo and video updates",
                         "Food and water provided",

@@ -165,11 +165,11 @@ export function PuppyForm({ initialData, onSuccess, onCancel }: PuppyFormProps) 
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="fee" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Adoption Fee</Label>
-                            <Input id="fee" value={formData.fee} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="$1,500" />
+                            <Input id="fee" value={formData.fee} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="AUD 1,500" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="nannyFee" className="text-[10px] font-black uppercase tracking-widest text-brand-white-900">Nanny Fee</Label>
-                            <Input id="nannyFee" value={formData.nannyFee} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="$350" />
+                            <Input id="nannyFee" value={formData.nannyFee} onChange={handleChange} required className="rounded-xl border-brand-white-400 h-11" placeholder="AUD 350" />
                         </div>
                     </div>
 
