@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Heart, Send, Bone, Dog } from "lucide-react";
+import { Mail, Heart, Send, Bone, Dog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -50,11 +50,8 @@ export function ContactFormClient() {
 
     return (
         <>
-            {/* Main Content */}
             <section className="py-20 -mt-10">
                 <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-
-                    {/* Success Message */}
                     <AnimatePresence>
                         {submitted && (
                             <motion.div
@@ -76,7 +73,6 @@ export function ContactFormClient() {
                     </AnimatePresence>
 
                     <div className="grid lg:grid-cols-3 gap-8">
-                        {/* Contact Form */}
                         <div className="lg:col-span-2">
                             <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-lg">
                                 <div className="grid sm:grid-cols-2 gap-6 mb-6">
@@ -148,7 +144,6 @@ export function ContactFormClient() {
                             </form>
                         </div>
 
-                        {/* Contact Info */}
                         <div className="space-y-6">
                             <div className="bg-white rounded-3xl p-8 shadow-lg">
                                 <h3 className="text-xl font-black text-brand-forest-900 uppercase mb-6">Contact Info</h3>
@@ -160,16 +155,6 @@ export function ContactFormClient() {
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Email</p>
                                             <p className="text-sm break-all">admin@germanshepherdrehomingcenter.com</p>
-                                        </div>
-                                    </a>
-                                    <a href="tel:+15043581381" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-copper-600 transition-colors">
-                                        <div className="w-12 h-12 bg-brand-copper-100 rounded-2xl flex items-center justify-center">
-                                            <Phone className="w-5 h-5 text-brand-copper-600" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-brand-forest-900">Phone</p>
-                                            <p className="text-sm">+1 (504) 358-1381</p>
-                                            <p className="text-xs text-brand-forest-500">Text messages only</p>
                                         </div>
                                     </a>
                                 </div>

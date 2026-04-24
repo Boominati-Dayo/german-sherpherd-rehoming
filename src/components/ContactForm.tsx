@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Heart, Send, MessageCircle } from "lucide-react";
+import { Mail, Heart, Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -65,16 +65,6 @@ export function ContactForm() {
                                     <div>
                                         <p className="text-xs font-bold text-brand-copper-400 uppercase">Email</p>
                                         <p className="text-white font-medium break-all">admin@germanshepherdrehomingcenter.com</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-brand-copper-700 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                        <Phone className="w-6 h-6 text-white" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs font-bold text-brand-copper-400 uppercase">Phone</p>
-                                        <p className="text-white font-medium">+1 (504) 358-1381</p>
-                                        <p className="text-xs text-brand-copper-300">Text messages only</p>
                                     </div>
                                 </div>
                             </div>

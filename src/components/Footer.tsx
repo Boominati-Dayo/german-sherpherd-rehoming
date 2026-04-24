@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PawPrint, Mail, Phone, Bone, Dog } from "lucide-react";
+import { PawPrint, Mail, Bone, Dog } from "lucide-react";
 
 export function Footer() {
     return (
@@ -75,16 +75,7 @@ export function Footer() {
                                 <div className="w-10 h-10 bg-brand-copper-700/20 rounded-full flex items-center justify-center">
                                     <Mail className="w-5 h-5 text-brand-copper-500" />
                                 </div>
-                                <span className="text-white/70 font-medium break-all">admin@gsrcenter.com</span>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-brand-copper-700/20 rounded-full flex items-center justify-center">
-                                    <Phone className="w-5 h-5 text-brand-copper-500" />
-                                </div>
-                                <div>
-                                    <span className="text-white/70 font-medium block">+1 (504) 358-1381</span>
-                                    <span className="text-xs text-white/50">Text messages only</span>
-                                </div>
+                                <span className="text-white/70 font-medium break-all">admin@germanshepherdrehomingcenter.com</span>
                             </li>
                         </ul>
                     </div>
