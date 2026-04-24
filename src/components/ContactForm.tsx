@@ -64,7 +64,7 @@ export function ContactForm() {
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-brand-copper-400 uppercase">Email</p>
-                                        <p className="text-white font-medium break-all">admin@germanshepherdrehoming.com</p>
+                                        <p className="text-white font-medium break-all">admin@germanshepherdrehomingcenter.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">

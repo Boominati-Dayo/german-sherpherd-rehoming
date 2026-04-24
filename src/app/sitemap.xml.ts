@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl = "https://germanshepherdrehomingcenter.com";
+const baseUrl = "https://www.germanshepherdrehomingcenter.com";
 
 export const dynamic = "force-dynamic";
 

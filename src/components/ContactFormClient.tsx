@@ -153,13 +153,13 @@ export function ContactFormClient() {
                             <div className="bg-white rounded-3xl p-8 shadow-lg">
                                 <h3 className="text-xl font-black text-brand-forest-900 uppercase mb-6">Contact Info</h3>
                                 <div className="space-y-4">
-                                    <a href="mailto:admin@germanshepherdrehoming.com" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-copper-600 transition-colors">
+                                    <a href="mailto:admin@germanshepherdrehomingcenter.com" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-copper-600 transition-colors">
                                         <div className="w-12 h-12 bg-brand-copper-100 rounded-2xl flex items-center justify-center">
                                             <Mail className="w-5 h-5 text-brand-copper-600" />
                                         </div>
                                         <div>
                                             <p className="font-bold text-brand-forest-900">Email</p>
-                                            <p className="text-sm break-all">admin@germanshepherdrehoming.com</p>
+                                            <p className="text-sm break-all">admin@germanshepherdrehomingcenter.com</p>
                                         </div>
                                     </a>
                                     <a href="tel:+15043581381" className="flex items-center gap-4 text-brand-forest-600 hover:text-brand-copper-600 transition-colors">
