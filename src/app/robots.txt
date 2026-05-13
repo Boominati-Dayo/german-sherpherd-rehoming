@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://germanshepherdrehomingcenter.com/sitemap.xml
+
+# Crawl-delay: 1
