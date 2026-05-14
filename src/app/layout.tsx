@@ -34,9 +34,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-    "geo-position": "Australia",
-    "geo-region": "AU",
-    "geo-placename": "Australia",
   },
   alternates: {
     canonical: BASE_URL,
@@ -76,8 +73,6 @@ export const metadata: Metadata = {
     images: [`${BASE_URL}/thumbnail.png`],
   },
   other: {
-    "geo.region": "AU",
-    "geo.placename": "Australia",
     "revisit-after": "7 days",
     "language": "en-AU",
   },
